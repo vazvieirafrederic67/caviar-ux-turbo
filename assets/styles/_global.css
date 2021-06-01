@@ -154,7 +154,7 @@ div[class*="empty-"] {width: 100%; clear: both;}
 .text-center {text-align: center;}
 .text-left {text-align: left;}
 .text-right {text-align: right;}
-.resp-img {display: block; max-width: 100%; height: auto; position: relative;}
+.resp-img {display: block; width: 100%; height: 200px; position: relative;background-size: cover;background-repeat: no-repeat;background-position: center;}
 .full-img {width: 100%; height: auto; display: block; position: relative;}
 .wrap {position: relative; z-index: 1;}
 .custome-container {position: relative; padding: 0 15px; max-width: 1530px; margin: 0 auto;}
@@ -306,7 +306,7 @@ div[class*="empty-"] {width: 100%; clear: both;}
 .simple-sub-text p {color: #464646;}
 
 .page-style-1, .page-style-1 input, .page-style-1 textarea, .page-style-1 select {font-family: 'Ubuntu', sans-serif;}
-.page-style-1 .title {font-family: 'Great Vibes', cursive;}
+.page-style-1 .title {font-family: 'Great Vibes', cursive; margin-bottom: 20px!important;}
 .page-style-1 .sub-title { font-size: 50px; line-height: 50px; text-transform: uppercase; font-weight: 700;}
 .page-style-1 .simple-sub-text {font-family: 'Bitter', serif;} 
 .page-style-1 h3, .page-style-1 h4, .page-style-1 h5, .page-style-1 h6 {font-weight: 700; text-transform: uppercase;}
@@ -769,7 +769,7 @@ div[class*="empty-"] {width: 100%; clear: both;}
 
 /*========FORM ELEMENTS=========*/
 
-select.input-field {font-weight: 700; background: url(../img/select-arrow.png) no-repeat; background-position: top 21px right 21px; background-size: 8px 6px;}
+select.input-field {font-weight: 100; background: url(../img/select-arrow.png) no-repeat; background-position: top 21px right 21px; background-size: 8px 6px;}
 .input-field {position: relative; width: 100%; height: 44px; line-height: 42px; font-size: 13px; color: #464646; border: 1px solid rgba(209,209,209,0.7); padding: 0 20px;}
 .input-field.color-2{color: #898989;}
 .input-field-wrap {position: relative;}
@@ -1026,7 +1026,7 @@ textarea.input-field.sm {height: 125px;}
 .nav {position: relative; float: right; font-size: 0px;}
 .header-menu li a {color: inherit; position: relative;}
 .header-menu > li {display: inline-block; font-size: 12px; font-weight: 700; color: #fff; text-transform: uppercase; position: relative;}
-.header-menu > li > a {padding: 43px 0px 41px; margin: 0px 25px; display: inline-block;}
+.header-menu > li > a {padding: 43px 0px 41px; margin: 0px 25px; display: inline-block; font-size: 14px;}
 .header-menu > li > ul li {color: #898989; position: relative;}
 .header-menu > li > ul li a {padding: 10px 25px; display: inline-block;}
 .follow, .header nav, .header .search {display: inline-block; vertical-align: middle;}
@@ -1062,6 +1062,8 @@ body.overflow {overflow: hidden;}
 .submit-search input {position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; opacity: 0; z-index: 5; cursor: pointer;}
 .close-search {position: absolute; right: 10px; bottom: 0px; width: 25px; height: 25px; text-align: center; cursor: pointer;}
 .submit-search path {fill: #898989;}
+.logo{display:flex;flex-direction: row;align-items: center;margin: 20px;}
+.text-logo {color:#fff;font-size: 48px;text-align: center;}
 .logo-type-2 {display: none;}
 .like-item, .shop-card-item {position: relative; display: inline-block; vertical-align: middle; margin: 0 10px; transition: all 0.35s ease-out; -webkit-transition: all 0.35s ease-out; -ms-transition: all 0.35s ease-out;}
 .shop-card-item {margin-right: 50px; padding: 40px 0px; cursor: pointer; }

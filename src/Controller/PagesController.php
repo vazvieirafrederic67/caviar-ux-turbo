@@ -26,10 +26,52 @@ class PagesController extends AbstractController
         return $this->render('pages/shop.html.twig');
     }
 
+    #[Route('/shop-caviar', name: 'app_shop_caviar')]
+    public function shopCaviar(): Response
+    {
+        return $this->render('pages/shop.html.twig');
+    }
+
+    #[Route('/shop-accessories', name: 'app_shop_accessories')]
+    public function shopAccessories(): Response
+    {
+        return $this->render('pages/shop_accessories.html.twig');
+    }
+
+    #[Route('/shop-baskets', name: 'app_shop_baskets')]
+    public function shopBaskets(): Response
+    {
+        return $this->render('pages/shop_baskets.html.twig');
+    }
+
     #[Route('/recipes', name: 'app_recipes')]
     public function recipes(): Response
     {
         return $this->render('pages/recipes.html.twig');
+    }
+
+    #[Route('/products', name: 'app_products')]
+    public function products(): Response
+    {
+        return $this->render('pages/products.html.twig');
+    }
+
+    #[Route('/products-caviar', name: 'app_products_caviar')]
+    public function productsCaviar(): Response
+    {
+        return $this->render('pages/products.html.twig');
+    }
+
+    #[Route('/products-accessories', name: 'app_products_accessories')]
+    public function productsAccessories(): Response
+    {
+        return $this->render('pages/products_accessories.html.twig');
+    }
+
+    #[Route('/products-baskets', name: 'app_products_baskets')]
+    public function productsBaskets(): Response
+    {
+        return $this->render('pages/products_baskets.html.twig');
     }
 
     #[Route('/contact', name: 'app_contact')]

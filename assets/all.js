@@ -20,10 +20,16 @@
 /* 17 - SHOP MENU FILTER  */
 /* 18 - CHOOSE ANIMATION  */
 
+// require jQuery normally
+const $ = require('jquery');
 
 const swiper = new Swiper();
 
-jQuery(function($) { "use strict";
+
+define( [ "jquery" ], function( $ ) {
+
+/*});
+jquery(function($) { "use strict";*/
 	
 	/*============================*/
 	/* 01 - VARIABLES */
@@ -216,12 +222,12 @@ jQuery(function($) { "use strict";
 	/* 03 - WINDOW LOAD */
 	/*============================*/
 	
-	$(window).load(function(){
+	$(window).on(function(){
         izotopInit();
 
        	if ( $('.data-jarallax').length)  {
 
-	   		$('.data-jarallax').load({
+	   		$('.data-jarallax').on({
 			    speed: 0.7
 			});
 	    }
