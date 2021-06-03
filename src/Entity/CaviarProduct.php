@@ -49,6 +49,16 @@ class CaviarProduct
      */
     private $shoppingCarts;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $subtitle;
+
     public function __construct()
     {
         $this->shoppingCarts = new ArrayCollection();
@@ -142,6 +152,30 @@ class CaviarProduct
         if ($this->shoppingCarts->removeElement($shoppingCart)) {
             $shoppingCart->removeCaviarProduct($this);
         }
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getSubtitle(): ?string
+    {
+        return $this->subtitle;
+    }
+
+    public function setSubtitle(string $subtitle): self
+    {
+        $this->subtitle = $subtitle;
 
         return $this;
     }

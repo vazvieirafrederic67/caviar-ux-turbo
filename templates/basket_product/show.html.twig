@@ -1,0 +1,34 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}BasketProduct{% endblock %}
+
+{% block body %}
+    <h1>BasketProduct</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ basket_product.name }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><div style="background-image:url({{ asset('uploads/images/baskets/' ~ basket_product.image) }});width:100px;height:100px;background-size:cover;background-repeat:no-repeat;"></div></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ basket_product.description }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ basket_product.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('basket_product_index') }}">back to list</a>
+
+    <a href="{{ path('basket_product_edit', {'id': basket_product.id}) }}">edit</a>
+
+    {{ include('basket_product/_delete_form.html.twig') }}
+{% endblock %}

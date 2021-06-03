@@ -1,0 +1,6 @@
+{{ form_start(form) }}
+    <div style="background-image:url( {{ asset('uploads/images/baskets/' ~ form.vars.value.image ) }} );width:100px;height:100px;background-size:cover;background-repeat:no-repeat;" class="image"></div>
+
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

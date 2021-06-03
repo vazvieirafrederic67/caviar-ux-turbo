@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New AccessoriesProduct{% endblock %}
+
+{% block body %}
+    <h1>Create new AccessoriesProduct</h1>
+
+    {{ include('accessories_product/_form.html.twig') }}
+
+    <a href="{{ path('accessories_product_index') }}">back to list</a>
+{% endblock %}

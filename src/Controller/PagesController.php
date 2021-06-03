@@ -2,16 +2,35 @@
 
 namespace App\Controller;
 
+use App\Repository\AccessoriesProductRepository;
+use App\Repository\BasketProductRepository;
+use App\Repository\CaviarProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PagesController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
+
+    private $caviars;
+    private $baskets;
+    private $accessories;
+
+    public function __construct(CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository)
+    {
+        $this->caviars = $caviarProductRepository->findAll();
+        $this->baskets = $basketProductRepository->findAll();
+        $this->accessories = $accessoriesProductRepository->findAll();
+    }
+
+
+
+    #[Route('/', name: 'app_home')]
     public function home(): Response
     {
-        return $this->render('pages/home.html.twig');
+        return $this->render('pages/home.html.twig',[
+            'caviars' => $this->caviars
+        ]);
     }
 
     #[Route('/about', name: 'app_about')]
@@ -53,25 +72,33 @@ class PagesController extends AbstractController
     #[Route('/products', name: 'app_products')]
     public function products(): Response
     {
-        return $this->render('pages/products.html.twig');
+        return $this->render('pages/products.html.twig',[
+            'caviars' => $this->caviars
+        ]);
     }
 
     #[Route('/products-caviar', name: 'app_products_caviar')]
     public function productsCaviar(): Response
     {
-        return $this->render('pages/products.html.twig');
+        return $this->render('pages/products.html.twig',[
+            'caviars' => $this->caviars
+        ]);
     }
 
     #[Route('/products-accessories', name: 'app_products_accessories')]
     public function productsAccessories(): Response
     {
-        return $this->render('pages/products_accessories.html.twig');
+        return $this->render('pages/products_accessories.html.twig',[
+            'accessories' => $this->accessories
+        ]);
     }
 
     #[Route('/products-baskets', name: 'app_products_baskets')]
     public function productsBaskets(): Response
     {
-        return $this->render('pages/products_baskets.html.twig');
+        return $this->render('pages/products_baskets.html.twig',[
+            'baskets' => $this->baskets
+        ]);
     }
 
     #[Route('/contact', name: 'app_contact')]

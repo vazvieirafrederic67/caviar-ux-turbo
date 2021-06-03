@@ -55,6 +55,7 @@ class RegistrationFormType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'format' => 'dd-MM-yyyy',
+                'attr' => ['autocomplete' => 'off']
             ])
             ->add('phoneNumber', TextType::class, [
                 'label' => false,

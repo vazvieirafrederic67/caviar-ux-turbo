@@ -106,6 +106,13 @@
                     <li>
                         <a href="{{ path('app_contact')}}">Contact<img src="img/down-arrow.png" alt="arrow down" class="menu-arr"></a>
                     </li>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li>
+                            <a style="color:red;" href="{{ path('app_admin')}}">Admin<img src="img/down-arrow.png" alt="arrow down" class="menu-arr"></a>
+                        </li>
+                    {% endif %}
+
                 </ul>
             </nav>
             </div>
@@ -265,6 +272,7 @@
      <div class="empty-lg-200 empty-md-100 empty-sm-90 empty-xs-60"></div>   
     </section>
     
+    {% if caviars is defined %}
     <section class="section">
       <div class="empty-lg-140 empty-md-100 empty-sm-90 empty-xs-60"></div> 
          <div class="container">
@@ -283,79 +291,29 @@
          </div>
          <div class="custome-container">
              <div class="row item-animation scroll-type-1">
-                 <div class="col-md-3 col-sm-6 col-xs-12">
-                     <div class="menu-item menu-item-1">
-                      <div class="image">
-                          <span class="page-span-1 page-span"></span>
-                          <span class="page-span-2 page-span type-2"></span>
-                          <img src="img/Beluga-mini.png" alt="Beluga">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1"><span class="txt">Voir plus</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h4 class="h4 caption"><a href="#" class="link-hover-line">Beluga</a></h4>
-                          <div class="empty-sm-10 empty-xs-10"></div>
-                          <div class="cat">Huso Huso</div>
-                      </div>
-                     </div>
-                    <div class="empty-sm-30 empty-xs-30"></div> 
-                 </div>
-                 <div class="col-md-3 col-sm-6 col-xs-12">
-                     <div class="menu-item menu-item-1">
-                      <div class="image">
-                          <span class="page-span-4 page-span"></span>
-                          <img src="img/Albinos-mini.png" alt="Albinos">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1"><span class="txt">Voir plus</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h4 class="h4 caption"><a href="#" class="link-hover-line">Albinos</a></h4>
-                          <div class="empty-sm-10 empty-xs-10"></div>
-                          <div class="cat">Almas</div>
-                      </div>
-                     </div>
-                    <div class="empty-sm-30 empty-xs-30"></div> 
-                 </div>
-                 <div class="col-md-3 col-sm-6 col-xs-12">
-                     <div class="menu-item menu-item-1">
-                      <div class="image">
-                          <img src="img/Acipenser-baeri-mini.png" alt="Acipenser Baeri">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1"><span class="txt">Voir plus</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h4 class="h4 caption"><a href="#" class="link-hover-line">Acipenser Baeri</a></h4>
-                          <div class="empty-sm-10 empty-xs-10"></div>
-                          <div class="cat"> Acipenser Baeri</div>
-                      </div>
-                     </div>
-                    <div class="empty-sm-30 empty-xs-30"></div> 
-                 </div>
-                 <div class="col-md-3 col-sm-6 col-xs-12">
-                     <div class="menu-item menu-item-1">
-                      <div class="image">
-                          <span class="page-span-4 type-2 page-span"></span>
-                          <span class="page-span-3 page-span"></span>
-                          <img src="img/Acipenser-Transmontanus-mini.png" alt="Acipenser Transmontanus">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1"><span class="txt">Voir plus</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h4 class="h4 caption"><a href="#" class="link-hover-line">Acipenser Transmontanus</a></h4>
-                          <div class="empty-sm-10 empty-xs-10"></div>
-                          <div class="cat">Acipenser Transmontanus</div>
-                      </div>
-                     </div>
-                    <div class="empty-sm-30 empty-xs-30"></div> 
-                 </div>     
+
+                {% for caviar in caviars %}
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="menu-item menu-item-1">
+                        <div class="image">
+                            <span class="page-span-1 page-span"></span>
+                            <span class="page-span-2 page-span type-2"></span>
+                            <img src="uploads/images/caviars/{{caviar.image}}" alt="{{caviar.name}}">
+                            <div class="vertical-align full menu-button">
+                                <a href="{{ path('app_products_caviar')}}" class="page-button button-style-1"><span class="txt">Voir plus</span></a>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <div class="empty-sm-20 empty-xs-20"></div>
+                            <h4 class="h4 caption"><a href="#" class="link-hover-line">{{caviar.name}}</a></h4>
+                            <div class="empty-sm-10 empty-xs-10"></div>
+                            <div class="cat">{{caviar.subtitle}}</div>
+                        </div>
+                        </div>
+                        <div class="empty-sm-30 empty-xs-30"></div> 
+                    </div>
+                {% endfor %}
+   
                <div class="text-center">
                   <div class="empty-sm-20 empty-xs-20"></div>
                    <a href="{{ path('app_products_caviar')}}" class="page-button button-style-2"><span class="bg" style="background-image: url(img/home-1/button_img_1.jpg)"></span><span class="txt">Détails</span></a>
@@ -364,7 +322,8 @@
          </div>
       <div class="empty-lg-140 empty-md-100 empty-sm-90 empty-xs-60"></div>
     </section>
-    
+    {% endif %}
+
     <section class="section">
      <div class="empty-lg-170 empty-md-70 empty-sm-50 empty-xs-20"></div>
       <div class="bg layer ready data-jarallax" data-jarallax="5" style="background-image: url(img/home-1/section_home1_bg_2.jpg)"></div>

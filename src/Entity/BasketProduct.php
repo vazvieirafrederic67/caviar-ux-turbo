@@ -39,6 +39,11 @@ class BasketProduct
      */
     private $shoppingCarts;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $price;
+
     public function __construct()
     {
         $this->shoppingCarts = new ArrayCollection();
@@ -108,6 +113,18 @@ class BasketProduct
         if ($this->shoppingCarts->removeElement($shoppingCart)) {
             $shoppingCart->removeBasketProduct($this);
         }
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

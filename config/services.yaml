@@ -4,6 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    images_accessories_directory: '%kernel.project_dir%/public/uploads/images/accessories'
+    images_baskets_directory: '%kernel.project_dir%/public/uploads/images/baskets'
+    images_caviars_directory: '%kernel.project_dir%/public/uploads/images/caviars'
 
 services:
     # default configuration for services in *this* file

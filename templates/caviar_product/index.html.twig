@@ -1,0 +1,45 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}CaviarProduct index{% endblock %}
+
+{% block body %}
+    <h1>CaviarProduct index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Subtitle</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Diameter</th>
+                <th>Color</th>
+                <th>Price</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for caviar_product in caviar_products %}
+            <tr>
+                <td>{{ caviar_product.name }}</td>
+                <td>{{ caviar_product.subtitle }}</td>
+                <td><div style="background-image:url({{ asset('uploads/images/caviars/' ~ caviar_product.image) }});width:100px;height:100px;background-size:cover;background-repeat:no-repeat;"></div></td>
+                <td>{{ caviar_product.description }}</td>
+                <td>{{ caviar_product.diameter }}</td>
+                <td>{{ caviar_product.color }}</td>
+                <td>{{ caviar_product.price }}</td>
+                <td>
+                    <a href="{{ path('caviar_product_show', {'id': caviar_product.id}) }}">show</a>
+                    <a href="{{ path('caviar_product_edit', {'id': caviar_product.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('caviar_product_new') }}">Create new</a>
+{% endblock %}
