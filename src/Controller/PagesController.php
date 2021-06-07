@@ -116,11 +116,11 @@ class PagesController extends AbstractController
     }
 
     #[Route('/shopping-cart-caviar-min/{id}', name: 'app_shop_cart_caviar_min')]
-    public function shoppingCartCaviarMin($id, CaviarProduct $caviarProduct, SessionInterface $session): Response
+    public function shoppingCartCaviarMin(CaviarProduct $caviarProduct, SessionInterface $session): Response
     {
         $panier = $session->get('caviarProduct', []);
 
-        if(!empty($panier[$caviarProduct->getName()]['quantity'])){
+        if(!empty($panier[$caviarProduct->getName()]['quantity']) && $panier[$caviarProduct->getName()]['quantity'] > 1){
             $panier[$caviarProduct->getName()]['quantity']--;
             $panier[$caviarProduct->getName()]['id'] = $caviarProduct->getId();
             $panier[$caviarProduct->getName()]['name'] = $caviarProduct->getName();
@@ -128,7 +128,14 @@ class PagesController extends AbstractController
             $panier[$caviarProduct->getName()]['price'] = $caviarProduct->getPrice();
 
 
-        }else{
+        }elseif($panier[$caviarProduct->getName()]['quantity'] <= 1){
+            $panier[$caviarProduct->getName()]['quantity'] = 1;
+            $panier[$caviarProduct->getName()]['id'] = $caviarProduct->getId();
+            $panier[$caviarProduct->getName()]['name'] = $caviarProduct->getName();
+            $panier[$caviarProduct->getName()]['image'] = $caviarProduct->getImage();
+            $panier[$caviarProduct->getName()]['price'] = $caviarProduct->getPrice();
+        }
+        else{
             $panier[$caviarProduct->getName()]['quantity'] = 1;
             $panier[$caviarProduct->getName()]['id'] = $caviarProduct->getId();
             $panier[$caviarProduct->getName()]['name'] = $caviarProduct->getName();
@@ -151,7 +158,7 @@ class PagesController extends AbstractController
     }
 
     #[Route('/shopping-cart-caviar-max/{id}', name: 'app_shop_cart_caviar_max')]
-    public function shoppingCartCaviarMaxx($id, CaviarProduct $caviarProduct, SessionInterface $session): Response
+    public function shoppingCartCaviarMax(CaviarProduct $caviarProduct, SessionInterface $session): Response
     {
         $panier = $session->get('caviarProduct', []);
 
@@ -184,6 +191,154 @@ class PagesController extends AbstractController
             'quantity' => $panier[$caviarProduct->getName()]['quantity'],
         ]);
     }
+
+    #[Route('/shopping-cart-basket-min/{id}', name: 'app_shop_cart_basket_min')]
+    public function shoppingCartBasketMin(BasketProduct $basketProduct, SessionInterface $session): Response
+    {
+        $panier = $session->get('basketProduct', []);
+
+        if(!empty($panier[$basketProduct->getName()]['quantity']) && $panier[$basketProduct->getName()]['quantity'] > 1){
+            $panier[$basketProduct->getName()]['quantity']--;
+            $panier[$basketProduct->getName()]['id'] = $basketProduct->getId();
+            $panier[$basketProduct->getName()]['name'] = $basketProduct->getName();
+            $panier[$basketProduct->getName()]['image'] = $basketProduct->getImage();
+            $panier[$basketProduct->getName()]['price'] = $basketProduct->getPrice();
+
+
+        }elseif($panier[$basketProduct->getName()]['quantity'] <= 1){
+            $panier[$basketProduct->getName()]['quantity'] = 1;
+            $panier[$basketProduct->getName()]['id'] = $basketProduct->getId();
+            $panier[$basketProduct->getName()]['name'] = $basketProduct->getName();
+            $panier[$basketProduct->getName()]['image'] = $basketProduct->getImage();
+            $panier[$basketProduct->getName()]['price'] = $basketProduct->getPrice();
+        }
+        else{
+            $panier[$basketProduct->getName()]['quantity'] = 1;
+            $panier[$basketProduct->getName()]['id'] = $basketProduct->getId();
+            $panier[$basketProduct->getName()]['name'] = $basketProduct->getName();
+            $panier[$basketProduct->getName()]['image'] = $basketProduct->getImage();
+            $panier[$basketProduct->getName()]['price'] = $basketProduct->getPrice();
+        }
+
+        $session->set('basketProduct', $panier);
+
+        return new JsonResponse([
+            'id' => $basketProduct->getId(),
+            'name' => $basketProduct->getName(),
+            'description' => $basketProduct->getDescription(),
+            'price' => $basketProduct->getPrice(),
+            'image' => $basketProduct->getImage(),
+            'quantity' => $panier[$basketProduct->getName()]['quantity']
+        ]);
+    }
+
+    #[Route('/shopping-cart-basket-max/{id}', name: 'app_shop_cart_basket_max')]
+    public function shoppingCartBasketMax(BasketProduct $basketProduct, SessionInterface $session): Response
+    {
+        $panier = $session->get('basketProduct', []);
+
+        if(!empty($panier[$basketProduct->getName()]['quantity'])){
+            $panier[$basketProduct->getName()]['quantity']++;
+            $panier[$basketProduct->getName()]['id'] = $basketProduct->getId();
+            $panier[$basketProduct->getName()]['name'] = $basketProduct->getName();
+            $panier[$basketProduct->getName()]['image'] = $basketProduct->getImage();
+            $panier[$basketProduct->getName()]['price'] = $basketProduct->getPrice();
+
+
+        }else{
+            $panier[$basketProduct->getName()]['quantity'] = 1;
+            $panier[$basketProduct->getName()]['id'] = $basketProduct->getId();
+            $panier[$basketProduct->getName()]['name'] = $basketProduct->getName();
+            $panier[$basketProduct->getName()]['image'] = $basketProduct->getImage();
+            $panier[$basketProduct->getName()]['price'] = $basketProduct->getPrice();
+        }
+
+        $session->set('basketProduct', $panier);
+
+        return new JsonResponse([
+            'id' => $basketProduct->getId(),
+            'name' => $basketProduct->getName(),
+            'description' => $basketProduct->getDescription(),
+            'price' => $basketProduct->getPrice(),
+            'image' => $basketProduct->getImage(),
+            'quantity' => $panier[$basketProduct->getName()]['quantity'],
+        ]);
+    }
+
+
+    #[Route('/shopping-cart-accessories-min/{id}', name: 'app_shop_cart_accessories_min')]
+    public function shoppingCartAccessoriesMin(AccessoriesProduct $accessoriesProduct, SessionInterface $session): Response
+    {
+        $panier = $session->get('accessoriesProduct', []);
+
+        if(!empty($panier[$accessoriesProduct->getName()]['quantity']) && $panier[$accessoriesProduct->getName()]['quantity'] > 1){
+            $panier[$accessoriesProduct->getName()]['quantity']--;
+            $panier[$accessoriesProduct->getName()]['id'] = $accessoriesProduct->getId();
+            $panier[$accessoriesProduct->getName()]['name'] = $accessoriesProduct->getName();
+            $panier[$accessoriesProduct->getName()]['image'] = $accessoriesProduct->getImage();
+            $panier[$accessoriesProduct->getName()]['price'] = $accessoriesProduct->getPrice();
+
+
+        }elseif($panier[$accessoriesProduct->getName()]['quantity'] <= 1){
+            $panier[$accessoriesProduct->getName()]['quantity'] = 1;
+            $panier[$accessoriesProduct->getName()]['id'] = $accessoriesProduct->getId();
+            $panier[$accessoriesProduct->getName()]['name'] = $accessoriesProduct->getName();
+            $panier[$accessoriesProduct->getName()]['image'] = $accessoriesProduct->getImage();
+            $panier[$accessoriesProduct->getName()]['price'] = $accessoriesProduct->getPrice();
+        }
+        else{
+            $panier[$accessoriesProduct->getName()]['quantity'] = 1;
+            $panier[$accessoriesProduct->getName()]['id'] = $accessoriesProduct->getId();
+            $panier[$accessoriesProduct->getName()]['name'] = $accessoriesProduct->getName();
+            $panier[$accessoriesProduct->getName()]['image'] = $accessoriesProduct->getImage();
+            $panier[$accessoriesProduct->getName()]['price'] = $accessoriesProduct->getPrice();
+        }
+
+        $session->set('accessoriesProduct', $panier);
+
+        return new JsonResponse([
+            'id' => $accessoriesProduct->getId(),
+            'name' => $accessoriesProduct->getName(),
+            'description' => $accessoriesProduct->getDescription(),
+            'price' => $accessoriesProduct->getPrice(),
+            'image' => $accessoriesProduct->getImage(),
+            'quantity' => $panier[$accessoriesProduct->getName()]['quantity']
+        ]);
+    }
+
+    #[Route('/shopping-cart-accessories-max/{id}', name: 'app_shop_cart_accessories_max')]
+    public function shoppingCartAccessoriesMax(AccessoriesProduct $accessoriesProduct, SessionInterface $session): Response
+    {
+        $panier = $session->get('accessoriesProduct', []);
+
+        if(!empty($panier[$accessoriesProduct->getName()]['quantity'])){
+            $panier[$accessoriesProduct->getName()]['quantity']++;
+            $panier[$accessoriesProduct->getName()]['id'] = $accessoriesProduct->getId();
+            $panier[$accessoriesProduct->getName()]['name'] = $accessoriesProduct->getName();
+            $panier[$accessoriesProduct->getName()]['image'] = $accessoriesProduct->getImage();
+            $panier[$accessoriesProduct->getName()]['price'] = $accessoriesProduct->getPrice();
+
+
+        }else{
+            $panier[$accessoriesProduct->getName()]['quantity'] = 1;
+            $panier[$accessoriesProduct->getName()]['id'] = $accessoriesProduct->getId();
+            $panier[$accessoriesProduct->getName()]['name'] = $accessoriesProduct->getName();
+            $panier[$accessoriesProduct->getName()]['image'] = $accessoriesProduct->getImage();
+            $panier[$accessoriesProduct->getName()]['price'] = $accessoriesProduct->getPrice();
+        }
+
+        $session->set('accessoriesProduct', $panier);
+
+        return new JsonResponse([
+            'id' => $accessoriesProduct->getId(),
+            'name' => $accessoriesProduct->getName(),
+            'description' => $accessoriesProduct->getDescription(),
+            'price' => $accessoriesProduct->getPrice(),
+            'image' => $accessoriesProduct->getImage(),
+            'quantity' => $panier[$accessoriesProduct->getName()]['quantity'],
+        ]);
+    }
+
 
     #[Route('/shopping-cart-basket/{id}', name: 'app_shop_cart_basket')]
     public function shoppingCartBasket($id, BasketProduct $basketProduct, SessionInterface $session): Response
