@@ -85,72 +85,92 @@
                             </svg>
                        </div>  
                        <ul>
-                           <li class="flex-align">
-                               <div class="img hover-zoom">
-                                  <a href="#"><img src="img/shop_list_img_1.png" alt=""></a>
-                               </div>
-                               <h5 class="h5 caption"><a href="#" class="link-hover">Mediterranean  Shrimp Pizza</a></h5>
-                               <div class="shop-counter">
-                                   <div class="custom-input-number">
+                        {% if app.session.get('caviarProduct') is defined %}
+                          {% for caviar in app.session.get('caviarProduct') %}
+                            <li class="flex-align">
+                                <div class="img hover-zoom">
+                                  <a href="#"><img src="uploads/images/caviars/{{caviar.image}}" alt="{{ caviar.name }}"></a>
+                                </div>
+                                
+                                <h5 class="h5 caption"><a {% if caviar.id is defined %} href="{{ path('app_shop_view',{ id: caviar.id} )}}" {% else %} href="#" {% endif %} class="link-hover">{{caviar.name}}</a></h5>
+                                
+                                <div class="shop-counter">
+                                    <div class="custom-input-number">
                                       <button type="button" class="cin-btn cin-decrement">
                                         <img src="img/left_arr.png" alt="">
                                       </button>
-                                      <input type="number" class="cin-input input-field" step="1" value="1" min="0" max="1000">
+                                      <input type="number" class="cin-input input-field" step="1" value="{{ caviar.quantity }}" min="0" max="1000">
                                       <button type="button" class="cin-btn cin-increment">
                                         <img src="img/right_arr.png" alt="">
                                       </button>
                                   </div>
                               </div>
-                              <div class="menu-price main-col">$16.80</div>
+                              <div class="menu-price main-col">{{caviar.price}}</div>
                               <div class="close-item main-fill-hover">
                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background=  "new 0 0 64 64"><g><path fill="#1D1D1B" d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/></g>
                                 </svg>
                               </div>
-                           </li>
-                           <li class="flex-align">
-                               <div class="img hover-zoom">
-                                   <a href="#"><img src="img/shop_list_img_1.png" alt=""></a>
-                               </div>
-                               <h5 class="h5 caption"><a href="#" class="link-hover">Mediterranean  Shrimp Pizza</a></h5>
-                               <div class="shop-counter">
-                                   <div class="custom-input-number">
+                            </li>
+                          {% endfor %}
+                        {% endif %}
+                        
+                        {% if app.session.get('basketProduct') is defined %}
+                          {% for basket in app.session.get('basketProduct') %}
+                            <li class="flex-align">
+                                <div class="img hover-zoom">
+                                  <a href="#"><img src="uploads/images/baskets/{{basket.image}}" alt="{{ basket.name }}"></a>
+                                </div>
+
+                                <h5 class="h5 caption"><a {% if basket.id is defined %} href="{{ path('app_shop_baskets_view',{ id: basket.id} )}}" {% else %} href="#" {% endif %} class="link-hover">{{basket.name}}</a></h5>
+                                
+                                <div class="shop-counter">
+                                    <div class="custom-input-number">
                                       <button type="button" class="cin-btn cin-decrement">
                                         <img src="img/left_arr.png" alt="">
                                       </button>
-                                      <input type="number" class="cin-input input-field" step="1" value="1" min="0" max="1000">
+                                      <input type="number" class="cin-input input-field" step="1" value="{{ basket.quantity }}" min="0" max="1000">
                                       <button type="button" class="cin-btn cin-increment">
                                         <img src="img/right_arr.png" alt="">
                                       </button>
                                   </div>
                               </div>
-                              <div class="menu-price main-col">$16.80</div>
+                              <div class="menu-price main-col">{{basket.price}}</div>
                               <div class="close-item main-fill-hover">
                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background=  "new 0 0 64 64"><g><path fill="#1D1D1B" d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/></g>
                                 </svg>
                               </div>
-                           </li>
-                           <li class="flex-align">
-                               <div class="img hover-zoom">
-                                  <a href="#"><img src="img/shop_list_img_2.png" alt=""></a>
-                               </div>
-                               <h5 class="h5 caption"><a href="#" class="link-hover">Big Coca-Cola 2L</a></h5>
-                               <div class="shop-counter">
-                                   <div class="custom-input-number">
+                            </li>
+                          {% endfor %}
+                        {% endif %}
+
+                        {% if app.session.get('accessoriesProduct') is defined %}
+                          {% for accessorie in app.session.get('accessoriesProduct') %}
+                            <li class="flex-align">
+                                <div class="img hover-zoom">
+                                  <a href="#"><img src="uploads/images/accessories/{{accessorie.image}}" alt="{{ accessorie.name }}"></a>
+                                </div>
+
+                                <h5 class="h5 caption"><a {% if accessorie.id is defined %} href="{{ path('app_shop_accessories_view',{ id: accessorie.id} )}}" {% else %} href="#" {% endif %} class="link-hover">{{accessorie.name}}</a></h5>
+                                
+                                <div class="shop-counter">
+                                    <div class="custom-input-number">
                                       <button type="button" class="cin-btn cin-decrement">
-                                        <img src="img/left_arr.png" alt="">
+                                        <img src="img/left_arr.png" alt="left arrow">
                                       </button>
-                                      <input type="number" class="cin-input input-field" step="1" value="1" min="0" max="1000">
+                                      <input type="number" class="cin-input input-field" step="1" value="{{ accessorie.quantity }}" min="0" max="1000">
                                       <button type="button" class="cin-btn cin-increment">
-                                        <img src="img/right_arr.png" alt="">
+                                        <img src="img/right_arr.png" alt="right arrow">
                                       </button>
                                   </div>
                               </div>
-                              <div class="menu-price main-col">$2.80</div>
+                              <div class="menu-price main-col">{{accessorie.price}}</div>
                               <div class="close-item main-fill-hover">
                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background=  "new 0 0 64 64"><g><path fill="#1D1D1B" d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/></g>
                                 </svg>
                               </div>
-                           </li>
+                            </li>
+                          {% endfor %}
+                        {% endif %}
                        </ul>
                        <div class="buy-bar">
                            <div class="fl">
@@ -244,511 +264,42 @@
 			   </div>
     </section>
     
-    <section class="section">
+    <section data-controller="shopBasket" class="section">
       <div class="empty-lg-120 empty-md-100 empty-sm-60 empty-xs-60"></div>
-      <div class="container">
-        <div class="row">
-    			<div class="col-md-12 col-xs-12">
-            <div class="shop-filter">
-              <div class="found-items">
-                <div class="simple-text">
-                    <p>Found <span class="main-col"><b>27</b></span> items</p>
-                </div>
-              </div>
-              <div class="shop-select">
-                <div class="show-item">
-                  <div class="title-select">
-                    <div class="simple-text">
-                        <p>Shown items per page</p>
-                    </div>
-                  </div>
-                  <select class="input-field type-2 main-col">
-                    <option value="val1">10</option>
-                    <option value="val1">40</option>
-                    <option value="val1">25</option>
-                    <option value="val1">38</option>
-                  </select> 
-                </div>
-                <div class="sort-by">
-                  <div class="title-select">
-                    <div class="simple-text">
-                        <p>Sort by</p>
-                    </div>
-                  </div>
-                  <select class="input-field type-2 main-col">
-                    <option value="val1">popular</option>
-                    <option value="val1">popular-1</option>
-                    <option value="val1">popular-2</option>
-                    <option value="val1">popular-3</option>
-                  </select> 
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-          <div class="container">
-            <div class="row row-3-columns type-1 row-2-columns">
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                  <div class="empty-sm-60 empty-xs-50"></div>
-                  <div class="menu-item menu-item-6 type-3">
-                      <div class="image">
-                        <a href="#" class="like-product main-fill-col">
-                            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 471.701 471.701" style="enable-background:new 0 0 471.701 471.701;" xml:space="preserve" width="16px" height="16px">
-                                <g><path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
-                                c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
-                                l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
-                                C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
-                                s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
-                                c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
-                                C444.801,187.101,434.001,213.101,414.401,232.701z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                            </svg>
-                        </a> 
-                          <img src="img/shop/product-1.png" alt="">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
-                              <div class="empty-sm-10 empty-xs-10"></div>
-                              <a href="#" class="page-button button-style-1 type-2 open-popup" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h5 class="h5 caption"><a href="#" class="link-hover-line">Mediterranean Shrimp Pizza</a></h5>
-                          <div class="empty-sm-5 empty-xs-5"></div>
-                          <div class="simple-text">
-                              <p><b>Ingredients: </b>Pepperoni, mushrooms, sausage, pizza sauce, and mozzarella cheese.</p>
-                          </div>
-                          <div class="simple-text">
-                              <p><b>Weight: </b>450g</p>
-                          </div>
-                          <div class="menu-price style-2 title main-col">$8.40</div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                  <div class="empty-sm-60 empty-xs-50"></div>
-                  <div class="menu-item menu-item-6 type-3">
-                      <div class="image">
-                        <a href="#" class="like-product main-fill-col">
-                            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 471.701 471.701" style="enable-background:new 0 0 471.701 471.701;" xml:space="preserve" width="16px" height="16px">
-                                <g><path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
-                                c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
-                                l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
-                                C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
-                                s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
-                                c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
-                                C444.801,187.101,434.001,213.101,414.401,232.701z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                            </svg>
-                        </a> 
-                          <img src="img/shop/product-2.png" alt="">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
-                              <div class="empty-sm-10 empty-xs-10"></div>
-                              <a href="#" class="page-button button-style-1 type-2 open-popup" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h5 class="h5 caption"><a href="#" class="link-hover-line">Pizza Margherita</a></h5>
-                          <div class="empty-sm-5 empty-xs-5"></div>
-                          <div class="simple-text">
-                              <p><b>Ingredients: </b>Mozzarella,  1/2 cup tomato sauce, drizzle with a few drops olive oil, basil and bake.</p>
-                          </div>
-                          <div class="simple-text">
-                              <p><b>Weight: </b>450g</p>
-                          </div>
-                          <div class="menu-price style-2 title main-col">$9.20</div>
-                      </div>
-                  </div>
-              </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                  <div class="empty-sm-60 empty-xs-50"></div>
-                  <div class="menu-item menu-item-6 type-3">
-                      <div class="image">
-                        <a href="#" class="like-product main-fill-col">
-                            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 471.701 471.701" style="enable-background:new 0 0 471.701 471.701;" xml:space="preserve" width="16px" height="16px">
-                                <g><path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
-                                c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
-                                l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
-                                C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
-                                s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
-                                c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
-                                C444.801,187.101,434.001,213.101,414.401,232.701z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                            </svg>
-                        </a> 
-                          <img src="img/shop/product-3.png" alt="">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
-                              <div class="empty-sm-10 empty-xs-10"></div>
-                              <a href="#" class="page-button button-style-1 type-2 open-popup" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h5 class="h5 caption"><a href="#" class="link-hover-line">Pizza al Prosciutto</a></h5>
-                          <div class="empty-sm-5 empty-xs-5"></div>
-                          <div class="simple-text">
-                              <p><b>Ingredients: </b>2-3 ounces finely sliced cooked ham, shredded, 1/2 cup tomato sauce , and 1/4 pound </p>
-                          </div>
-                          <div class="simple-text">
-                              <p><b>Weight: </b>450g</p>
-                          </div>
-                          <div class="menu-price style-2 title main-col">$7.35</div>
-                      </div>
-                  </div>
-              </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                  <div class="empty-sm-60 empty-xs-50"></div>
-                  <div class="menu-item menu-item-6 type-3">
-                      <div class="image">
-                        <a href="#" class="like-product main-fill-col">
-                            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 471.701 471.701" style="enable-background:new 0 0 471.701 471.701;" xml:space="preserve" width="16px" height="16px">
-                                <g><path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
-                                c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
-                                l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
-                                C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
-                                s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
-                                c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
-                                C444.801,187.101,434.001,213.101,414.401,232.701z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                            </svg>
-                        </a> 
-                          <img src="img/shop/product-4.png" alt="">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
-                              <div class="empty-sm-10 empty-xs-10"></div>
-                              <a href="#" class="page-button button-style-1 type-2 open-popup" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h5 class="h5 caption"><a href="#" class="link-hover-line">Mediterranean Shrimp Pizza</a></h5>
-                          <div class="empty-sm-5 empty-xs-5"></div>
-                          <div class="simple-text">
-                              <p><b>Ingredients: </b>Pepperoni, mushrooms, sausage, pizza sauce, and mozzarella cheese.</p>
-                          </div>
-                          <div class="simple-text">
-                              <p><b>Weight: </b>450g</p>
-                          </div>
-                          <div class="menu-price style-2 title main-col">$8.40</div>
-                      </div>
-                  </div>
-              </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                  <div class="empty-sm-60 empty-xs-50"></div>
-                  <div class="menu-item menu-item-6 type-3">
-                      <div class="image">
-                        <a href="#" class="like-product main-fill-col">
-                            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 471.701 471.701" style="enable-background:new 0 0 471.701 471.701;" xml:space="preserve" width="16px" height="16px">
-                                <g><path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
-                                c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
-                                l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
-                                C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
-                                s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
-                                c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
-                                C444.801,187.101,434.001,213.101,414.401,232.701z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                            </svg>
-                        </a> 
-                          <img src="img/shop/product-5.png" alt="">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
-                              <div class="empty-sm-10 empty-xs-10"></div>
-                              <a href="#" class="page-button button-style-1 type-2 open-popup" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h5 class="h5 caption"><a href="#" class="link-hover-line">Pizza Margherita</a></h5>
-                          <div class="empty-sm-5 empty-xs-5"></div>
-                          <div class="simple-text">
-                              <p><b>Ingredients: </b>Mozzarella,  1/2 cup tomato sauce, drizzle with a few drops olive oil, basil and bake.</p>
-                          </div>
-                          <div class="simple-text">
-                              <p><b>Weight: </b>450g</p>
-                          </div>
-                          <div class="menu-price style-2 title main-col">$9.20</div>
-                      </div>
-                  </div>
-              </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                  <div class="empty-sm-60 empty-xs-50"></div>
-                  <div class="menu-item menu-item-6 type-3">
-                      <div class="image">
-                        <a href="#" class="like-product main-fill-col">
-                            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 471.701 471.701" style="enable-background:new 0 0 471.701 471.701;" xml:space="preserve" width="16px" height="16px">
-                                <g><path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
-                                c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
-                                l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
-                                C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
-                                s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
-                                c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
-                                C444.801,187.101,434.001,213.101,414.401,232.701z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                            </svg>
-                        </a> 
-                          <img src="img/shop/product-6.png" alt="">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
-                              <div class="empty-sm-10 empty-xs-10"></div>
-                              <a href="#" class="page-button button-style-1 type-2 open-popup" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h5 class="h5 caption"><a href="#" class="link-hover-line">Pizza al Prosciutto</a></h5>
-                          <div class="empty-sm-5 empty-xs-5"></div>
-                          <div class="simple-text">
-                              <p><b>Ingredients: </b>2-3 ounces finely sliced cooked ham, shredded, 1/2 cup tomato sauce , and 1/4 pound shredded.</p>
-                          </div>
-                          <div class="simple-text">
-                              <p><b>Weight: </b>450g</p>
-                          </div>
-                          <div class="menu-price style-2 title main-col">$7.35</div>
-                      </div>
-                  </div>
-              </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                  <div class="empty-sm-60 empty-xs-50"></div>
-                  <div class="menu-item menu-item-6 type-3">
-                      <div class="image">
-                        <a href="#" class="like-product main-fill-col">
-                            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 471.701 471.701" style="enable-background:new 0 0 471.701 471.701;" xml:space="preserve" width="16px" height="16px">
-                                <g><path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
-                                c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
-                                l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
-                                C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
-                                s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
-                                c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
-                                C444.801,187.101,434.001,213.101,414.401,232.701z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                            </svg>
-                        </a> 
-                          <img src="img/shop/product-7.png" alt="">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
-                              <div class="empty-sm-10 empty-xs-10"></div>
-                              <a href="#" class="page-button button-style-1 type-2 open-popup" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h5 class="h5 caption"><a href="#" class="link-hover-line">Mediterranean Shrimp Pizza</a></h5>
-                          <div class="empty-sm-5 empty-xs-5"></div>
-                          <div class="simple-text">
-                              <p><b>Ingredients: </b>Pepperoni, mushrooms, sausage, pizza sauce, and mozzarella cheese.</p>
-                          </div>
-                          <div class="simple-text">
-                              <p><b>Weight: </b>450g</p>
-                          </div>
-                          <div class="menu-price style-2 title main-col">$8.40</div>
-                      </div>
-                  </div>
-              </div>
-               <div class="col-md-4 col-sm-6 col-xs-12">
-                  <div class="empty-sm-60 empty-xs-50"></div>
-                  <div class="menu-item menu-item-6 type-3">
-                      <div class="image">
-                        <a href="#" class="like-product main-fill-col">
-                            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 471.701 471.701" style="enable-background:new 0 0 471.701 471.701;" xml:space="preserve" width="16px" height="16px">
-                                <g><path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
-                                c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
-                                l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
-                                C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
-                                s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
-                                c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
-                                C444.801,187.101,434.001,213.101,414.401,232.701z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                            </svg>
-                        </a> 
-                          <img src="img/shop/product-8.png" alt="">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
-                              <div class="empty-sm-10 empty-xs-10"></div>
-                              <a href="#" class="page-button button-style-1 type-2 open-popup" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h5 class="h5 caption"><a href="#" class="link-hover-line">Pizza Margherita</a></h5>
-                          <div class="empty-sm-5 empty-xs-5"></div>
-                          <div class="simple-text">
-                              <p><b>Ingredients: </b>Mozzarella,  1/2 cup tomato sauce, drizzle with a few drops olive oil, basil and bake.</p>
-                          </div>
-                          <div class="simple-text">
-                              <p><b>Weight: </b>450g</p>
-                          </div>
-                          <div class="menu-price style-2 title main-col">$9.20</div>
-                      </div>
-                  </div>
-              </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                  <div class="empty-sm-60 empty-xs-50"></div>
-                  <div class="menu-item menu-item-6 type-3">
-                      <div class="image">
-                        <a href="#" class="like-product main-fill-col">
-                            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 471.701 471.701" style="enable-background:new 0 0 471.701 471.701;" xml:space="preserve" width="16px" height="16px">
-                                <g><path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
-                                c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
-                                l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
-                                C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
-                                s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
-                                c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
-                                C444.801,187.101,434.001,213.101,414.401,232.701z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                            </svg>
-                        </a> 
-                          <img src="img/shop/product-9.png" alt="">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
-                              <div class="empty-sm-10 empty-xs-10"></div>
-                              <a href="#" class="page-button button-style-1 type-2 open-popup" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h5 class="h5 caption"><a href="#" class="link-hover-line">Pizza al Prosciutto</a></h5>
-                          <div class="empty-sm-5 empty-xs-5"></div>
-                          <div class="simple-text">
-                              <p><b>Ingredients: </b>2-3 ounces finely sliced cooked ham, shredded, 1/2 cup tomato sauce , and 1/4 pound </p>
-                          </div>
-                          <div class="simple-text">
-                              <p><b>Weight: </b>450g</p>
-                          </div>
-                          <div class="menu-price style-2 title main-col">$7.35</div>
-                      </div>
-                  </div>
-              </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                  <div class="empty-sm-60 empty-xs-50"></div>
-                  <div class="menu-item menu-item-6 type-3">
-                      <div class="image">
-                        <a href="#" class="like-product main-fill-col">
-                            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 471.701 471.701" style="enable-background:new 0 0 471.701 471.701;" xml:space="preserve" width="16px" height="16px">
-                                <g><path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
-                                c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
-                                l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
-                                C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
-                                s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
-                                c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
-                                C444.801,187.101,434.001,213.101,414.401,232.701z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                            </svg>
-                        </a> 
-                          <img src="img/shop/product-10.png" alt="">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
-                              <div class="empty-sm-10 empty-xs-10"></div>
-                              <a href="#" class="page-button button-style-1 type-2 open-popup" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h5 class="h5 caption"><a href="#" class="link-hover-line">Mediterranean Shrimp Pizza</a></h5>
-                          <div class="empty-sm-5 empty-xs-5"></div>
-                          <div class="simple-text">
-                              <p><b>Ingredients: </b>Pepperoni, mushrooms, sausage, pizza sauce, and mozzarella cheese.</p>
-                          </div>
-                          <div class="simple-text">
-                              <p><b>Weight: </b>450g</p>
-                          </div>
-                          <div class="menu-price style-2 title main-col">$8.40</div>
-                      </div>
-                  </div>
-              </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                  <div class="empty-sm-60 empty-xs-50"></div>
-                  <div class="menu-item menu-item-6 type-3">
-                      <div class="image">
-                        <a href="#" class="like-product main-fill-col">
-                            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 471.701 471.701" style="enable-background:new 0 0 471.701 471.701;" xml:space="preserve" width="16px" height="16px">
-                                <g><path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
-                                c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
-                                l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
-                                C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
-                                s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
-                                c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
-                                C444.801,187.101,434.001,213.101,414.401,232.701z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                            </svg>
-                        </a> 
-                          <img src="img/shop/product-11.png" alt="">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
-                              <div class="empty-sm-10 empty-xs-10"></div>
-                              <a href="#" class="page-button button-style-1 type-2 open-popup" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h5 class="h5 caption"><a href="#" class="link-hover-line">Pizza Margherita</a></h5>
-                          <div class="empty-sm-5 empty-xs-5"></div>
-                          <div class="simple-text">
-                              <p><b>Ingredients: </b>Mozzarella,  1/2 cup tomato sauce, drizzle with a few drops olive oil, basil and bake.</p>
-                          </div>
-                          <div class="simple-text">
-                              <p><b>Weight: </b>450g</p>
-                          </div>
-                          <div class="menu-price style-2 title main-col">$9.20</div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                  <div class="empty-sm-60 empty-xs-50"></div>
-                  <div class="menu-item menu-item-6 type-3">
-                      <div class="image">
-                        <a href="#" class="like-product main-fill-col">
-                            <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 471.701 471.701" style="enable-background:new 0 0 471.701 471.701;" xml:space="preserve" width="16px" height="16px">
-                                <g><path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
-                                c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
-                                l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
-                                C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
-                                s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
-                                c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
-                                C444.801,187.101,434.001,213.101,414.401,232.701z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                            </svg>
-                        </a> 
-                          <img src="img/shop/product-12.png" alt="">
-                          <div class="vertical-align full menu-button">
-                              <a href="#" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
-                              <div class="empty-sm-10 empty-xs-10"></div>
-                              <a href="#" class="page-button button-style-1 type-2 open-popup" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
-                          </div>
-                      </div>
-                      <div class="text">
-                          <div class="empty-sm-20 empty-xs-20"></div>
-                          <h5 class="h5 caption"><a href="#" class="link-hover-line">Pizza al Prosciutto</a></h5>
-                          <div class="empty-sm-5 empty-xs-5"></div>
-                          <div class="simple-text">
-                              <p><b>Ingredients: </b>2-3 ounces finely sliced cooked ham, shredded, 1/2 cup tomato sauce , and 1/4 pound shredded.</p>
-                          </div>
-                          <div class="simple-text">
-                              <p><b>Weight: </b>450g</p>
-                          </div>
-                          <div class="menu-price style-2 title main-col">$7.35</div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-        <div class="empty-lg-80 empty-md-50 empty-sm-40 empty-xs-30"></div>
         <div class="container">
-          <div class="row">
-            <div class="col-md-10 col-md-offset-1 col-xs-12">
-              <div class="page-navigation">
-               <a href="#" class="left-arr">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="6px" height="8px" viewBox="0 0 292.359 292.359" style="enable-background:new 0 0 292.359 292.359;" xml:space="preserve">
-                <g><path d="M222.979,5.424C219.364,1.807,215.08,0,210.132,0c-4.949,0-9.233,1.807-12.848,5.424L69.378,133.331   c-3.615,3.617-5.424,7.898-5.424,12.847c0,4.949,1.809,9.233,5.424,12.847l127.906,127.907c3.614,3.617,7.898,5.428,12.848,5.428   c4.948,0,9.232-1.811,12.847-5.428c3.617-3.614,5.427-7.898,5.427-12.847V18.271C228.405,13.322,226.596,9.042,222.979,5.424z" fill="#898989"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                </svg>  
-               </a>
-               <a href="#">1</a>
-               <a href="#">2</a>
-               <a href="#">3</a>
-               <a href="#">4</a>
-               <span>...</span>
-               <a href="#">29</a>
-               <a href="#" class="right-arr">
-                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="6px" height="8px" viewBox="0 0 292.359 292.359" style="enable-background:new 0 0 292.359 292.359;" xml:space="preserve"><g>
-                   <path d="M222.979,133.331L95.073,5.424C91.456,1.807,87.178,0,82.226,0c-4.952,0-9.233,1.807-12.85,5.424   c-3.617,3.617-5.424,7.898-5.424,12.847v255.813c0,4.948,1.807,9.232,5.424,12.847c3.621,3.617,7.902,5.428,12.85,5.428   c4.949,0,9.23-1.811,12.847-5.428l127.906-127.907c3.614-3.613,5.428-7.897,5.428-12.847   C228.407,141.229,226.594,136.948,222.979,133.331z" fill="#898989"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                 </svg>
-               </a>
-              </div>
+          <div class="row row-3-columns type-1 row-2-columns">
+
+            {% for basket in baskets %}
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="empty-sm-60 empty-xs-50"></div>
+                <div class="menu-item menu-item-6 type-3">
+                  <div style="height:265px;"  class="image">
+
+                    <img src="uploads/images/baskets/{{ basket.image }}" alt="{{ basket.name }}">
+                    <div class="vertical-align full menu-button">
+                        <a href="{{ path('app_shop_cart_basket',{ id:basket.id } ) }}" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
+                        <div class="empty-sm-10 empty-xs-10"></div>
+                      <a href="{{ path('app_shop_baskets_view',{ id:basket.id } ) }}" class="page-button button-style-1 type-2 open-popup-product" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <div class="empty-sm-20 empty-xs-20"></div>
+                    <h5 class="h5 caption"><a href="{{ path('app_products')}}" class="link-hover-line">{{ basket.name }}</a></h5>
+                    <div class="empty-sm-5 empty-xs-5"></div>
+                    <div class="simple-text">
+                        <p>{{ basket.description }}</p>
+                    </div>
+                    <div class="menu-price style-2 title main-col">{{ basket.price }} €</div>
+                  </div>
+                </div>
             </div>
+
+            {% endfor %}
+
           </div>
         </div>
-      <div class="empty-lg-140 empty-md-100 empty-sm-60 empty-xs-60"></div>
+        <div class="empty-lg-80 empty-md-50 empty-sm-40 empty-xs-30"></div>
     </section>
 
 	</div>
@@ -866,7 +417,9 @@
        </div>
    </footer>
 
+   <!-- Modal shop start   -->
     <div class="popup index-popup-gallery" data-rel="1">
+
        <div class="popup-wrap type-2">
           <div class="empty-sm-0 empty-xs-15"></div>
           <div class="container quick-wrapp"> 
@@ -874,139 +427,36 @@
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 21.9 21.9" enable-background="new 0 0 21.9 21.9" width="14px" height="14px">
             <path d="M14.1,11.3c-0.2-0.2-0.2-0.5,0-0.7l7.5-7.5c0.2-0.2,0.3-0.5,0.3-0.7s-0.1-0.5-0.3-0.7l-1.4-1.4C20,0.1,19.7,0,19.5,0  c-0.3,0-0.5,0.1-0.7,0.3l-7.5,7.5c-0.2,0.2-0.5,0.2-0.7,0L3.1,0.3C2.9,0.1,2.6,0,2.4,0S1.9,0.1,1.7,0.3L0.3,1.7C0.1,1.9,0,2.2,0,2.4  s0.1,0.5,0.3,0.7l7.5,7.5c0.2,0.2,0.2,0.5,0,0.7l-7.5,7.5C0.1,19,0,19.3,0,19.5s0.1,0.5,0.3,0.7l1.4,1.4c0.2,0.2,0.5,0.3,0.7,0.3  s0.5-0.1,0.7-0.3l7.5-7.5c0.2-0.2,0.5-0.2,0.7,0l7.5,7.5c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l1.4-1.4c0.2-0.2,0.3-0.5,0.3-0.7  s-0.1-0.5-0.3-0.7L14.1,11.3z" fill="#484848"/>
             </svg> 
-         </div> 
+          </div> 
             <div class="row left-right-item">
               <div class="col-md-6 col-xs-12">
-                <img src="img/shop/pop-up.png" alt="" class="full-img">
+                <img id="modal-image" src="" alt="" class="full-img">
               </div>
               <div class="col-md-6 col-xs-12">
                 <div class="quick-content">
                   <div class="empty-sm-0 empty-xs-30"></div>
                   <aside>
                     <div class="empty-sm-20 empty-xs-20"></div>
-                    <h4 class="h3 sm tt color-2">Mediterranean Shrimp Pizza</h4>
+                   
+                      <h4 id="modal-title" class="h3 sm tt color-2"></h4>
+                   
                     <div class="empty-sm-20 empty-xs-20"></div>
-                    <h5 class="h5 sm color-2">Price: <span class="h4 main-col"><b>$8.40</b></span></h5>
+                    <h5 class="h5 sm color-2">Price: <span class="h4 main-col"><p id="modal-price"></p> €</span></h5>
                   </aside>
                   <div class="empty-sm-20 empty-xs-20"></div>
                   <aside class="product-size">
-                    <h5 class="h5 sm color-2 inline-box">Size:</h5>
-                    <div class="checkbox-entry-wrap">  
-                      <label class="checkbox-entry">
-                          <input type="radio" name="1" checked="">
-                          <span>
-                            <i></i>
-                            <p>25cm <span>(250g)</span></p>  
-                          </span>
-                      </label>
-                    </div>
-                    <div class="checkbox-entry-wrap">  
-                      <label class="checkbox-entry">
-                          <input type="radio" name="1">
-                          <span>
-                            <i></i>
-                            <p>30cm <span>(450g)</span></p>  
-                          </span>
-                      </label>
-                    </div>
-                    <div class="checkbox-entry-wrap">  
-                      <label class="checkbox-entry">
-                          <input type="radio" name="1">
-                          <span>
-                            <i></i>
-                            <p>40cm <span>(550g)</span></p>  
-                          </span>
-                      </label>
-                    </div>
+                    <h5 class="h5 sm color-2 inline-box">Diameter: <p id="modal-diameter"><p></h5>
+                    <h5 class="h5 sm color-2 inline-box">Color: <p id="modal-color"><p></h5>
                   </aside>
                   <div class="empty-sm-25 empty-xs-20"></div>
                   <aside>
                     <div class="simple-text">
-                      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null eiusmod tempor incididunt ut labore tore veritatis </p>
+                      <p id="modal-subtitle"></p>
+                      <p id="modal-description"></p>
                     </div>
                   </aside>
                   <div class="empty-sm-25 empty-xs-20"></div>
-                  <aside>
-                    <h5 class="tt h5 sm color-2">Choose Ingredients:</h5>
-                    <div class="empty-sm-25 empty-xs-15"></div>
-                    <div class="arrow-closest item-padd-30">
-                     <div class="swiper-container checkbox-wrapp" data-mode="horizontal" data-effect="slide" data-add-slides="3" data-slides-per-view="responsive" data-lg-slides="3" data-md-slides="3" data-xs-slides="2" data-sm-slides="4" data-loop="0" data-speed="800" data-space="13">
-                        <div class="swiper-wrapper">
-                          <div class="swiper-slide" > 
-                            <div class="checkbox-entry-wrap ">  
-                            <label class="checkbox-entry">
-                              <input type="checkbox" checked="">
-                                <div class="content-check">
-                                  <img src="img/product-detail/сhoose-1.jpg" alt="" class="full-img">
-                                  <div class="empty-sm-10 empty-xs-10"></div>
-                                  <div class="simple-text">
-                                    <p><b>Peperoni</b></p>
-                                  </div>
-                              </div>
-                            </label>
-                            </div>
-                          </div>
-                          <div class="swiper-slide" > 
-                            <div class="checkbox-entry-wrap ">  
-                            <label class="checkbox-entry">
-                              <input type="checkbox" checked="">
-                                <div class="content-check">
-                                  <img src="img/product-detail/сhoose-2.jpg" alt="" class="full-img">
-                                  <div class="empty-sm-10 empty-xs-10"></div>
-                                  <div class="simple-text">
-                                    <p><b>Ham</b></p>
-                                  </div>
-                              </div>
-                            </label>
-                            </div>
-                          </div>
-                          <div class="swiper-slide" > 
-                            <div class="checkbox-entry-wrap ">  
-                            <label class="checkbox-entry">
-                              <input type="checkbox">
-                                <div class="content-check">
-                                  <img src="img/product-detail/сhoose-3.jpg" alt="" class="full-img">
-                                  <div class="empty-sm-10 empty-xs-10"></div>
-                                  <div class="simple-text">
-                                    <p><b>Mashrooms</b></p>
-                                  </div>
-                              </div>
-                            </label>
-                            </div>
-                          </div>
-                          <div class="swiper-slide" > 
-                            <div class="checkbox-entry-wrap ">  
-                            <label class="checkbox-entry">
-                              <input type="checkbox">
-                                <div class="content-check">
-                                  <img src="img/product-detail/сhoose-4.jpg" alt="" class="full-img">
-                                  <div class="empty-sm-10 empty-xs-10"></div>
-                                  <div class="simple-text">
-                                    <p><b>Ruccola</b></p>
-                                  </div>
-                              </div>
-                            </label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="swiper-arrow-left swiper-arrow type-3 style-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="19px" height="19px">
-                          <g>
-                          <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z" fill="#FFFFFF"/>
-                          </g>
-                        </svg> 
-                      </div> 
-                      <div class="swiper-arrow-right swiper-arrow type-3 style-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="19px" height="19px">
-                          <g>
-                          <path d="m40.4,121.3c-0.8,0.8-1.8,1.2-2.9,1.2s-2.1-0.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8,0l53.9,53.9c1.6,1.6 1.6,4.2 0,5.8l-53.9,53.9z" fill="#FFFFFF"/>
-                          </g>
-                        </svg>  
-                      </div>
-                    </div>
-                  </aside>
-                  <div class="empty-sm-40 empty-xs-25"></div>
+
                   <aside>
                   <div class="buy-bar type-2">
                      <div class="fl">
@@ -1023,7 +473,7 @@
                         <div class="empty-sm-0 empty-xs-15"></div>
                      </div>
                      <div class="fr">
-                         <a href="#" class="page-button button-style-1 type-2"><span class="txt">Add to cart</span></a>
+                        <a id="modal-link" href="{{ path('app_shop_baskets_view',{ id: 0 } ) }}" class="page-button button-style-1 type-2"><span class="txt">Add to cart</span></a>
                      </div>
                   </div>
                   </aside>
