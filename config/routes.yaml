@@ -1,3 +1,217 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+accessories_product_index:
+    path: /
+    controller: App\Controller\AccessoriesProductController::index
+    methods: GET
+
+accessories_product_new:
+    path: /new
+    controller: App\Controller\AccessoriesProductController::new
+    methods: GET|POST
+
+accessories_product_show:
+    path: /{id}
+    controller: App\Controller\AccessoriesProductController::show
+    methods: GET
+
+accessories_product_edit:
+    path: /{id}/edit
+    controller: App\Controller\AccessoriesProductController::edit
+    methods: GET|POST
+
+accessories_product_delete:
+    path: /{id}
+    controller: App\Controller\AccessoriesProductController::delete
+    methods: POST
+
+app_admin:
+    path: /admin
+    controller: App\Controller\AdminController::index
+
+basket_product_index:
+    path: /
+    controller: App\Controller\BasketProductController::index
+    methods: GET
+
+basket_product_new:
+    path: /new
+    controller: App\Controller\BasketProductController::new
+    methods: GET|POST
+
+basket_product_show:
+    path: /{id}
+    controller: App\Controller\BasketProductController::show
+    methods: GET
+
+
+basket_product_edit:
+    path: /{id}/edit
+    controller: App\Controller\BasketProductController::edit
+    methods: GET|POST
+
+basket_product_delete:
+    path: /{id}
+    controller: App\Controller\BasketProductController::delete
+    methods: POST
+
+caviar_product_index':
+    path: /
+    controller: App\Controller\CaviarProductController::index
+    methods: GET
+
+caviar_product_new':
+    path: /new
+    controller: App\Controller\CaviarProductController::new
+    methods: GET|POST
+
+caviar_product_show':
+    path: /{id}
+    controller: App\Controller\CaviarProductController::show
+    methods: GET
+
+caviar_product_edit':
+    path: /{id}/edit
+    controller: App\Controller\CaviarProductController::edit
+    methods: GET|POST
+
+
+caviar_product_delete':
+    path: /{id}
+    controller: App\Controller\CaviarProductController::delete
+    methods: POST
+
+app_home:
+    path: /home
+    controller: App\Controller\PagesController::home
+
+app_about:
+    path: /about
+    controller: App\Controller\PagesController::about
+
+
+app_shop:
+    path: /shop
+    controller: App\Controller\PagesController::shop
+
+app_shop_view:
+    path: /shop-view{id}
+    controller: App\Controller\PagesController::shopView
+
+app_shop_baskets_view:
+    path: /shop-baskets-view/{id}
+    controller: App\Controller\PagesController::shopBasketView
+
+app_shop_accessories_view:
+    path: /shop-accessories-view/{id}
+    controller: App\Controller\PagesController::shopAccessoriesView
+
+app_shop_cart_caviar:
+    path: /shopping-cart-caviar/{id}
+    controller: App\Controller\PagesController::shoppingCartCaviar
+
+app_shop_cart_caviar_min:
+    path: /shopping-cart-caviar-min/{id}
+    controller: App\Controller\PagesController::shoppingCartCaviarMin
+
+app_shop_cart_caviar_max:
+    path: /shopping-cart-caviar-max/{id}
+    controller: App\Controller\PagesController::shoppingCartCaviarMax
+
+app_shop_cart_basket_min:
+    path: /shopping-cart-basket-min/{id}
+    controller: App\Controller\PagesController::shoppingCartBasketMin
+
+app_shop_cart_basket_max:
+    path: /shopping-cart-basket-max/{id}
+    controller: App\Controller\PagesController::shoppingCartBasketMax
+
+app_shop_cart_accessoires_min:
+    path: /shopping-cart-accessories-min/{id}
+    controller: App\Controller\PagesController::shoppingCartAccessoriesMin
+
+app_shop_cart_accessoires_max:
+    path: /shopping-cart-accessories-max/{id}
+    controller: App\Controller\PagesController::shoppingCartAccessoriesMax
+
+app_shop_cart_basket:
+    path: /shopping-cart-basket/{id}
+    controller: App\Controller\PagesController::shoppingCartBasket
+
+app_shop_cart_accessories:
+    path: /shopping-cart-accessories/{id}
+    controller: App\Controller\PagesController::shoppingCartAccessories
+
+app_shop_caviar:
+    path: /shop-caviar
+    controller: App\Controller\PagesController::shopCaviar
+
+app_shop_accessories:
+    path: /shop-accessories
+    controller: App\Controller\PagesController::shopAccessories
+
+app_shop_baskets:
+    path: /shop-baskets
+    controller: App\Controller\PagesController::shopBaskets
+
+app_recipes:
+    path: /recipes
+    controller: App\Controller\PagesController::recipes
+
+
+app_products:
+    path: /products
+    controller: App\Controller\PagesController::products
+
+app_products_caviar:
+    path: /products-caviar
+    controller: App\Controller\PagesController::productsCaviar
+
+app_products_accessories:
+    path: /products-accessories
+    controller: App\Controller\PagesController::productsAccessories
+
+app_products_baskets:
+    path: /products-baskets
+    controller: App\Controller\PagesController::productsBaskets
+
+app_contact:
+    path: /contact
+    controller: App\Controller\PagesController::contact
+
+app_register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+
+user_index:
+    path: /
+    controller: App\Controller\UserController::index
+    methods: GET
+
+user_new:
+    path: /new
+    controller: App\Controller\UserController::new
+    methods: GET|POST
+
+user_show:
+    path: /{id}
+    controller: App\Controller\UserController::show
+    methods: GET
+
+user_edit:
+    path: /{id}/edit
+    controller: App\Controller\UserController::edit
+    methods: GET|POST
+
+user_delete:
+    path: /{id}
+    controller: App\Controller\UserController::delete
+    methods: POST
+
+

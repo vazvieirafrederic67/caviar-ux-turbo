@@ -29,7 +29,7 @@ class PagesController extends AbstractController
         
     }
 
-    #[Route('/', name: 'app_home')]
+    #[Route('/home', name: 'app_home')]
     public function home(): Response
     {
         return $this->render('pages/home.html.twig',[
