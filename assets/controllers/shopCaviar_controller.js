@@ -31,7 +31,7 @@ export default class extends Controller {
             
             elementProduct.addEventListener("click", function(e){
                 // On empêche la navigation
-                e.preventDefault()
+                e.preventDefault();
     
                 fetch(this.getAttribute("href")).then(function(response) {
                     response.json().then(function(data) {

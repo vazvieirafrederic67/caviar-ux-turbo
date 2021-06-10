@@ -1,24 +1,28 @@
 import { Controller } from 'stimulus';
 
-/*
- * This is an example Stimulus controller!
- *
- * Any element with a data-controller="hello" attribute will cause
- * this controller to be executed. The name "hello" comes from the filename:
- * hello_controller.js -> "hello"
- *
- * Delete this file or adapt it for your use!
- */
+
 export default class extends Controller {
+
     connect() {
+        let cardAmountElement = document.querySelector('.main-col-card');
+        cardAmountElement.innerHTML = 0;
+    
+        let elementsCard = this.element.querySelectorAll('.flex-align');
+
+        elementsCard.forEach( (element) => {
+            let elementCardPrice = element.querySelector('.menu-price').innerHTML;
+            let elementCardQuantity = element.querySelector('.cin-input').value;
+            let elementAmountFinal = elementCardQuantity * elementCardPrice;
+            cardAmountElement.innerHTML = parseFloat(parseInt(cardAmountElement.innerHTML) + parseInt(elementAmountFinal)).toFixed(2);
+        });
 
         let cardCountElement = document.querySelector('.shop-number');
+        
         let cardCaviarQuantity = document.querySelectorAll('.card-caviar-quantity');
         let cardBasketQuantity = document.querySelectorAll('.card-basket-quantity');
         let cardAccessoriesQuantity = document.querySelectorAll('.card-accessories-quantity');
         let cardCountQuantity = 0;
         
-
         if(cardCaviarQuantity) {
             cardCaviarQuantity.forEach( (element) => {
                 cardCountQuantity = parseInt(cardCountQuantity) + parseInt(element.value);
@@ -39,15 +43,11 @@ export default class extends Controller {
 
         cardCountElement.innerHTML = cardCountQuantity;
 
-
-
-
         /**
          * Gestion des quantitées du panier pour le caviar
          */
         let cardCaviarMin = document.querySelectorAll('.card-caviar-min');
         let cardCaviarMax = document.querySelectorAll('.card-caviar-max');
-
 
         cardCaviarMin.forEach( (element) => {
             element.addEventListener('click', function(e){
@@ -56,6 +56,17 @@ export default class extends Controller {
                     response.json().then(function(data) {
                         cardCaviarQuantity.value = data.quantity;
                         cardCountElement.innerHTML = cardCount(cardCaviarQuantity, cardBasketQuantity, cardAccessoriesQuantity);
+                        let elementAmoutView = 0;
+
+                        elementsCard.forEach( (element) => {
+                            let elementCardPrice = element.querySelector('.menu-price').innerHTML;
+                            let elementCardQuantity = element.querySelector('.cin-input').value;
+                            let elementAmountFinal = elementCardQuantity * elementCardPrice;
+                            elementAmoutView = parseInt(elementAmoutView) + parseInt(elementAmountFinal);
+
+                            
+ 
+                        });
                     });
                 }) 
             });
@@ -68,12 +79,21 @@ export default class extends Controller {
                     response.json().then(function(data) {
                         cardCaviarQuantity.value = data.quantity;
                         cardCountElement.innerHTML = cardCount(cardCaviarQuantity, cardBasketQuantity, cardAccessoriesQuantity);
+                        let elementAmoutView = 0;
+
+                        elementsCard.forEach( (element) => {
+                            let elementCardPrice = element.querySelector('.menu-price').innerHTML;
+                            let elementCardQuantity = element.querySelector('.cin-input').value;
+                            let elementAmountFinal = elementCardQuantity * elementCardPrice;
+                            elementAmoutView = parseInt(elementAmoutView) + parseInt(elementAmountFinal);
+
+                           
+
+                        });
                     });
                 }) 
             });
         });
-
-
 
         /**
          * Gestion des quantitées pour le panier pour les coffrets
@@ -105,8 +125,6 @@ export default class extends Controller {
             });
         });
 
-
-
         /**
          * Gestion des quantitées pour les accessoires
          */
@@ -137,8 +155,6 @@ export default class extends Controller {
             });
         });
 
-
-        
         /**
          * Gestion de la vue quantité
          */

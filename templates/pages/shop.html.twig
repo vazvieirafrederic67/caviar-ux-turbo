@@ -76,7 +76,7 @@
                     </svg>
                     <div class="shop-number"></div>
                    </div>  
-                   <span class="shop-card-price">Total: <b class="main-col">$19.60</b></span>
+                   <span class="shop-card-price">Total: <b class="main-col-card">$19.60</b> €</span>
                    <div class="shop-card-list">
                      <div class="shop-card-align-mobile">
                        <div class="close-card-mobile main-fill-col">
@@ -101,7 +101,9 @@
                                       <button type="button" class="cin-btn cin-decrement">
                                         <a class="card-caviar-min" href="{{ path('app_shop_cart_caviar_min',{ id:caviar.id } ) }}"><img src="img/left_arr.png" alt="left arrow"></a>
                                       </button>
+
                                       <input type="number" class="cin-input input-field card-caviar-quantity" step="1" value="{{ caviar.quantity }}" min="1" max="1000">
+                                      
                                       <button type="button" class="cin-btn cin-increment">
                                         <a class="card-caviar-max" href="{{ path('app_shop_cart_caviar_max',{ id:caviar.id } ) }}"><img src="img/right_arr.png" alt="right arrow"></a>
                                       </button>
