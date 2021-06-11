@@ -192,6 +192,17 @@ class PagesController extends AbstractController
         ]);
     }
 
+    #[Route('/shopping-cart-caviar-delete/{id}', name: 'app_shop_cart_caviar_delete')]
+    public function shoppingCartCaviarDelete(CaviarProduct $caviarProduct, SessionInterface $session): Response
+    {
+        $panier = $session->get('caviarProduct', []);
+        $session->remove('caviarProduct');
+        unset($panier[$caviarProduct->getName()]);
+        $session->set('caviarProduct', $panier );
+        
+        return new JsonResponse();
+    }
+
     #[Route('/shopping-cart-basket-min/{id}', name: 'app_shop_cart_basket_min')]
     public function shoppingCartBasketMin(BasketProduct $basketProduct, SessionInterface $session): Response
     {
@@ -265,6 +276,16 @@ class PagesController extends AbstractController
         ]);
     }
 
+    #[Route('/shopping-cart-basket-delete/{id}', name: 'app_shop_cart_basket_delete')]
+    public function shoppingCartBasketDelete(BasketProduct $basketProduct, SessionInterface $session): Response
+    {
+        $panier = $session->get('basketProduct', []);
+        $session->remove('basketProduct');
+        unset($panier[$basketProduct->getName()]);
+        $session->set('basketProduct', $panier );
+        
+        return new JsonResponse();
+    }
 
     #[Route('/shopping-cart-accessories-min/{id}', name: 'app_shop_cart_accessories_min')]
     public function shoppingCartAccessoriesMin(AccessoriesProduct $accessoriesProduct, SessionInterface $session): Response
@@ -337,6 +358,17 @@ class PagesController extends AbstractController
             'image' => $accessoriesProduct->getImage(),
             'quantity' => $panier[$accessoriesProduct->getName()]['quantity'],
         ]);
+    }
+
+    #[Route('/shopping-cart-accessories-delete/{id}', name: 'app_shop_cart_accessories_delete')]
+    public function shoppingCartAccessoriesDelete(AccessoriesProduct $accessoriesProduct, SessionInterface $session): Response
+    {
+        $panier = $session->get('accessoriesProduct', []);
+        $session->remove('accessoriesProduct');
+        unset($panier[$accessoriesProduct->getName()]);
+        $session->set('accessoriesProduct', $panier );
+        
+        return new JsonResponse();
     }
 
 

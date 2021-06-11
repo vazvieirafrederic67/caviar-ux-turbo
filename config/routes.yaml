@@ -116,6 +116,10 @@ app_shop_cart_caviar_max:
     path: /shopping-cart-caviar-max/{id}
     controller: App\Controller\PagesController::shoppingCartCaviarMax
 
+app_shop_cart_caviar_delete:
+    path: /shopping-cart-caviar-delete/{id}
+    controller: App\Controller\PagesController::shoppingCartCaviarDelete
+
 app_shop_cart_basket_min:
     path: /shopping-cart-basket-min/{id}
     controller: App\Controller\PagesController::shoppingCartBasketMin
@@ -124,6 +128,10 @@ app_shop_cart_basket_max:
     path: /shopping-cart-basket-max/{id}
     controller: App\Controller\PagesController::shoppingCartBasketMax
 
+app_shop_cart_basket_delete:
+    path: /shopping-cart-basket-delete/{id}
+    controller: App\Controller\PagesController::shoppingCartBasketDelete
+
 app_shop_cart_accessoires_min:
     path: /shopping-cart-accessories-min/{id}
     controller: App\Controller\PagesController::shoppingCartAccessoriesMin
@@ -131,6 +139,10 @@ app_shop_cart_accessoires_min:
 app_shop_cart_accessoires_max:
     path: /shopping-cart-accessories-max/{id}
     controller: App\Controller\PagesController::shoppingCartAccessoriesMax
+
+app_shop_cart_accessories_delete:
+    path: /shopping-cart-accessories-delete/{id}
+    controller: App\Controller\PagesController::shoppingCartAccessoriesDelete
 
 app_shop_cart_basket:
     path: /shopping-cart-basket/{id}
@@ -155,7 +167,6 @@ app_shop_baskets:
 app_recipes:
     path: /recipes
     controller: App\Controller\PagesController::recipes
-
 
 app_products:
     path: /products

@@ -181,6 +181,22 @@ export default class extends Controller {
         let totalCardPrice = document.querySelector('.total-price');
         totalCardPrice.innerHTML = cardAmountElement.innerHTML;
 
+        /**
+         * Remove product
+         */
+        let linksDelete = document.querySelectorAll('.link-delete');
+
+        linksDelete.forEach( (element) => {
+
+            element.addEventListener('click', function(e){
+                e.preventDefault();
+                fetch(this.getAttribute("href")).then(function(response) {
+                    response.json().then(function() {
+                        cardPrice();
+                    });
+                }) 
+            })  
+        })
 
 
         cardPrice()
@@ -188,18 +204,24 @@ export default class extends Controller {
         function cardPrice(){
 
             let final = 0;
+            let finalQuantity = 0;
             let cardProduct = document.querySelectorAll('.card-product');
 
+            if(cardProduct.length < 1){
+                cardCountElement.innerHTML = 0;
+                cardAmountElement.innerHTML = 0;
+                totalCardPrice.innerHTML = 0;
+            }
+           
             cardProduct.forEach( (element) => {
                 let price = element.querySelector('.menu-price').innerHTML;
                 let quantity = element.querySelector('.cin-input').value;
+                finalQuantity = parseInt( parseInt(finalQuantity) + parseInt(quantity));
                 let temp = price * quantity;
                 final = final + temp;
                 cardAmountElement.innerHTML = parseFloat(final).toFixed(2);
                 totalCardPrice.innerHTML = parseFloat(final).toFixed(2);
-
-                console.log(final);
-
+                cardCountElement.innerHTML = finalQuantity;
             })
         }
     }
