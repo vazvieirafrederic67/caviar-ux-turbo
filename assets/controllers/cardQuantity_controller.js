@@ -1,9 +1,9 @@
 import { Controller } from 'stimulus';
 
-
 export default class extends Controller {
 
     connect() {
+
         let cardAmountElement = document.querySelector('.main-col-card');
         cardAmountElement.innerHTML = 0;
     
@@ -52,23 +52,18 @@ export default class extends Controller {
         cardCaviarMin.forEach( (element) => {
             element.addEventListener('click', function(e){
                 e.preventDefault();
+
                 fetch(this.getAttribute("href")).then(function(response) {
                     response.json().then(function(data) {
+
                         cardCaviarQuantity.value = data.quantity;
                         cardCountElement.innerHTML = cardCount(cardCaviarQuantity, cardBasketQuantity, cardAccessoriesQuantity);
-                        let elementAmoutView = 0;
 
-                        elementsCard.forEach( (element) => {
-                            let elementCardPrice = element.querySelector('.menu-price').innerHTML;
-                            let elementCardQuantity = element.querySelector('.cin-input').value;
-                            let elementAmountFinal = elementCardQuantity * elementCardPrice;
-                            elementAmoutView = parseInt(elementAmoutView) + parseInt(elementAmountFinal);
-
-                            
- 
-                        });
+                        cardPrice();
                     });
-                }) 
+                })
+
+                
             });
         });
 
@@ -77,19 +72,11 @@ export default class extends Controller {
                 e.preventDefault();
                 fetch(this.getAttribute("href")).then(function(response) {
                     response.json().then(function(data) {
+
                         cardCaviarQuantity.value = data.quantity;
                         cardCountElement.innerHTML = cardCount(cardCaviarQuantity, cardBasketQuantity, cardAccessoriesQuantity);
-                        let elementAmoutView = 0;
 
-                        elementsCard.forEach( (element) => {
-                            let elementCardPrice = element.querySelector('.menu-price').innerHTML;
-                            let elementCardQuantity = element.querySelector('.cin-input').value;
-                            let elementAmountFinal = elementCardQuantity * elementCardPrice;
-                            elementAmoutView = parseInt(elementAmoutView) + parseInt(elementAmountFinal);
-
-                           
-
-                        });
+                        cardPrice();
                     });
                 }) 
             });
@@ -108,6 +95,8 @@ export default class extends Controller {
                     response.json().then(function(data) {
                         cardBasketQuantity.value = data.quantity;
                         cardCountElement.innerHTML = cardCount(cardCaviarQuantity, cardBasketQuantity, cardAccessoriesQuantity);
+
+                        cardPrice();
                     });
                 }) 
             });
@@ -120,6 +109,8 @@ export default class extends Controller {
                     response.json().then(function(data) {
                         cardBasketQuantity.value = data.quantity;
                         cardCountElement.innerHTML = cardCount(cardCaviarQuantity, cardBasketQuantity, cardAccessoriesQuantity);
+
+                        cardPrice();
                     });
                 }) 
             });
@@ -138,6 +129,8 @@ export default class extends Controller {
                     response.json().then(function(data) {
                         cardAccessoriesQuantity.value = data.quantity;
                         cardCountElement.innerHTML = cardCount(cardCaviarQuantity, cardBasketQuantity, cardAccessoriesQuantity);
+
+                        cardPrice();
                     });
                 }) 
             });
@@ -150,6 +143,8 @@ export default class extends Controller {
                     response.json().then(function(data) {
                         cardAccessoriesQuantity.value = data.quantity;
                         cardCountElement.innerHTML = cardCount(cardCaviarQuantity, cardBasketQuantity, cardAccessoriesQuantity);
+
+                        cardPrice();
                     });
                 }) 
             });
@@ -183,5 +178,29 @@ export default class extends Controller {
             return cardCountQuantity;
         }
 
+        let totalCardPrice = document.querySelector('.total-price');
+        totalCardPrice.innerHTML = cardAmountElement.innerHTML;
+
+
+
+        cardPrice()
+
+        function cardPrice(){
+
+            let final = 0;
+            let cardProduct = document.querySelectorAll('.card-product');
+
+            cardProduct.forEach( (element) => {
+                let price = element.querySelector('.menu-price').innerHTML;
+                let quantity = element.querySelector('.cin-input').value;
+                let temp = price * quantity;
+                final = final + temp;
+                cardAmountElement.innerHTML = parseFloat(final).toFixed(2);
+                totalCardPrice.innerHTML = parseFloat(final).toFixed(2);
+
+                console.log(final);
+
+            })
+        }
     }
 }

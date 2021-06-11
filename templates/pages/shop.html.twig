@@ -76,7 +76,7 @@
                     </svg>
                     <div class="shop-number"></div>
                    </div>  
-                   <span class="shop-card-price">Total: <b class="main-col-card">$19.60</b> €</span>
+                   <span class="shop-card-price">Total: <b class="main-col-card"></b> €</span>
                    <div class="shop-card-list">
                      <div class="shop-card-align-mobile">
                        <div class="close-card-mobile main-fill-col">
@@ -89,7 +89,7 @@
                         {% if app.session.get('caviarProduct') is defined %}
                           {% for caviar in app.session.get('caviarProduct') %}
 
-                            <li class="flex-align">
+                            <li class="flex-align card-product">
                                 <div class="img hover-zoom">
                                   <a href="#"><img src="uploads/images/caviars/{{caviar.image}}" alt="{{ caviar.name }}"></a>
                                 </div>
@@ -120,7 +120,7 @@
                         
                         {% if app.session.get('basketProduct') is defined %}
                           {% for basket in app.session.get('basketProduct') %}
-                            <li class="flex-align">
+                            <li class="flex-align card-product">
                                 <div class="img hover-zoom">
                                   <a href="#"><img src="uploads/images/baskets/{{basket.image}}" alt="{{ basket.name }}"></a>
                                 </div>
@@ -149,7 +149,7 @@
 
                         {% if app.session.get('accessoriesProduct') is defined %}
                           {% for accessorie in app.session.get('accessoriesProduct') %}
-                            <li class="flex-align">
+                            <li class="flex-align card-product">
                                 <div class="img hover-zoom">
                                   <a href="#"><img src="uploads/images/accessories/{{accessorie.image}}" alt="{{ accessorie.name }}"></a>
                                 </div>
@@ -179,7 +179,7 @@
                        </ul>
                        <div class="buy-bar">
                            <div class="fl">
-                              <h4 class="h4 caption">Total:<b class="main-col">$19.60</b></h4>  
+                              <h4 class="h4 caption">Total:<b class="main-col total-price"></b> €</h4>
                            </div>
                            <div class="fr">
                                <a href="#" class="page-button button-style-1 type-2"><span class="txt">Go to the cart</span></a>

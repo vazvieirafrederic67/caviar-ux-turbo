@@ -93,7 +93,7 @@ app_shop:
     controller: App\Controller\PagesController::shop
 
 app_shop_view:
-    path: /shop-view{id}
+    path: /shop-view/{id}
     controller: App\Controller\PagesController::shopView
 
 app_shop_baskets_view:
