@@ -132,11 +132,11 @@ app_shop_cart_basket_delete:
     path: /shopping-cart-basket-delete/{id}
     controller: App\Controller\PagesController::shoppingCartBasketDelete
 
-app_shop_cart_accessoires_min:
+app_shop_cart_accessories_min:
     path: /shopping-cart-accessories-min/{id}
     controller: App\Controller\PagesController::shoppingCartAccessoriesMin
 
-app_shop_cart_accessoires_max:
+app_shop_cart_accessories_max:
     path: /shopping-cart-accessories-max/{id}
     controller: App\Controller\PagesController::shoppingCartAccessoriesMax
 
