@@ -1,25 +1,25 @@
 accessories_product_index:
-    path: /
+    path: /admin/accessories/product/
     controller: App\Controller\AccessoriesProductController::index
     methods: GET
 
 accessories_product_new:
-    path: /new
+    path: /admin/accessories/product/new
     controller: App\Controller\AccessoriesProductController::new
     methods: GET|POST
 
 accessories_product_show:
-    path: /{id}
+    path: /admin/accessories/product/{id}
     controller: App\Controller\AccessoriesProductController::show
     methods: GET
 
 accessories_product_edit:
-    path: /{id}/edit
+    path: /admin/accessories/product/{id}/edit
     controller: App\Controller\AccessoriesProductController::edit
     methods: GET|POST
 
 accessories_product_delete:
-    path: /{id}
+    path: /admin/accessories/product/{id}
     controller: App\Controller\AccessoriesProductController::delete
     methods: POST
 
@@ -28,54 +28,54 @@ app_admin:
     controller: App\Controller\AdminController::index
 
 basket_product_index:
-    path: /
+    path: /admin/basket/product/
     controller: App\Controller\BasketProductController::index
     methods: GET
 
 basket_product_new:
-    path: /new
+    path: /admin/basket/product/new
     controller: App\Controller\BasketProductController::new
     methods: GET|POST
 
 basket_product_show:
-    path: /{id}
+    path: /admin/basket/product/{id}
     controller: App\Controller\BasketProductController::show
     methods: GET
 
 
 basket_product_edit:
-    path: /{id}/edit
+    path: /admin/basket/product/{id}/edit
     controller: App\Controller\BasketProductController::edit
     methods: GET|POST
 
 basket_product_delete:
-    path: /{id}
+    path: /admin/basket/product/{id}
     controller: App\Controller\BasketProductController::delete
     methods: POST
 
-caviar_product_index':
-    path: /
+caviar_product_index:
+    path: /admin/caviar/product/
     controller: App\Controller\CaviarProductController::index
     methods: GET
 
-caviar_product_new':
-    path: /new
+caviar_product_new:
+    path: /admin/caviar/product/new
     controller: App\Controller\CaviarProductController::new
     methods: GET|POST
 
-caviar_product_show':
-    path: /{id}
+caviar_product_show:
+    path: /admin/caviar/product/{id}
     controller: App\Controller\CaviarProductController::show
     methods: GET
 
-caviar_product_edit':
-    path: /{id}/edit
+caviar_product_edit:
+    path: /admin/caviar/product/{id}/edit
     controller: App\Controller\CaviarProductController::edit
     methods: GET|POST
 
 
-caviar_product_delete':
-    path: /{id}
+caviar_product_delete:
+    path: /admin/caviar/product/{id}
     controller: App\Controller\CaviarProductController::delete
     methods: POST
 
@@ -190,27 +190,27 @@ app_logout:
     controller: App\Controller\SecurityController::logout
 
 user_index:
-    path: /
+    path: /admin/user/
     controller: App\Controller\UserController::index
     methods: GET
 
 user_new:
-    path: /new
+    path: /admin/user/new
     controller: App\Controller\UserController::new
     methods: GET|POST
 
 user_show:
-    path: /{id}
+    path: /admin/user/{id}
     controller: App\Controller\UserController::show
     methods: GET
 
 user_edit:
-    path: /{id}/edit
+    path: /admin/user/{id}/edit
     controller: App\Controller\UserController::edit
     methods: GET|POST
 
 user_delete:
-    path: /{id}
+    path: /admin/user/{id}
     controller: App\Controller\UserController::delete
     methods: POST
 
