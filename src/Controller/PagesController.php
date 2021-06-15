@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\UserType;
 use App\Entity\BasketProduct;
 use App\Entity\CaviarProduct;
+use App\Form\ChangeUserInfoType;
 use App\Entity\AccessoriesProduct;
 use App\Repository\BasketProductRepository;
 use App\Repository\CaviarProductRepository;
@@ -12,8 +15,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AccessoriesProductRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\RegistrationFormType;
+use App\Security\AppUserAuthenticator;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class PagesController extends AbstractController
 {
@@ -490,5 +498,131 @@ class PagesController extends AbstractController
     public function contact(): Response
     {
         return $this->render('pages/contact.html.twig');
+    }
+
+    #[Route('/checkout', name: 'app_checkout')]
+    public function checkout(Request $request, SessionInterface $session, CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $user = $this->getUser();
+
+        $total = 0;
+        $price = 0;
+        $quantity = 0;
+
+        $caviarPanier = $session->get('caviarProduct', []);
+        $basketPanier = $session->get('basketProduct', []);
+        $accessoriesPanier = $session->get('accessoriesProduct', []);
+
+        if(!empty($caviarPanier)){
+            foreach($caviarPanier as $panier) {
+                $caviar = $caviarProductRepository->find($panier['id']);
+                $price = $caviar->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        }   
+
+        if(!empty($basketPanier)){
+            foreach($basketPanier as $panier) {
+                $basket = $basketProductRepository->find($panier['id']);
+                $price = $basket->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        }        
+
+
+        if(!empty($accessoriesPanier)){
+            foreach($accessoriesPanier as $panier) {
+                $accessories =  $accessoriesProductRepository->find($panier['id']);
+                $price = $accessories->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        } 
+
+        $form = $this->createForm(ChangeUserInfoType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('app_checkout');
+        }
+
+        return $this->render('pages/checkout.html.twig',[
+            'form' => $form->createView(),
+            'total' => $total
+        ]);
+    }
+
+    #[Route('/checkout-anonymous', name: 'app_checkout_anonymous')]
+    public function checkoutAnonymous(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppUserAuthenticator $authenticator, SessionInterface $session, CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository): Response
+    {
+        $total = 0;
+        $price = 0;
+        $quantity = 0;
+
+        $caviarPanier = $session->get('caviarProduct', []);
+        $basketPanier = $session->get('basketProduct', []);
+        $accessoriesPanier = $session->get('accessoriesProduct', []);
+
+        if(!empty($caviarPanier)){
+            foreach($caviarPanier as $panier) {
+                $caviar = $caviarProductRepository->find($panier['id']);
+                $price = $caviar->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        }   
+
+        if(!empty($basketPanier)){
+            foreach($basketPanier as $panier) {
+                $basket = $basketProductRepository->find($panier['id']);
+                $price = $basket->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        }        
+
+
+        if(!empty($accessoriesPanier)){
+            foreach($accessoriesPanier as $panier) {
+                $accessories =  $accessoriesProductRepository->find($panier['id']);
+                $price = $accessories->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        }   
+
+        $user = new User();
+
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // encode the plain password
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+
+            return $this->redirectToRoute('app_checkout');
+        }
+
+        return $this->render('pages/checkout.html.twig',[
+            'form' => $form->createView(),
+            'total' => $total
+        ]);
     }
 }

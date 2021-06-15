@@ -226,3 +226,12 @@ user_delete:
     methods: POST
 
 
+app_checkout:
+    path: /checkout
+    controller: App\Controller\PagesController::checkout
+
+app_checkout_anonymous:
+    path: /checkout-anonymous
+    controller: App\Controller\PagesController::checkoutAnonymous
+
+

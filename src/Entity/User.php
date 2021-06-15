@@ -52,7 +52,7 @@ class User implements UserInterface
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      */
     private $adresseNumber;
 
@@ -62,7 +62,7 @@ class User implements UserInterface
     private $streetName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      */
     private $postalCode;
 
@@ -82,7 +82,7 @@ class User implements UserInterface
     private $shoppingCarts;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      */
     private $phoneNumber;
 
@@ -201,12 +201,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAdresseNumber(): ?string
+    public function getAdresseNumber(): ?int
     {
         return $this->adresseNumber;
     }
 
-    public function setAdresseNumber(string $adresseNumber): self
+    public function setAdresseNumber(int $adresseNumber): self
     {
         $this->adresseNumber = $adresseNumber;
 
@@ -225,12 +225,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPostalCode(): ?string
+    public function getPostalCode(): ?int
     {
         return $this->postalCode;
     }
 
-    public function setPostalCode(string $postalCode): self
+    public function setPostalCode(int $postalCode): self
     {
         $this->postalCode = $postalCode;
 
@@ -292,12 +292,12 @@ class User implements UserInterface
     }
 
 
-    public function getPhoneNumber(): ?string
+    public function getPhoneNumber(): ?int
     {
         return $this->phoneNumber;
     }
 
-    public function setPhoneNumber(string $phoneNumber): self
+    public function setPhoneNumber(int $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
 

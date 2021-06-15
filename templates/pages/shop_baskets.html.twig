@@ -91,7 +91,7 @@
 
                             <li class="flex-align card-product">
                                 <div class="img hover-zoom">
-                                  <a href="#"><img src="uploads/images/caviars/{{caviar.image}}" alt="{{ caviar.name }}"></a>
+                                  <a href="#"><img style="min-width:200px" src="uploads/images/caviars/{{caviar.image}}" alt="{{ caviar.name }}"></a>
                                 </div>
                                 
                                 <h5 class="h5 caption"><a {% if caviar.id is defined %} href="{{ path('app_shop_view',{ id: caviar.id} )}}" {% else %} href="#" {% endif %} class="link-hover">{{caviar.name}}</a></h5>
@@ -124,7 +124,7 @@
                           {% for basket in app.session.get('basketProduct') %}
                             <li class="flex-align card-product">
                                 <div class="img hover-zoom">
-                                  <a href="#"><img src="uploads/images/baskets/{{basket.image}}" alt="{{ basket.name }}"></a>
+                                  <a href="#"><img style="min-width:200px" src="uploads/images/baskets/{{basket.image}}" alt="{{ basket.name }}"></a>
                                 </div>
 
                                 <h5 class="h5 caption"><a {% if basket.id is defined %} href="{{ path('app_shop_baskets_view',{ id: basket.id} )}}" {% else %} href="#" {% endif %} class="link-hover">{{basket.name}}</a></h5>
@@ -132,11 +132,11 @@
                                 <div class="shop-counter">
                                     <div class="custom-input-number">
                                       <button type="button" class="cin-btn cin-decrement">
-                                        <a class="card-basket-min" href="{{ path('app_shop_cart_basket_min',{ id:basket.id } ) }}"><img src="img/left_arr.png" alt="left arrow"></a>
+                                        <a class="card-basket-min" href="{{ path('app_shop_cart_basket_min',{ id:basket.id } ) }}"><img style="height:12px;width:12px;" src="img/left_arr.png" alt="left arrow"></a>
                                       </button>
                                       <input type="number" class="cin-input input-field card-basket-quantity" step="1" value="{{ basket.quantity }}" min="1" max="1000">
                                       <button type="button" class="cin-btn cin-increment">
-                                        <a class="card-basket-max" href="{{ path('app_shop_cart_basket_max',{ id:basket.id } ) }}"><img src="img/right_arr.png" alt="right arrow"></a>
+                                        <a class="card-basket-max" href="{{ path('app_shop_cart_basket_max',{ id:basket.id } ) }}"><img style="height:12px;width:12px;" src="img/right_arr.png" alt="right arrow"></a>
                                       </button>
                                   </div>
                               </div>
@@ -155,7 +155,7 @@
                           {% for accessorie in app.session.get('accessoriesProduct') %}
                             <li class="flex-align card-product">
                                 <div class="img hover-zoom">
-                                  <a href="#"><img src="uploads/images/accessories/{{accessorie.image}}" alt="{{ accessorie.name }}"></a>
+                                  <a href="#"><img style="min-width:200px" src="uploads/images/accessories/{{accessorie.image}}" alt="{{ accessorie.name }}"></a>
                                 </div>
 
                                 <h5 class="h5 caption"><a {% if accessorie.id is defined %} href="{{ path('app_shop_accessories_view',{ id: accessorie.id} )}}" {% else %} href="#" {% endif %} class="link-hover">{{accessorie.name}}</a></h5>
@@ -163,11 +163,11 @@
                                 <div class="shop-counter">
                                     <div class="custom-input-number">
                                       <button type="button" class="cin-btn cin-decrement">
-                                        <a class="card-accessories-min" href="{{ path('app_shop_cart_accessories_min',{ id:accessorie.id } ) }}"><img src="img/left_arr.png" alt="left arrow"></a>
+                                        <a class="card-accessories-min" href="{{ path('app_shop_cart_accessories_min',{ id:accessorie.id } ) }}"><img style="height:12px;width:12px;" src="img/left_arr.png" alt="left arrow"></a>
                                       </button>
                                       <input type="number" class="cin-input input-field card-accessories-quantity" step="1" value="{{ accessorie.quantity }}" min="1" max="1000">
                                       <button type="button" class="cin-btn cin-increment">
-                                        <a class="card-accessories-max" href="{{ path('app_shop_cart_accessories_max',{ id:accessorie.id } ) }}"><img src="img/right_arr.png" alt="right arrow"></a>
+                                        <a class="card-accessories-max" href="{{ path('app_shop_cart_accessories_max',{ id:accessorie.id } ) }}"><img style="height:12px;width:12px;" src="img/right_arr.png" alt="right arrow"></a>
                                       </button>
                                   </div>
                               </div>
@@ -188,8 +188,11 @@
                               <h4 class="h4 caption">Total:<b class="main-col total-price"></b> €</h4>
                            </div>
                            <div class="fl">
-                               <a href="#" class="page-button button-style-1 type-2"><span class="txt">Go to the cart</span></a>
-                               <a href="#" class="page-button button-style-1 type-4"><span class="txt">go to checkout</span></a>
+                              {% if is_granted('ROLE_USER') %}
+                                <a href="{{ path('app_checkout')}}" class="page-button button-style-1 type-2"><span class="txt">Go to checkout</span></a>
+                              {% else %}
+                                <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1 type-4"><span class="txt">go to checkout</span></a>
+                              {% endif %}
                            </div>
                        </div>
                      </div>   
