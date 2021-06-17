@@ -192,6 +192,10 @@ app_register:
     path: /register
     controller: App\Controller\RegistrationController::register
 
+app_register_distributor:
+    path: /register-distributor
+    controller: App\Controller\RegistrationController::registerDistributor
+
 app_login:
     path: /login
     controller: App\Controller\SecurityController::login

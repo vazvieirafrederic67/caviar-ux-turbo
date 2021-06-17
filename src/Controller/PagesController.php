@@ -4,10 +4,14 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Entity\UserAnonyme;
 use App\Entity\BasketProduct;
 use App\Entity\CaviarProduct;
+use App\Form\UserAnonymeType;
 use App\Form\ChangeUserInfoType;
 use App\Entity\AccessoriesProduct;
+use App\Form\RegistrationFormType;
+use App\Security\AppUserAuthenticator;
 use App\Repository\BasketProductRepository;
 use App\Repository\CaviarProductRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,11 +21,9 @@ use App\Repository\AccessoriesProductRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\RegistrationFormType;
-use App\Security\AppUserAuthenticator;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class PagesController extends AbstractController
 {
@@ -55,7 +57,9 @@ class PagesController extends AbstractController
     public function shop(): Response
     {
         return $this->render('pages/shop.html.twig',[
-            'caviars' => $this->caviars
+            'caviars' => $this->caviars,
+            'baskets' => $this->baskets,
+            'accessories' => $this->accessories
         ]);
     }
 
@@ -435,7 +439,7 @@ class PagesController extends AbstractController
     #[Route('/shop-caviar', name: 'app_shop_caviar')]
     public function shopCaviar(): Response
     {
-        return $this->render('pages/shop.html.twig',[
+        return $this->render('pages/shop_caviar.html.twig',[
             'caviars' => $this->caviars
         ]);
     }
@@ -466,7 +470,9 @@ class PagesController extends AbstractController
     public function products(): Response
     {
         return $this->render('pages/products.html.twig',[
-            'caviars' => $this->caviars
+            'caviars' => $this->caviars,
+            'baskets' => $this->baskets,
+            'accessories' => $this->accessories
         ]);
     }
 
@@ -597,24 +603,16 @@ class PagesController extends AbstractController
             }
         }   
 
-        $user = new User();
+        $user = new UserAnonyme();
 
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(UserAnonymeType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // encode the plain password
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+            dd($form->getData());
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+  
 
 
             return $this->redirectToRoute('app_checkout');

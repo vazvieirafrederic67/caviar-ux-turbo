@@ -20,19 +20,11 @@ const $ = require('jquery');
 global.$ = global.jQuery = $;
 
 
-
-
 import 'jquery-ui/themes/base/core.css';
 import 'jquery-ui/themes/base/theme.css';
 import 'jquery-ui/themes/base/selectable.css';
 import 'jquery-ui/ui/core';
 import 'jquery-ui/ui/widgets/selectable';
-
-
-
-
-
-
 
 
 // import Swiper styles
@@ -43,11 +35,11 @@ import './jqueryui';
 import './swiper';
 import './all';
 import './jscolor';
-import './jquery.knob';
-import './jquery.throttle';
-import './jquery.classycountdown';
+import './knob';
+import './throttle';
+import './classycountdown';
 import './jarallax';
-import './color.picker';
+import './colorpicker';
 
 
 

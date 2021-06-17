@@ -91,6 +91,11 @@ class User implements UserInterface
      */
     private $dateOfBirth;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $cni;
+
     public function __construct()
     {
         $this->shoppingCarts = new ArrayCollection();
@@ -312,6 +317,18 @@ class User implements UserInterface
     public function setDateOfBirth(\DateTimeInterface $dateOfBirth): self
     {
         $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
+    }
+
+    public function getCni(): ?string
+    {
+        return $this->cni;
+    }
+
+    public function setCni(?string $cni): self
+    {
+        $this->cni = $cni;
 
         return $this;
     }
