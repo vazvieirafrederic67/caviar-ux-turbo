@@ -80,7 +80,7 @@ caviar_product_delete:
     methods: POST
 
 app_home:
-    path: /home
+    path: /
     controller: App\Controller\PagesController::home
 
 app_about:
@@ -229,7 +229,6 @@ user_delete:
     controller: App\Controller\UserController::delete
     methods: POST
 
-
 app_checkout:
     path: /checkout
     controller: App\Controller\PagesController::checkout
@@ -237,5 +236,13 @@ app_checkout:
 app_checkout_anonymous:
     path: /checkout-anonymous
     controller: App\Controller\PagesController::checkoutAnonymous
+
+app_paiement:
+    path: /paiement
+    controller: App\Controller\PagesController::paiement
+
+app_paiement_anonymous:
+    path: /paiement-anonymous
+    controller: App\Controller\PagesController::paiementAnonymous
 
 

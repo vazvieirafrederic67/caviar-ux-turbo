@@ -477,7 +477,13 @@
                    {% endif %}
                 </div>
              </div>
-        </div> 				  
+        </div> 		
+        <div class="empty-lg-70 empty-md-50 empty-sm-30 empty-xs-30"></div>
+        {% if is_granted('ROLE_USER') %}
+            <div class="page-button button-style-1 type-4">
+                <a href="{{ path('app_paiement')}}"><span class="txt">Payment</span></a>
+            </div>
+        {% endif %}		  
 		<div class="empty-lg-140 empty-md-100 empty-sm-60 empty-xs-60"></div>
     </section>
 

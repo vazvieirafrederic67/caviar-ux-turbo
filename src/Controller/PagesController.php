@@ -4,10 +4,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\Entity\UserAnonyme;
 use App\Entity\BasketProduct;
 use App\Entity\CaviarProduct;
-use App\Form\UserAnonymeType;
+use App\Entity\UserAnonymous;
+use App\Form\UserAnonymousType;
 use App\Form\ChangeUserInfoType;
 use App\Entity\AccessoriesProduct;
 use App\Form\RegistrationFormType;
@@ -39,7 +39,7 @@ class PagesController extends AbstractController
         
     }
 
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function home(): Response
     {
         return $this->render('pages/home.html.twig',[
@@ -555,7 +555,7 @@ class PagesController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('app_checkout');
+            return $this->redirectToRoute('app_paiement');
         }
 
         return $this->render('pages/checkout.html.twig',[
@@ -603,23 +603,114 @@ class PagesController extends AbstractController
             }
         }   
 
-        $user = new UserAnonyme();
+        $user = new UserAnonymous();
 
-        $form = $this->createForm(UserAnonymeType::class, $user);
+        $form = $this->createForm(UserAnonymousType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            dd($form->getData());
-
-  
-
-
-            return $this->redirectToRoute('app_checkout');
+            return $this->redirectToRoute('app_paiement_anonymous');
         }
 
         return $this->render('pages/checkout.html.twig',[
             'form' => $form->createView(),
+            'total' => $total
+        ]);
+    }
+
+    #[Route('/paiement', name: 'app_paiement')]
+    public function paiement(Request $request, SessionInterface $session, CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $user = $this->getUser();
+
+        $total = 0;
+        $price = 0;
+        $quantity = 0;
+
+        $caviarPanier = $session->get('caviarProduct', []);
+        $basketPanier = $session->get('basketProduct', []);
+        $accessoriesPanier = $session->get('accessoriesProduct', []);
+
+        if(!empty($caviarPanier)){
+            foreach($caviarPanier as $panier) {
+                $caviar = $caviarProductRepository->find($panier['id']);
+                $price = $caviar->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        }   
+
+        if(!empty($basketPanier)){
+            foreach($basketPanier as $panier) {
+                $basket = $basketProductRepository->find($panier['id']);
+                $price = $basket->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        }        
+
+
+        if(!empty($accessoriesPanier)){
+            foreach($accessoriesPanier as $panier) {
+                $accessories =  $accessoriesProductRepository->find($panier['id']);
+                $price = $accessories->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        } 
+
+        $total = number_format((float)$total, 2, ',', '');
+
+        return $this->render('pages/paiement.html.twig',[
+            'total' => $total
+        ]);
+    }
+
+    #[Route('/paiement-anonymous', name: 'app_paiement_anonymous')]
+    public function paiementAnonymous(Request $request, SessionInterface $session, CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository): Response
+    {
+
+        $total = 0;
+        $price = 0;
+        $quantity = 0;
+
+        $caviarPanier = $session->get('caviarProduct', []);
+        $basketPanier = $session->get('basketProduct', []);
+        $accessoriesPanier = $session->get('accessoriesProduct', []);
+
+        if(!empty($caviarPanier)){
+            foreach($caviarPanier as $panier) {
+                $caviar = $caviarProductRepository->find($panier['id']);
+                $price = $caviar->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        }   
+
+        if(!empty($basketPanier)){
+            foreach($basketPanier as $panier) {
+                $basket = $basketProductRepository->find($panier['id']);
+                $price = $basket->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        }        
+
+
+        if(!empty($accessoriesPanier)){
+            foreach($accessoriesPanier as $panier) {
+                $accessories =  $accessoriesProductRepository->find($panier['id']);
+                $price = $accessories->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        } 
+
+        $total = number_format((float)$total, 2, ',', '');
+
+        return $this->render('pages/paiement_anonymous.html.twig',[
             'total' => $total
         ]);
     }
