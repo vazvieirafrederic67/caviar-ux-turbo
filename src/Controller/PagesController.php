@@ -45,6 +45,7 @@ class PagesController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function home(): Response
     {
+
         return $this->render('pages/home.html.twig',[
             'caviars' => $this->caviars
         ]);
@@ -930,4 +931,28 @@ class PagesController extends AbstractController
             'message' => $this->message
         ]);
     }
+
+    // Method: POST, PUT, GET etc
+    // Data: array("param" => "value") ==> index.php?param=value
+    #[Route('/api', name: 'app_api')]
+    public function CallAPI()
+    {
+        $url = "https://schema.getpostman.com/json/collection/v2.1.0/collection.json";
+        $id = 'd5a2fccc-23ea-46fe-a2c5-e22de1c3097a';
+       
+       
+
+
+
+
+
+
+
+
+
+        return $this->render('pages/home.html.twig');
+    }
+
+
+
 }
