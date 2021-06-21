@@ -59,6 +59,21 @@ class ShoppingCart
      */
     private $userAnonyme;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $caviarName;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $basketName;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $accessoriesName;
+
     public function __construct()
     {
         $this->caviarProduct = new ArrayCollection();
@@ -199,6 +214,42 @@ class ShoppingCart
     public function setUserAnonyme(?UserAnonymous $userAnonyme): self
     {
         $this->userAnonyme = $userAnonyme;
+
+        return $this;
+    }
+
+    public function getCaviarName(): ?string
+    {
+        return $this->caviarName;
+    }
+
+    public function setCaviarName(string $caviarName): self
+    {
+        $this->caviarName = $caviarName;
+
+        return $this;
+    }
+
+    public function getBasketName(): ?string
+    {
+        return $this->basketName;
+    }
+
+    public function setBasketName(string $basketName): self
+    {
+        $this->basketName = $basketName;
+
+        return $this;
+    }
+
+    public function getAccessoriesName(): ?string
+    {
+        return $this->accessoriesName;
+    }
+
+    public function setAccessoriesName(string $accessoriesName): self
+    {
+        $this->accessoriesName = $accessoriesName;
 
         return $this;
     }

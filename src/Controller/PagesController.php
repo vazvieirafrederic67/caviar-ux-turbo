@@ -573,7 +573,7 @@ class PagesController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('app_paiement');
+            return $this->redirectToRoute('app_checkout');
         }
 
         return $this->render('pages/checkout.html.twig',[
@@ -822,41 +822,45 @@ class PagesController extends AbstractController
             $userAnonyme->setDateOfBirth($userAnonymePanier['dateOfBirth']);
             $userAnonyme->setPhoneNumber($userAnonymePanier['phoneNumber']);
 
-
-            $shoppingCart = new ShoppingCart();
-            $shoppingCart->setUserAnonyme($userAnonyme);
-
             if($caviarPanier !== []){
-                $quantity = 0;
+                
                 foreach($caviarPanier as $panier){
+                    $shoppingCart = new ShoppingCart();
+                    $shoppingCart->setUserAnonyme($userAnonyme);
                     $caviarProduct = $caviarProductRepository->find($panier['id']);
                     $shoppingCart->addCaviarProduct($caviarProduct);
-                    $quantity = $quantity + $panier['quantity'];
-                    $shoppingCart->setCaviarQuantity($quantity);
+                    $shoppingCart->setCaviarQuantity($panier['quantity']);
+                    $shoppingCart->setCaviarName($panier['name']);
+                    $entityManager->persist($shoppingCart);
                 }
             }
 
             if($basketPanier !== []){
-                $quantity = 0;
+                
                 foreach($basketPanier as $panier){
+                    $shoppingCart = new ShoppingCart();
+                    $shoppingCart->setUserAnonyme($userAnonyme);
                     $basketProduct = $basketProductRepository->find($panier['id']);
                     $shoppingCart->addBasketProduct($basketProduct);
-                    $quantity = $quantity + $panier['quantity'];
-                    $shoppingCart->setBasketQuantity($quantity);
+                    $shoppingCart->setBasketQuantity($panier['quantity']);
+                    $shoppingCart->setBasketName($panier['name']);
+                    $entityManager->persist($shoppingCart);
                 }
             }
 
             if($accessoriesPanier !== []){
-                $quantity = 0;
+                
                 foreach($accessoriesPanier as $panier){
+                    $shoppingCart = new ShoppingCart();
+                    $shoppingCart->setUserAnonyme($userAnonyme);
                     $accessoriesProduct = $accessoriesProductRepository->find($panier['id']);
                     $shoppingCart->addAccessoriesProduct($accessoriesProduct);
-                    $quantity = $quantity + $panier['quantity'];
-                    $shoppingCart->setAccessoriesQuantity($quantity);
+                    $shoppingCart->setAccessoriesQuantity($panier['quantity']);
+                    $shoppingCart->setAccessoriesName($panier['name']);
+                    $entityManager->persist($shoppingCart);
                 }
             }
             
-            $entityManager->persist($shoppingCart);
             $entityManager->flush();
 
             $userPanier = $session->set('user', []);
@@ -870,36 +874,43 @@ class PagesController extends AbstractController
         if(!empty($userPanier['email'])){
 
             $user = $userRepository->findOneBy(['email' => $userPanier['email']]);
-            $shoppingCart = new ShoppingCart();
-            $shoppingCart->setUser($user);
 
             if($caviarPanier !== []){
-                $quantity = 0;
+                
                 foreach($caviarPanier as $panier){
+                    $shoppingCart = new ShoppingCart();
+                    $shoppingCart->setUser($user);
                     $caviarProduct = $caviarProductRepository->find($panier['id']);
                     $shoppingCart->addCaviarProduct($caviarProduct);
-                    $quantity = $quantity + $panier['quantity'];
-                    $shoppingCart->setCaviarQuantity($quantity);
+                    $shoppingCart->setCaviarQuantity($panier['quantity']);
+                    $shoppingCart->setCaviarName($panier['name']);
+                    $entityManager->persist($shoppingCart);
                 }
             }
 
             if($basketPanier !== []){
-                $quantity = 0;
+               
                 foreach($basketPanier as $panier){
+                    $shoppingCart = new ShoppingCart();
+                    $shoppingCart->setUser($user);
                     $basketProduct = $basketProductRepository->find($panier['id']);
                     $shoppingCart->addBasketProduct($basketProduct);
-                    $quantity = $quantity + $panier['quantity'];
-                    $shoppingCart->setBasketQuantity($quantity);
+                    $shoppingCart->setBasketQuantity($panier['quantity']);
+                    $shoppingCart->setBasketName($panier['name']);
+                    $entityManager->persist($shoppingCart);
                 }
             }
 
             if($accessoriesPanier !== []){
-                $quantity = 0;
+               
                 foreach($accessoriesPanier as $panier){
+                    $shoppingCart = new ShoppingCart();
+                    $shoppingCart->setUser($user);
                     $accessoriesProduct = $accessoriesProductRepository->find($panier['id']);
                     $shoppingCart->addAccessoriesProduct($accessoriesProduct);
-                    $quantity = $quantity + $panier['quantity'];
-                    $shoppingCart->setAccessoriesQuantity($quantity);
+                    $shoppingCart->setAccessoriesQuantity($panier['quantity']);
+                    $shoppingCart->setAccessoriesName($panier['name']);
+                    $entityManager->persist($shoppingCart);
                 }
             }
             
