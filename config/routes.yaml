@@ -245,4 +245,8 @@ app_paiement_anonymous:
     path: /paiement-anonymous
     controller: App\Controller\PagesController::paiementAnonymous
 
+app_validation_shopping:
+    path: /validation-shopping
+    controller: App\Controller\PagesController::validationShopping
+
 

@@ -20,8 +20,7 @@ class ShoppingCart
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="shoppingCarts")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="shoppingCarts",cascade={"persist"})
      */
     private $user;
 
@@ -39,6 +38,26 @@ class ShoppingCart
      * @ORM\ManyToMany(targetEntity=AccessoriesProduct::class, inversedBy="shoppingCarts")
      */
     private $accessoriesProduct;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $caviarQuantity;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $basketQuantity;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $accessoriesQuantity;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=UserAnonymous::class, inversedBy="shoppingCartsAnonymous",cascade={"persist"})
+     */
+    private $userAnonyme;
 
     public function __construct()
     {
@@ -132,6 +151,54 @@ class ShoppingCart
     public function removeAccessoriesProduct(AccessoriesProduct $accessoriesProduct): self
     {
         $this->accessoriesProduct->removeElement($accessoriesProduct);
+
+        return $this;
+    }
+
+    public function getCaviarQuantity(): ?int
+    {
+        return $this->caviarQuantity;
+    }
+
+    public function setCaviarQuantity(int $caviarQuantity): self
+    {
+        $this->caviarQuantity = $caviarQuantity;
+
+        return $this;
+    }
+
+    public function getBasketQuantity(): ?int
+    {
+        return $this->basketQuantity;
+    }
+
+    public function setBasketQuantity(int $basketQuantity): self
+    {
+        $this->basketQuantity = $basketQuantity;
+
+        return $this;
+    }
+
+    public function getAccessoriesQuantity(): ?int
+    {
+        return $this->accessoriesQuantity;
+    }
+
+    public function setAccessoriesQuantity(?int $accessoriesQuantity): self
+    {
+        $this->accessoriesQuantity = $accessoriesQuantity;
+
+        return $this;
+    }
+
+    public function getUserAnonyme(): ?UserAnonymous
+    {
+        return $this->userAnonyme;
+    }
+
+    public function setUserAnonyme(?UserAnonymous $userAnonyme): self
+    {
+        $this->userAnonyme = $userAnonyme;
 
         return $this;
     }

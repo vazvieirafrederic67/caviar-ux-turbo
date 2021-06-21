@@ -10,6 +10,7 @@ use App\Entity\UserAnonymous;
 use App\Form\UserAnonymousType;
 use App\Form\ChangeUserInfoType;
 use App\Entity\AccessoriesProduct;
+use App\Entity\ShoppingCart;
 use App\Form\RegistrationFormType;
 use App\Security\AppUserAuthenticator;
 use App\Repository\BasketProductRepository;
@@ -18,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AccessoriesProductRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -30,13 +32,14 @@ class PagesController extends AbstractController
     private $caviars;
     private $baskets;
     private $accessories;
+    private $message;
 
     public function __construct(CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository)
     {
         $this->caviars = $caviarProductRepository->findAll();
         $this->baskets = $basketProductRepository->findAll();
         $this->accessories = $accessoriesProductRepository->findAll();
-        
+        $this->message = null;
     }
 
     #[Route('/', name: 'app_home')]
@@ -548,6 +551,21 @@ class PagesController extends AbstractController
             }
         } 
 
+        $userPanier = $session->get('user', []);
+
+        $userPanier['lastname'] = $user->getLastname();
+        $userPanier['firstname'] = $user->getFirstname();
+        $userPanier['email'] = $user->getEmail();
+        $userPanier['adresseNumber'] = $user->getAdresseNumber();
+        $userPanier['streetName'] = $user->getStreetName();
+        $userPanier['postalCode'] = $user->getPostalCode();
+        $userPanier['city'] = $user->getCity();
+        $userPanier['country'] = $user->getCountry();
+        $userPanier['dateOfBirth'] = $user->getDateOfBirth();
+        $userPanier['phoneNumber'] = $user->getPhoneNumber();
+
+        $session->set('user', $userPanier);
+
         $form = $this->createForm(ChangeUserInfoType::class, $user);
         $form->handleRequest($request);
 
@@ -593,7 +611,6 @@ class PagesController extends AbstractController
             }
         }        
 
-
         if(!empty($accessoriesPanier)){
             foreach($accessoriesPanier as $panier) {
                 $accessories =  $accessoriesProductRepository->find($panier['id']);
@@ -610,6 +627,21 @@ class PagesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $userPanier = $session->get('userAnonyme', []);
+
+            $userPanier['lastname'] = $user->getLastname();
+            $userPanier['firstname'] = $user->getFirstname();
+            $userPanier['email'] = $user->getEmail();
+            $userPanier['adresseNumber'] = $user->getAdresseNumber();
+            $userPanier['streetName'] = $user->getStreetName();
+            $userPanier['postalCode'] = $user->getPostalCode();
+            $userPanier['city'] = $user->getCity();
+            $userPanier['country'] = $user->getCountry();
+            $userPanier['dateOfBirth'] = $user->getDateOfBirth();
+            $userPanier['phoneNumber'] = $user->getPhoneNumber();
+ 
+            $session->set('userAnonyme', $userPanier);
+
             return $this->redirectToRoute('app_paiement_anonymous');
         }
 
@@ -623,7 +655,6 @@ class PagesController extends AbstractController
     public function paiement(Request $request, SessionInterface $session, CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
-        $user = $this->getUser();
 
         $total = 0;
         $price = 0;
@@ -651,7 +682,6 @@ class PagesController extends AbstractController
             }
         }        
 
-
         if(!empty($accessoriesPanier)){
             foreach($accessoriesPanier as $panier) {
                 $accessories =  $accessoriesProductRepository->find($panier['id']);
@@ -661,10 +691,19 @@ class PagesController extends AbstractController
             }
         } 
 
-        $total = number_format((float)$total, 2, ',', '');
+        $prix = (float)$total;
+
+        // On instancie Stripe
+        \Stripe\Stripe::setApiKey('sk_test_51Ir3u4JS3NsLYofkF9np7mZcyc8lLJF70cDxiHd5lmj3f38kI5aL29SjW5WAAIOMqRdpVbwaHfJ1ddk85H4pk1c000UyhTlmaM');
+
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => $prix * 100,
+            'currency' => 'eur'
+        ]);
 
         return $this->render('pages/paiement.html.twig',[
-            'total' => $total
+            'total' => $prix,
+            'secret' => $intent->client_secret
         ]);
     }
 
@@ -676,9 +715,68 @@ class PagesController extends AbstractController
         $price = 0;
         $quantity = 0;
 
+       
         $caviarPanier = $session->get('caviarProduct', []);
         $basketPanier = $session->get('basketProduct', []);
         $accessoriesPanier = $session->get('accessoriesProduct', []);
+
+        if(!empty($caviarPanier)){
+            foreach($caviarPanier as $panier) {
+                $caviar = $caviarProductRepository->find($panier['id']);
+                $price = $caviar->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        }   
+
+        if(!empty($basketPanier)){
+            foreach($basketPanier as $panier) {
+                $basket = $basketProductRepository->find($panier['id']);
+                $price = $basket->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        }        
+
+        if(!empty($accessoriesPanier)){
+            foreach($accessoriesPanier as $panier) {
+                $accessories =  $accessoriesProductRepository->find($panier['id']);
+                $price = $accessories->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+            }
+        } 
+
+        $prix = (float)$total;
+
+        // On instancie Stripe
+        \Stripe\Stripe::setApiKey('sk_test_51Ir3u4JS3NsLYofkF9np7mZcyc8lLJF70cDxiHd5lmj3f38kI5aL29SjW5WAAIOMqRdpVbwaHfJ1ddk85H4pk1c000UyhTlmaM');
+
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => $prix * 100,
+            'currency' => 'eur'
+        ]);
+
+        return $this->render('pages/paiement_anonymous.html.twig',[
+            'total' => $prix,
+            'secret' => $intent->client_secret
+        ]);
+    }
+
+    #[Route('/validation-shopping', name: 'app_validation_shopping')]
+    public function validationShopping(SessionInterface $session,UserRepository $userRepository, CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository){
+
+        $total = 0;
+        $price = 0;
+        $quantity = 0;
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $userPanier = $session->get('user', []);
+        $userAnonymePanier = $session->get('userAnonyme', []);
+        $caviarPanier = $session->get('caviarProduct', []);
+        $basketPanier = $session->get('basketProduct', []);
+        $accessoriesPanier = $session->get('accessoriesProduct', []);
+
 
         if(!empty($caviarPanier)){
             foreach($caviarPanier as $panier) {
@@ -708,10 +806,117 @@ class PagesController extends AbstractController
             }
         } 
 
-        $total = number_format((float)$total, 2, ',', '');
+       
 
-        return $this->render('pages/paiement_anonymous.html.twig',[
-            'total' => $total
+        if(!empty($userAnonymePanier['email'])){
+
+            $userAnonyme = new UserAnonymous();
+            $userAnonyme->setLastname($userAnonymePanier['lastname']);
+            $userAnonyme->setFirstname($userAnonymePanier['firstname']);
+            $userAnonyme->setEmail($userAnonymePanier['email']);
+            $userAnonyme->setAdresseNumber($userAnonymePanier['adresseNumber']);
+            $userAnonyme->setStreetName($userAnonymePanier['streetName']);
+            $userAnonyme->setPostalCode($userAnonymePanier['postalCode']);
+            $userAnonyme->setCity($userAnonymePanier['city']);
+            $userAnonyme->setCountry($userAnonymePanier['country']);
+            $userAnonyme->setDateOfBirth($userAnonymePanier['dateOfBirth']);
+            $userAnonyme->setPhoneNumber($userAnonymePanier['phoneNumber']);
+
+
+            $shoppingCart = new ShoppingCart();
+            $shoppingCart->setUserAnonyme($userAnonyme);
+
+            if($caviarPanier !== []){
+                $quantity = 0;
+                foreach($caviarPanier as $panier){
+                    $caviarProduct = $caviarProductRepository->find($panier['id']);
+                    $shoppingCart->addCaviarProduct($caviarProduct);
+                    $quantity = $quantity + $panier['quantity'];
+                    $shoppingCart->setCaviarQuantity($quantity);
+                }
+            }
+
+            if($basketPanier !== []){
+                $quantity = 0;
+                foreach($basketPanier as $panier){
+                    $basketProduct = $basketProductRepository->find($panier['id']);
+                    $shoppingCart->addBasketProduct($basketProduct);
+                    $quantity = $quantity + $panier['quantity'];
+                    $shoppingCart->setBasketQuantity($quantity);
+                }
+            }
+
+            if($accessoriesPanier !== []){
+                $quantity = 0;
+                foreach($accessoriesPanier as $panier){
+                    $accessoriesProduct = $accessoriesProductRepository->find($panier['id']);
+                    $shoppingCart->addAccessoriesProduct($accessoriesProduct);
+                    $quantity = $quantity + $panier['quantity'];
+                    $shoppingCart->setAccessoriesQuantity($quantity);
+                }
+            }
+            
+            $entityManager->persist($shoppingCart);
+            $entityManager->flush();
+
+            $userPanier = $session->set('user', []);
+            $userAnonymePanier = $session->set('userAnonyme', []);
+            $caviarPanier = $session->set('caviarProduct', []);
+            $basketPanier = $session->set('basketProduct', []);
+            $accessoriesPanier = $session->set('accessoriesProduct', []);
+            $this->message = "Votre paiement à bien été effectué, " . $userAnonyme->getFirstname() . "!";
+        }
+
+        if(!empty($userPanier['email'])){
+
+            $user = $userRepository->findOneBy(['email' => $userPanier['email']]);
+            $shoppingCart = new ShoppingCart();
+            $shoppingCart->setUser($user);
+
+            if($caviarPanier !== []){
+                $quantity = 0;
+                foreach($caviarPanier as $panier){
+                    $caviarProduct = $caviarProductRepository->find($panier['id']);
+                    $shoppingCart->addCaviarProduct($caviarProduct);
+                    $quantity = $quantity + $panier['quantity'];
+                    $shoppingCart->setCaviarQuantity($quantity);
+                }
+            }
+
+            if($basketPanier !== []){
+                $quantity = 0;
+                foreach($basketPanier as $panier){
+                    $basketProduct = $basketProductRepository->find($panier['id']);
+                    $shoppingCart->addBasketProduct($basketProduct);
+                    $quantity = $quantity + $panier['quantity'];
+                    $shoppingCart->setBasketQuantity($quantity);
+                }
+            }
+
+            if($accessoriesPanier !== []){
+                $quantity = 0;
+                foreach($accessoriesPanier as $panier){
+                    $accessoriesProduct = $accessoriesProductRepository->find($panier['id']);
+                    $shoppingCart->addAccessoriesProduct($accessoriesProduct);
+                    $quantity = $quantity + $panier['quantity'];
+                    $shoppingCart->setAccessoriesQuantity($quantity);
+                }
+            }
+            
+            $entityManager->persist($shoppingCart);
+            $entityManager->flush();
+
+            $userPanier = $session->set('user', []);
+            $userAnonymePanier = $session->set('userAnonyme', []);
+            $caviarPanier = $session->set('caviarProduct', []);
+            $basketPanier = $session->set('basketProduct', []);
+            $accessoriesPanier = $session->set('accessoriesProduct', []);
+            $this->message = "Votre paiement à bien été effectué, " . $user->getFirstname() . "!";
+        }
+        
+
+        return $this->render('pages/home.html.twig',[
+            'message' => $this->message
         ]);
     }
 }

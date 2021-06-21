@@ -90,10 +90,18 @@
                 <div class="swiper-slide">
                   <div class="parallax-bg bg" style="background-image: url(img/home-1/home1_slider_img_1.jpg)" data-swiper-parallax="50%"></div>
                    <div class="table-view mobile-rel-block">
+
                    	 <div class="table-cell">
                        <div class="container">
+
+                        {% if message is defined %}
+                            <div class="simple-text md simple-sub-text">
+                                <p style="color:white;font-size:24px;">{{message}}</p>
+                            </div>
+                        {% endif %}
                           <div class="empty-lg-50 empty-md-50 empty-sm-0 empty-xs-0"></div>
                            <div class="simple-item text-center color-type-1 simple-item-style-1" data-swiper-parallax="30%" data-swiper-parallax-duration="1000">
+ 
                                <div class="first-div title h1 main-col">Bienvenue</div>
                                <div class="empty-sm-30 empty-xs-30"></div>
                                    <div class="wrap-padding">

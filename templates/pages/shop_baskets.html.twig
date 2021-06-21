@@ -239,9 +239,9 @@
 
                     <img src="uploads/images/baskets/{{ basket.image }}" alt="{{ basket.name }}">
                     <div class="vertical-align full menu-button">
-                        <a href="{{ path('app_shop_cart_basket',{ id:basket.id } ) }}" class="page-button button-style-1 type-4"><span class="txt">Add to cart</span></a>
+                        <a href="{{ path('app_shop_cart_basket',{ id:basket.id } ) }}" class="page-button button-style-1 type-4"><span class="txt">Ajouter au panier</span></a>
                         <div class="empty-sm-10 empty-xs-10"></div>
-                      <a href="{{ path('app_shop_baskets_view',{ id:basket.id } ) }}" class="page-button button-style-1 type-2 open-popup-product" data-open="popup-gallery" data-rel="1"><span class="txt">quick view</span></a>
+                      <a href="{{ path('app_shop_baskets_view',{ id:basket.id } ) }}" class="page-button button-style-1 type-2 open-popup-product" data-open="popup-gallery" data-rel="1"><span class="txt">Détail</span></a>
                     </div>
                   </div>
                   <div class="text">
@@ -354,13 +354,9 @@
                       <h4 id="modal-title" class="h3 sm tt color-2"></h4>
                    
                     <div class="empty-sm-20 empty-xs-20"></div>
-                    <h5 class="h5 sm color-2">Price: <span class="h4 main-col"><p id="modal-price"></p> €</span></h5>
+                    <h5 style="display:flex" class="h5 sm color-2">Prix&nbsp;:&nbsp;<span style="display:flex" class="h4 main-col"><p id="modal-price"> </p> €</span></h5>
                   </aside>
-                  <div class="empty-sm-20 empty-xs-20"></div>
-                  <aside class="product-size">
-                    <h5 class="h5 sm color-2 inline-box">Diameter: <p id="modal-diameter"><p></h5>
-                    <h5 class="h5 sm color-2 inline-box">Color: <p id="modal-color"><p></h5>
-                  </aside>
+  
                   <div class="empty-sm-25 empty-xs-20"></div>
                   <aside>
                     <div class="simple-text">
@@ -373,7 +369,7 @@
                   <aside>
                   <div class="buy-bar type-2">
                      <div class="fr">
-                        <a id="modal-link" href="{{ path('app_shop_cart_basket',{ id: 0 } ) }}" class="page-button button-style-1 type-2"><span class="txt">Add to cart</span></a>
+                        <a id="modal-link" href="{{ path('app_shop_cart_basket',{ id: 0 } ) }}" class="page-button button-style-1 type-2"><span class="txt">Ajouter au panier</span></a>
                      </div>
                   </div>
                   </aside>

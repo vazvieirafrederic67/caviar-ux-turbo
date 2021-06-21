@@ -85,9 +85,15 @@ class UserAnonymous
      */
     private $dateOfBirth;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ShoppingCart::class, mappedBy="userAnonyme")
+     */
+    private $shoppingCartsAnonymous;
+
     public function __construct()
     {
         $this->shoppingCarts = new ArrayCollection();
+        $this->shoppingCartsAnonymous = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -272,6 +278,36 @@ class UserAnonymous
     public function setDateOfBirth(\DateTimeInterface $dateOfBirth): self
     {
         $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ShoppingCart[]
+     */
+    public function getShoppingCartsAnonymous(): Collection
+    {
+        return $this->shoppingCartsAnonymous;
+    }
+
+    public function addShoppingCartsAnonymou(ShoppingCart $shoppingCartsAnonymou): self
+    {
+        if (!$this->shoppingCartsAnonymous->contains($shoppingCartsAnonymou)) {
+            $this->shoppingCartsAnonymous[] = $shoppingCartsAnonymou;
+            $shoppingCartsAnonymou->setUserAnonyme($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShoppingCartsAnonymou(ShoppingCart $shoppingCartsAnonymou): self
+    {
+        if ($this->shoppingCartsAnonymous->removeElement($shoppingCartsAnonymou)) {
+            // set the owning side to null (unless already changed)
+            if ($shoppingCartsAnonymou->getUserAnonyme() === $this) {
+                $shoppingCartsAnonymou->setUserAnonyme(null);
+            }
+        }
 
         return $this;
     }
