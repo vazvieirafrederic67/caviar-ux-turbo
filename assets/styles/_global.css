@@ -1225,9 +1225,10 @@ body.overflow {overflow: hidden;}
     .header-menu > li ul ul {padding-top: 5px;}
     .header-menu > li, .header nav {display: block;width: 100%;}
     .header-menu > li {margin: 20px 0px; font-size: 16px;}
-    .header-menu > li > a {margin: 0px; padding: 0px 20px;}
+    .header-menu > li > a {margin: 0px; padding: 0px 20px; font-size: 48px;}
     .header-menu > li > ul li a {padding: 10px 0px;}
     .right-block {width: 100%; float: none;}
+    .right-block > div {font-size: 54px;}
     .search-popup {z-index: 500; position: fixed; left: 0px; top: 0px; padding: 20px 0px;}
     .nav-align-wrap {text-align: center; transition: all 0.35s ease-out; -webkit-transition: all 0.35s ease-out;-ms-transition: all 0.35s ease-out;}
 	.header.open-search .nav-align-wrap {padding-top: 70px;}
@@ -1262,6 +1263,8 @@ body.overflow {overflow: hidden;}
     .header .like-item path, .shop-card-item .shop-icon path {fill: #fff!important;}
     .close-card-mobile {display: block;}
     .swiper-container-horizontal > .pagination.swiper-pagination-bullets {bottom: 30px;}
+    .shop-number {font-size: 36px;width:36px;height:36px;line-height: 32px;}
+    .shop-icon > svg {width: 54px;height: 54px;}
 }
 @media (max-width: 768px) {
     .search-form {width: 100%; max-width: 100%;}
