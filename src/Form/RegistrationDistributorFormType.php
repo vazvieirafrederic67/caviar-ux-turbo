@@ -74,7 +74,7 @@ class RegistrationDistributorFormType extends AbstractType
             ])
             ->add('country', ChoiceType::class, [
                 'label' => false,
-                'placeholder' => 'Choose your country',
+                'placeholder' => 'Choisir votre pays',
                 'choices'  => $this->countries,
             ])
             ->add('email', TextType::class, [
@@ -88,11 +88,11 @@ class RegistrationDistributorFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez insérer un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit au moins avoir {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),

@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\ContactType;
 use App\Entity\BasketProduct;
 use App\Entity\CaviarProduct;
 use App\Entity\UserAnonymous;
@@ -505,9 +507,31 @@ class PagesController extends AbstractController
     }
 
     #[Route('/contact', name: 'app_contact')]
-    public function contact(): Response
+    public function contact(Request $request): Response
     {
-        return $this->render('pages/contact.html.twig');
+        $this->message = null;
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
+            $this->message = 'Votre message a bien été envoyé, ' . $contact->getFirstname() .' ! Nous revenons vers vous rapidement.';
+
+            return $this->render('pages/contact.html.twig',[
+                'form' => $form->createView(),
+                'message' => $this->message
+            ]);
+        }
+
+        return $this->render('pages/contact.html.twig',[
+            'form' => $form->createView(),
+            'message' => $this->message
+        ]);
     }
 
     #[Route('/checkout', name: 'app_checkout')]
@@ -931,28 +955,6 @@ class PagesController extends AbstractController
             'message' => $this->message
         ]);
     }
-
-    // Method: POST, PUT, GET etc
-    // Data: array("param" => "value") ==> index.php?param=value
-    #[Route('/api', name: 'app_api')]
-    public function CallAPI()
-    {
-        $url = "https://schema.getpostman.com/json/collection/v2.1.0/collection.json";
-        $id = 'd5a2fccc-23ea-46fe-a2c5-e22de1c3097a';
-       
-       
-
-
-
-
-
-
-
-
-
-        return $this->render('pages/home.html.twig');
-    }
-
 
 
 }

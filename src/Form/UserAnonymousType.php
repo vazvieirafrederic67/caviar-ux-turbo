@@ -51,7 +51,7 @@ class UserAnonymousType extends AbstractType
             ])
             ->add('country', ChoiceType::class, [
                 'label' => false,
-                'placeholder' => 'Choose your country',
+                'placeholder' => 'Choisir votre pays',
                 'choices'  => $this->countries,
             ])
             ->add('phoneNumber', TextType::class, [
