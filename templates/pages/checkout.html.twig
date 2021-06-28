@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Checkout {% endblock %}
+{% block title %} Panier {% endblock %}
 
 {% block body %}
 <body data-turbo="false" class="page-color-style-6 page-style-6">
@@ -39,9 +39,9 @@
             </div>
             <nav>
               <ul class="header-menu">
-                  <li><a href="{{path('app_home')}}">Home<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
+                  <li><a href="{{path('app_home')}}">Accueil<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                     </li>
-                    <li><a href="{{path('app_about')}}">About</a></li>
+                    <li><a href="{{path('app_about')}}">A propos</a></li>
                     <li><a href="{{path('app_shop')}}">Shop<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                         <ul>
                             <li><a href="{{ path('app_shop_caviar')}}">Caviar</a></li>
@@ -49,10 +49,10 @@
                             <li><a href="{{ path('app_shop_accessories')}}">Accessoires</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{ path('app_recipes')}}">Recipes<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
+                    <li><a href="{{ path('app_recipes')}}">Recettes<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                     </li>
                     <li>
-                        <a href="{{ path('app_products')}}">Products<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
+                        <a href="{{ path('app_products')}}">Produits<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                         <ul>
                             <li><a href="{{ path('app_products_caviar')}}">Caviar</a></li>
                             <li><a href="{{ path('app_products_baskets')}}">Paniers</a></li>
@@ -78,13 +78,8 @@
   				<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0">
   					<div class="simple-item color-type-2 text-center">
   						<div class="main-title">
-  							<h1 class="h1 color-2">Checkout</h1>
+  							<h1 class="h1 color-2">Panier</h1>
   							<div class="empty-sm-25"></div>
-  							<div class="col-md-10 col-md-offset-1">
-  								<div class="simple-text md opacity-1">
-  									<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-  								</div>
-  							</div>
   						</div>   
                     </div>
                 </div>

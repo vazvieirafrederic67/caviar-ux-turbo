@@ -149,9 +149,9 @@
                            </div>
                            <div class="fl">
                               {% if is_granted('ROLE_USER') %}
-                                <a href="{{ path('app_checkout')}}" class="page-button button-style-1 type-2"><span class="txt">Go to checkout</span></a>
+                                <a href="{{ path('app_checkout')}}" class="page-button button-style-1 type-2"><span class="txt">Aller au panier</span></a>
                               {% else %}
-                                <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1 type-4"><span class="txt">go to checkout</span></a>
+                                <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1 type-4"><span class="txt">Aller au panier</span></a>
                               {% endif %}
                            </div>
                        </div>
@@ -168,9 +168,9 @@
             </div>
             <nav>
               <ul class="header-menu">
-                  <li><a href="{{path('app_home')}}">Home<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
+                  <li><a href="{{path('app_home')}}">Accueil<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                     </li>
-                    <li><a href="{{path('app_about')}}">About</a></li>
+                    <li><a href="{{path('app_about')}}">A propos</a></li>
                     <li><a href="{{path('app_shop')}}">Shop<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                         <ul>
                             <li><a href="{{ path('app_shop_caviar')}}">Caviar</a></li>
@@ -178,10 +178,10 @@
                             <li><a href="{{ path('app_shop_accessories')}}">Accessoires</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{ path('app_recipes')}}">Recipes<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
+                    <li><a href="{{ path('app_recipes')}}">Recettes<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                     </li>
                     <li class="active">
-                        <a href="{{ path('app_products')}}">Products<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
+                        <a href="{{ path('app_products')}}">Produits<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                         <ul>
                             <li><a href="{{ path('app_products_caviar')}}">Caviar</a></li>
                             <li><a href="{{ path('app_products_baskets')}}">Paniers</a></li>
@@ -208,11 +208,11 @@
                     <div class="col-md-6 col-md-offset-3 col-sm-12 col-sm-offset-0">
                         <div class="simple-item color-type-1 text-center">
                         <div class="main-title">
-                        <h1 class="h1 caption">Our Accessories</h1>
+                        <h1 class="h1 caption">Nos Accessoires</h1>
                         <div class="empty-sm-30"></div>
                         <div class="col-md-10 col-md-offset-1">
                             <div class="simple-text md">
-                                <p>Our selection of accessories</p>
+                                <p>Notre sélection d' accessories</p>
                             </div>
                         </div>
                         </div>   
@@ -300,14 +300,14 @@
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="footer-item">  
-                        <h5 class="h5">quick links</h5>
+                        <h5 class="h5">Liens rapides</h5>
                             <div class="empty-sm-15 empty-xs-15"></div>
                                 <ul class="list-style-3 ul-list">
-                                    <li><a href="{{ path('app_home')}}" class="link-hover">HOME</a></li>
-                                    <li><a href="{{ path('app_about')}}" class="link-hover">ABOUT</a></li>
+                                    <li><a href="{{ path('app_home')}}" class="link-hover">Accueil</a></li>
+                                    <li><a href="{{ path('app_about')}}" class="link-hover">A propos</a></li>
                                     <li><a href="{{ path('app_shop')}}" class="link-hover">SHOP</a></li>
-                                    <li><a href="{{ path('app_recipes')}}" class="link-hover">RECIPES</a></li>
-                                    <li><a href="{{ path('app_contact')}}" class="link-hover">CONTACT</a></li>
+                                    <li><a href="{{ path('app_recipes')}}" class="link-hover">Recettes</a></li>
+                                    <li><a href="{{ path('app_contact')}}" class="link-hover">Contact</a></li>
                                 </ul>
                             <div class="empty-sm-30 empty-xs-30"></div>
                         </div> 

@@ -150,9 +150,9 @@
                            </div>
                            <div class="fl">
                               {% if is_granted('ROLE_USER') %}
-                                <a href="{{ path('app_checkout')}}" class="page-button button-style-1 type-2"><span class="txt">Go to checkout</span></a>
+                                <a href="{{ path('app_checkout')}}" class="page-button button-style-1 type-2"><span class="txt">Aller au panier</span></a>
                               {% else %}
-                                <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1 type-4"><span class="txt">go to checkout</span></a>
+                                <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1 type-4"><span class="txt">Aller au panier</span></a>
                               {% endif %}
                            </div>
                        </div>
@@ -304,11 +304,11 @@
                         <h5 class="h5">quick links</h5>
                             <div class="empty-sm-15 empty-xs-15"></div>
                                 <ul class="list-style-3 ul-list">
-                                    <li><a href="{{ path('app_home')}}" class="link-hover">HOME</a></li>
-                                    <li><a href="{{ path('app_about')}}" class="link-hover">ABOUT</a></li>
+                                    <li><a href="{{ path('app_home')}}" class="link-hover">Accueil</a></li>
+                                    <li><a href="{{ path('app_about')}}" class="link-hover">A propos</a></li>
                                     <li><a href="{{ path('app_shop')}}" class="link-hover">SHOP</a></li>
-                                    <li><a href="{{ path('app_recipes')}}" class="link-hover">RECIPES</a></li>
-                                    <li><a href="{{ path('app_contact')}}" class="link-hover">CONTACT</a></li>
+                                    <li><a href="{{ path('app_recipes')}}" class="link-hover">Recettes</a></li>
+                                    <li><a href="{{ path('app_contact')}}" class="link-hover">Contact</a></li>
                                 </ul>
                             <div class="empty-sm-30 empty-xs-30"></div>
                         </div> 

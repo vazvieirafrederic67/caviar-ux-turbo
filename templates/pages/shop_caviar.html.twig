@@ -150,9 +150,9 @@
                            </div>
                            <div class="fl">
                               {% if is_granted('ROLE_USER') %}
-                                <a href="{{ path('app_checkout')}}" class="page-button button-style-1 type-2"><span class="txt">Go to checkout</span></a>
+                                <a href="{{ path('app_checkout')}}" class="page-button button-style-1 type-2"><span class="txt">Aller au panier</span></a>
                               {% else %}
-                                <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1 type-4"><span class="txt">go to checkout</span></a>
+                                <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1 type-4"><span class="txt">Aller au panier</span></a>
                               {% endif %}
                            </div>
                        </div>
