@@ -249,4 +249,20 @@ app_validation_shopping:
     path: /validation-shopping
     controller: App\Controller\PagesController::validationShopping
 
+app_contact_index:
+    path: /admin/contact
+    controller: App\Controller\ContactController::index
+
+app_contact_show:
+    path: /admin/contact/{id}
+    controller: App\Controller\ContactController::show
+
+app_contact_edit:
+    path: /admin/contact/{id}/edit
+    controller: App\Controller\ContactController::edit
+
+app_contact_delete:
+    path: /admin/contact/{id}
+    controller: App\Controller\ContactController::delete
+
 

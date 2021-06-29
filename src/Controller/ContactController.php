@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/contact')]
 class ContactController extends AbstractController
 {
-    #[Route('/', name: 'contact_index', methods: ['GET'])]
+    #[Route('/', name: 'app_contact_index', methods: ['GET'])]
     public function index(ContactRepository $contactRepository): Response
     {
         return $this->render('contact/index.html.twig', [
@@ -21,7 +21,7 @@ class ContactController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'contact_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_contact_show', methods: ['GET'])]
     public function show(Contact $contact): Response
     {
         return $this->render('contact/show.html.twig', [
@@ -29,7 +29,7 @@ class ContactController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'contact_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_contact_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Contact $contact): Response
     {
         $form = $this->createForm(Contact1Type::class, $contact);
@@ -47,7 +47,7 @@ class ContactController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'contact_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_contact_delete', methods: ['POST'])]
     public function delete(Request $request, Contact $contact): Response
     {
         if ($this->isCsrfTokenValid('delete'.$contact->getId(), $request->request->get('_token'))) {
