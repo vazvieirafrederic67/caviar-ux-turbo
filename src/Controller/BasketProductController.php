@@ -135,6 +135,7 @@ class BasketProductController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$basketProduct->getId(), $request->request->get('_token'))) {
 
+            
             if(file_exists ($this->getParameter('images_baskets_directory') . '/' . $basketProduct->getImage())){
                 unlink($this->getParameter('images_baskets_directory') . "/" .$basketProduct->getImage());
             }

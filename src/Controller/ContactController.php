@@ -38,7 +38,7 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('contact_index');
+            return $this->redirectToRoute('app_contact_index');
         }
 
         return $this->render('contact/edit.html.twig', [
@@ -47,15 +47,17 @@ class ContactController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_contact_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_contact_delete', methods: ['POST'])]
     public function delete(Request $request, Contact $contact): Response
     {
+
+
         if ($this->isCsrfTokenValid('delete'.$contact->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($contact);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('contact_index');
+        return $this->redirectToRoute('app_contact_index');
     }
 }

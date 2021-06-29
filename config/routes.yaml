@@ -262,7 +262,7 @@ app_contact_edit:
     controller: App\Controller\ContactController::edit
 
 app_contact_delete:
-    path: /admin/contact/{id}
+    path: /admin/contact/{id}/delete
     controller: App\Controller\ContactController::delete
-
+    methods: POST
 
