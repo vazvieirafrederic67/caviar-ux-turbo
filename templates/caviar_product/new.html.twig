@@ -3,9 +3,15 @@
 {% block title %}New CaviarProduct{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5">Create new CaviarProduct</h1>
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+
+    <h6 class="border-bottom pb-2 mb-0">Create new CaviarProduct</h6>
+
 
     {{ include('caviar_product/_form.html.twig') }}
 
     <a href="{{ path('caviar_product_index') }}">back to list</a>
+
+</div>
 {% endblock %}

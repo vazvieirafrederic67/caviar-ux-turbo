@@ -3,28 +3,33 @@
 {% block title %}BasketProduct{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5">BasketProduct</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Name</th>
-                <td>{{ basket_product.name }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td><div style="background-image:url({{ asset('uploads/images/baskets/' ~ basket_product.image) }});width:100px;height:100px;background-size:cover;background-repeat:no-repeat;"></div></td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ basket_product.description }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ basket_product.price }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+        <h6 class="border-bottom pb-2 mb-0">BasketProduct</h6>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ basket_product.name }}</td>
+                </tr>
+                <tr>
+                    <th>Image</th>
+                    <td><div style="background-image:url({{ asset('uploads/images/baskets/' ~ basket_product.image) }});width:100px;height:100px;background-size:cover;background-repeat:no-repeat;"></div></td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ basket_product.description }}</td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td>{{ basket_product.price }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
 
     <a href="{{ path('basket_product_index') }}">back to list</a>
 

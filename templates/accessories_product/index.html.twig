@@ -3,37 +3,42 @@
 {% block title %}AccessoriesProduct index{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5">AccessoriesProduct index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Image</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for accessories_product in accessories_products %}
-            <tr>
-                <td>{{ accessories_product.name }}</td>
-                <td><div style="background-image:url({{ asset('uploads/images/accessories/' ~ accessories_product.image) }});width:100px;height:100px;background-size:cover;background-repeat:no-repeat;"></div></td>
-                <td>{{ accessories_product.description }}</td>
-                <td>{{ accessories_product.price }}</td>
-                <td>
-                    <a href="{{ path('accessories_product_show', {'id': accessories_product.id}) }}">show</a>
-                    <a href="{{ path('accessories_product_edit', {'id': accessories_product.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+        <h6 class="border-bottom pb-2 mb-0">AccessoriesProduct index</h6>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for accessories_product in accessories_products %}
+                <tr>
+                    <td>{{ accessories_product.name }}</td>
+                    <td><div style="background-image:url({{ asset('uploads/images/accessories/' ~ accessories_product.image) }});width:100px;height:100px;background-size:cover;background-repeat:no-repeat;"></div></td>
+                    <td>{{ accessories_product.description }}</td>
+                    <td>{{ accessories_product.price }}</td>
+                    <td>
+                        <a href="{{ path('accessories_product_show', {'id': accessories_product.id}) }}">show</a>
+                        <a href="{{ path('accessories_product_edit', {'id': accessories_product.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
 
     <a href="{{ path('accessories_product_new') }}">Create new</a>
 {% endblock %}

@@ -3,32 +3,37 @@
 {% block title %}AccessoriesProduct{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5">AccessoriesProduct</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Name</th>
-                <td>{{ accessories_product.name }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td><div style="background-image:url({{ asset('uploads/images/accessories/' ~ accessories_product.image) }});width:100px;height:100px;background-size:cover;background-repeat:no-repeat;"></div></td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ accessories_product.description }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ accessories_product.price }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
 
-    <a href="{{ path('accessories_product_index') }}">back to list</a>
+        <h6 class="border-bottom pb-2 mb-0">Create new AccessoriesProduct</h6>
 
-    <a href="{{ path('accessories_product_edit', {'id': accessories_product.id}) }}">edit</a>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ accessories_product.name }}</td>
+                </tr>
+                <tr>
+                    <th>Image</th>
+                    <td><div style="background-image:url({{ asset('uploads/images/accessories/' ~ accessories_product.image) }});width:100px;height:100px;background-size:cover;background-repeat:no-repeat;"></div></td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ accessories_product.description }}</td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td>{{ accessories_product.price }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    {{ include('accessories_product/_delete_form.html.twig') }}
+        <a href="{{ path('accessories_product_index') }}">back to list</a>
+
+        <a href="{{ path('accessories_product_edit', {'id': accessories_product.id}) }}">edit</a>
+
+        {{ include('accessories_product/_delete_form.html.twig') }}
+
+    </div>
 {% endblock %}

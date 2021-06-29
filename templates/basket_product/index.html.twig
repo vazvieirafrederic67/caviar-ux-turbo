@@ -3,37 +3,43 @@
 {% block title %}BasketProduct index{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5">BasketProduct index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Image</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for basket_product in basket_products %}
-            <tr>
-                <td>{{ basket_product.name }}</td>
-                <td><div style="background-image:url({{ asset('uploads/images/baskets/' ~ basket_product.image) }});width:100px;height:100px;background-size:cover;background-repeat:no-repeat;"></div></td>
-                <td>{{ basket_product.description }}</td>
-                <td>{{ basket_product.price }}</td>
-                <td>
-                    <a href="{{ path('basket_product_show', {'id': basket_product.id}) }}">show</a>
-                    <a href="{{ path('basket_product_edit', {'id': basket_product.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+        <h6 class="border-bottom pb-2 mb-0">BasketProduct index</h6>
+
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for basket_product in basket_products %}
+                <tr>
+                    <td>{{ basket_product.name }}</td>
+                    <td><div style="background-image:url({{ asset('uploads/images/baskets/' ~ basket_product.image) }});width:100px;height:100px;background-size:cover;background-repeat:no-repeat;"></div></td>
+                    <td>{{ basket_product.description }}</td>
+                    <td>{{ basket_product.price }}</td>
+                    <td>
+                        <a href="{{ path('basket_product_show', {'id': basket_product.id}) }}">show</a>
+                        <a href="{{ path('basket_product_edit', {'id': basket_product.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
 
     <a href="{{ path('basket_product_new') }}">Create new</a>
 {% endblock %}

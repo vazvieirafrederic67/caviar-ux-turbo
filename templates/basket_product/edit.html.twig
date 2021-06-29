@@ -3,11 +3,16 @@
 {% block title %}Edit BasketProduct{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5">Edit BasketProduct</h1>
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+
+    <h6 class="border-bottom pb-2 mb-0">Edit BasketProduct</h6>
 
     {{ include('basket_product/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('basket_product_index') }}">back to list</a>
 
     {{ include('basket_product/_delete_form.html.twig') }}
+
+</div>
 {% endblock %}

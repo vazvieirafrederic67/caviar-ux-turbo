@@ -3,11 +3,16 @@
 {% block title %}Edit Contact{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5">Edit Contact</h1>
 
-    {{ include('contact/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
 
-    <a href="{{ path('app_contact_index') }}">back to list</a>
+        <h6 class="border-bottom pb-2 mb-0">Edit Contact</h6>
 
-    {{ include('contact/_delete_form.html.twig') }}
+        {{ include('contact/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('app_contact_index') }}">back to list</a>
+
+        {{ include('contact/_delete_form.html.twig') }}
+
+    </div>
 {% endblock %}

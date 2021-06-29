@@ -3,9 +3,14 @@
 {% block title %}New AccessoriesProduct{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5">Create new AccessoriesProduct</h1>
 
-    {{ include('accessories_product/_form.html.twig') }}
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
 
-    <a href="{{ path('accessories_product_index') }}">back to list</a>
+        <h6 class="border-bottom pb-2 mb-0">Create new AccessoriesProduct</h6>
+
+        {{ include('accessories_product/_form.html.twig') }}
+
+        <a href="{{ path('accessories_product_index') }}">back to list</a>
+
+    </div>
 {% endblock %}

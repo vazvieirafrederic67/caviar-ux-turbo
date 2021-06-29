@@ -2067,6 +2067,10 @@ transition: all 0.35s ease-out; }
 .no-animated .scroll-type-1 {opacity: 1; transform: translateY(0); -webkit-transform: translateY(0);-ms-transform: translateY(0);}
 }
 
+.round_image {border-radius:50%;width:230px;height:auto;}
+#caviar_product_description {width:70vw;height:20vh;margin-top:2vh;background-color: lightgray;}
+#basket_product_description {width:70vw;height:20vh;margin-top:2vh;background-color: lightgray;}
+#accessories_product_description {width:70vw;height:20vh;margin-top:2vh;background-color: lightgray;}
 
 
 
