@@ -17,8 +17,17 @@
     </head>
         
         <div data-turbo="false" class="container-fluid">
-            {% include 'partials/_navbarAdmin.html.twig' %}
-            {% block body %}{% endblock %}
-        </div>
+            <div style="height:100vh;" class="row">
 
+                <div style="height:100%;background-color:lightgrey;" class="col-2">
+                    {% include 'partials/_navbarAdmin.html.twig' %}
+                </div>
+                
+
+                <div style="height:100%;" class="col-10">
+                    {% block body %}{% endblock %}
+                </div>
+                
+            </div>
+        </div>
 </html>

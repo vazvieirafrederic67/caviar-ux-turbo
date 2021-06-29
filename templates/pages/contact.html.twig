@@ -180,6 +180,10 @@
                         </ul>
                     </li>
                     <li><a href="{{ path('app_recipes')}}">Recettes<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
+                        <ul>
+                          <li><a href="{{ path('app_shop_caviar')}}">Nos Chefs</a></li>
+                          <li><a href="{{ path('app_shop_caviar')}}">Ou nous trouver</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="{{ path('app_products')}}">Produits<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
@@ -303,9 +307,11 @@
                             <div class="empty-sm-70 empty-xs-30"></div>
                             <div class="text-center color-type-2">
 
-                             
-                                <h4 class="h4 tt color-type-1 test-message">{{message}}</h4>
-                               
+                                {% if message is not null %}
+                                <h4 class="h4 tt color-type-1">{{message}}</h4>
+                                {% else %}
+                                <h4 class="h4 tt color-type-1 test-message">Nous contacter</h4>
+                                {% endif %}
                             </div>
                             <div class="empty-sm-45 empty-xs-30"></div>
 
@@ -402,7 +408,7 @@
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="footer-item">  
-                        <h5 class="h5">quick links</h5>
+                        <h5 class="h5">Liens rapides</h5>
                             <div class="empty-sm-15 empty-xs-15"></div>
                                 <ul class="list-style-3 ul-list">
                                     <li><a href="{{ path('app_home')}}" class="link-hover">Accueil</a></li>
