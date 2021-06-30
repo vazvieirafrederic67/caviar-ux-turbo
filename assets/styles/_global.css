@@ -1184,7 +1184,7 @@ body.overflow {overflow: hidden;}
     .header-style-5 {position: absolute; left: 0px; bottom: 0px; top: auto; background: #fff; border-bottom: 1px solid #f9f9f9;}
     .header-style-5.type-2 {bottom: auto; top: 0px; border-bottom: 0 none; position: fixed;}
     .header.header-style-5.scrol {background: #fff;}
-    .shop-card-list {position: absolute; padding: 30px 0px; background: #fff; top: 100%; left: 0px; min-width: 630px; margin-left: -315px; padding: 30px 0px; box-shadow: 0 0 4px rgba(0,0,0,0.2); visibility: hidden; opacity: 0; transition: all 0.25s ease-out; -webkit-transition: all 0.25s ease-out; -ms-transition: all 0.25s ease-out; transform: scale(0.9); -webkit-transform: scale(0.9);-ms-transform: scale(0.9); max-height: 561px; overflow-y: auto; cursor: default;}
+    .shop-card-list {position: absolute; padding: 30px 0px; background: #fff; top: 100%; left: 0px; min-width: 630px; margin-left: -600px; padding: 30px 0px; box-shadow: 0 0 4px rgba(0,0,0,0.2); visibility: hidden; opacity: 0; transition: all 0.25s ease-out; -webkit-transition: all 0.25s ease-out; -ms-transition: all 0.25s ease-out; transform: scale(0.9); -webkit-transform: scale(0.9);-ms-transform: scale(0.9); max-height: 561px; overflow-y: auto; cursor: default;}
     .shop-card-item:hover .shop-card-list {visibility: visible; opacity: 1; transform: scale(1); -webkit-transform: scale(1);-ms-transform: scale(1);}   
 }
 

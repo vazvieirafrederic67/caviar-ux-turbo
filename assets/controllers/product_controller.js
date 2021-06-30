@@ -14,7 +14,6 @@ export default class extends Controller {
 
         let caviarsElement = this.element.querySelectorAll('.container > .row');
 
-        /*caviarsElement.forEach(element => console.log(element));*/
 
         for (const [key, value] of Object.entries(caviarsElement)) {
 

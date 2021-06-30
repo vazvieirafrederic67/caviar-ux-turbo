@@ -117,7 +117,7 @@
                             </td>
                             <td>
                                 <div class="shop-item">
-                                    <h6 class="h6">{{caviar.quantity}} items</h6>
+                                    <h6 class="h6">{{caviar.quantity}} {% if caviar.quantity < 2 %} pièce {% else %} pièces {% endif %}</h6>
                                 </div>
                             </td>
                             <td>
@@ -143,7 +143,7 @@
                             </td>
                             <td>
                                 <div class="shop-item">
-                                    <h6 class="h6">{{basket.quantity}} items</h6>
+                                    <h6 class="h6">{{basket.quantity}} {% if basket.quantity < 2 %} pièce {% else %} pièces {% endif %}</h6>
                                 </div>
                             </td>
                             <td>
@@ -168,7 +168,7 @@
                             </td>
                             <td>
                                 <div class="shop-item">
-                                    <h6 class="h6">{{ accessorie.quantity }} items</h6>
+                                    <h6 class="h6">{{ accessorie.quantity }} {% if accessorie.quantity < 2 %} pièce {% else %} pièces {% endif %}</h6>
                                 </div>
                             </td>
                             <td>
