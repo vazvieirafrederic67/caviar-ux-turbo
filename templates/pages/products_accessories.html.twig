@@ -109,7 +109,12 @@
                                       </button>
                                   </div>
                               </div>
-                              <div class="main-col"><span class="menu-price">{{basket.price|number_format(2, ',', '.')}}</span> €</div>
+                              <div class="main-col">
+                                <p style="display-flex;flex-direction:row; width:200px;" class="h5">
+                                    €
+                                    <span class="menu-price">{{basket.price|number_format(2, ',', '.')}}</span>
+                                </p>
+                              </div>
                               <div class="close-item main-fill-hover">
                                 <a class="link-delete" href="{{ path('app_shop_cart_basket_delete',{ id:basket.id } ) }}">
                                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background=  "new 0 0 64 64"><g><path fill="#1D1D1B" d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/></g>
@@ -140,7 +145,12 @@
                                       </button>
                                   </div>
                               </div>
-                              <div class="main-col"><span class="menu-price">{{accessorie.price|number_format(2, ',', '.')}}</span> €</div>
+                              <div class="main-col">
+                                <p style="display-flex;flex-direction:row; width:200px;" class="h5">
+                                    €
+                                    <span class="menu-price">{{accessorie.price|number_format(2, ',', '.')}}</span>
+                                </p>
+                              </div>
                               <div class="close-item main-fill-hover">
                                 <a class="link-delete" href="{{ path('app_shop_cart_accessories_delete',{ id:accessorie.id } ) }}">
                                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background=  "new 0 0 64 64"><g><path fill="#1D1D1B" d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/></g>
@@ -180,7 +190,7 @@
                   <li><a href="{{path('app_home')}}">Accueil<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                     </li>
                     <li><a href="{{path('app_about')}}">A propos</a></li>
-                    <li><a href="{{path('app_shop')}}">Shop<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
+                    <li class="active"><a href="{{path('app_shop')}}">Shop<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                         <ul>
                             <li><a href="{{ path('app_shop_caviar')}}">Caviar</a></li>
                             <li><a href="{{ path('app_shop_baskets')}}">Paniers</a></li>
