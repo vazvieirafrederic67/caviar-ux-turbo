@@ -25,7 +25,7 @@
                     <td>{{ basket_product.name }}</td>
                     <td><div style="background-image:url({{ asset('uploads/images/baskets/' ~ basket_product.image) }});width:100px;height:100px;background-size:cover;background-repeat:no-repeat;"></div></td>
                     <td>{{ basket_product.description }}</td>
-                    <td>{{ basket_product.price }}</td>
+                    <td>{{ basket_product.price|number_format(2, ',', '.') }}</td>
                     <td>
                         <a href="{{ path('basket_product_show', {'id': basket_product.id}) }}">show</a>
                         <a href="{{ path('basket_product_edit', {'id': basket_product.id}) }}">edit</a>

@@ -13,6 +13,7 @@ export default class extends Controller {
             let elementCardPrice = element.querySelector('.menu-price').innerHTML;
             let elementCardQuantity = element.querySelector('.cin-input').value;
             let elementAmountFinal = elementCardQuantity * elementCardPrice;
+
             cardAmountElement.innerHTML = parseFloat(parseInt(cardAmountElement.innerHTML) + parseInt(elementAmountFinal)).toFixed(2);
         });
 
@@ -214,11 +215,12 @@ export default class extends Controller {
             }
            
             cardProduct.forEach( (element) => {
-                let price = element.querySelector('.menu-price').innerHTML;
+                let price = element.querySelector('.menu-price').innerHTML.replace(".","");
                 let quantity = element.querySelector('.cin-input').value;
                 finalQuantity = parseInt( parseInt(finalQuantity) + parseInt(quantity));
-                let temp = price * quantity;
+                let temp = price.replace(",", ".") * quantity;
                 final = final + temp;
+
                 cardAmountElement.innerHTML = parseFloat(final).toFixed(2);
                 totalCardPrice.innerHTML = parseFloat(final).toFixed(2);
                 cardCountElement.innerHTML = finalQuantity;

@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <th>Price</th>
-                    <td>{{ basket_product.price }}</td>
+                    <td>{{ basket_product.price|number_format(2, ',', '.') }}</td>
                 </tr>
             </tbody>
         </table>

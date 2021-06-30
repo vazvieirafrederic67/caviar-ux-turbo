@@ -5,9 +5,10 @@ namespace App\Form;
 use App\Entity\CaviarProduct;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
 class CaviarProductType extends AbstractType
 {
@@ -37,8 +38,9 @@ class CaviarProductType extends AbstractType
             ])
             ->add('description')
             ->add('diameter')
+            ->add('grammage')
             ->add('color')
-            ->add('price')
+            ->add('price', MoneyType::class)
         ;
     }
 

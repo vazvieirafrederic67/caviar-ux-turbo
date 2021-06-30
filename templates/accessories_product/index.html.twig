@@ -24,7 +24,7 @@
                     <td>{{ accessories_product.name }}</td>
                     <td><div style="background-image:url({{ asset('uploads/images/accessories/' ~ accessories_product.image) }});width:100px;height:100px;background-size:cover;background-repeat:no-repeat;"></div></td>
                     <td>{{ accessories_product.description }}</td>
-                    <td>{{ accessories_product.price }}</td>
+                    <td>{{ accessories_product.price|number_format(2, ',', '.') }}</td>
                     <td>
                         <a href="{{ path('accessories_product_show', {'id': accessories_product.id}) }}">show</a>
                         <a href="{{ path('accessories_product_edit', {'id': accessories_product.id}) }}">edit</a>

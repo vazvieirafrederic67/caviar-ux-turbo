@@ -40,8 +40,8 @@ class AccessoriesProduct
      */
     private $shoppingCarts;
 
-    /**
-     * @ORM\Column(type="float")
+     /**
+     * @ORM\Column(type="decimal", scale=2)
      */
     private $price;
 

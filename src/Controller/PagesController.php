@@ -118,7 +118,7 @@ class PagesController extends AbstractController
             $panier[$caviarProduct->getName()]['name'] = $caviarProduct->getName();
             $panier[$caviarProduct->getName()]['image'] = $caviarProduct->getImage();
             $panier[$caviarProduct->getName()]['price'] = $caviarProduct->getPrice();
-
+            $panier[$caviarProduct->getName()]['grammage'] = $caviarProduct->getGrammage();
 
         }else{
             $panier[$caviarProduct->getName()]['quantity'] = 1;
@@ -126,6 +126,7 @@ class PagesController extends AbstractController
             $panier[$caviarProduct->getName()]['name'] = $caviarProduct->getName();
             $panier[$caviarProduct->getName()]['image'] = $caviarProduct->getImage();
             $panier[$caviarProduct->getName()]['price'] = $caviarProduct->getPrice();
+            $panier[$caviarProduct->getName()]['grammage'] = $caviarProduct->getGrammage();
         }
 
         $session->set('caviarProduct', $panier);

@@ -49,8 +49,8 @@ class CaviarProduct
      */
     private $shoppingCarts;
 
-    /**
-     * @ORM\Column(type="float")
+     /**
+     * @ORM\Column(type="decimal", scale=2)
      */
     private $price;
 
@@ -58,6 +58,11 @@ class CaviarProduct
      * @ORM\Column(type="string", length=255)
      */
     private $subtitle;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $grammage;
 
     public function __construct()
     {
@@ -176,6 +181,18 @@ class CaviarProduct
     public function setSubtitle(string $subtitle): self
     {
         $this->subtitle = $subtitle;
+
+        return $this;
+    }
+
+    public function getGrammage(): ?int
+    {
+        return $this->grammage;
+    }
+
+    public function setGrammage(int $grammage): self
+    {
+        $this->grammage = $grammage;
 
         return $this;
     }

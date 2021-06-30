@@ -51,26 +51,26 @@
                           {% for caviar in app.session.get('caviarProduct') %}
 
                             <li class="flex-align card-product">
-                                <div class="img hover-zoom">
+                              <div class="img hover-zoom">
                                   <a href="#"><img style="min-width:200px" src="uploads/images/caviars/{{caviar.image}}" alt="{{ caviar.name }}"></a>
-                                </div>
-                                
-                                <h5 class="h5 caption"><a {% if caviar.id is defined %} href="{{ path('app_shop_view',{ id: caviar.id} )}}" {% else %} href="#" {% endif %} class="link-hover">{{caviar.name}}</a></h5>
-                                
-                                <div class="shop-counter">
-                                    <div class="custom-input-number">
-                                      <button type="button" class="cin-btn cin-decrement">
-                                        <a class="card-caviar-min" href="{{ path('app_shop_cart_caviar_min',{ id:caviar.id } ) }}"><img style="height:12px;width:12px;" src="img/left_arr.png" alt="left arrow"></a>
-                                      </button>
-
-                                      <input type="number" class="cin-input input-field card-caviar-quantity" step="1" value="{{ caviar.quantity }}" min="1" max="1000">
-                                      
-                                      <button type="button" class="cin-btn cin-increment">
-                                        <a class="card-caviar-max" href="{{ path('app_shop_cart_caviar_max',{ id:caviar.id } ) }}"><img style="height:12px;width:12px;" src="img/right_arr.png" alt="right arrow"></a>
-                                      </button>
-                                  </div>
                               </div>
-                              <div class="menu-price main-col">{{caviar.price}}</div>
+                                
+                              <h5 class="h5 caption"><a {% if caviar.id is defined %} href="{{ path('app_shop_view',{ id: caviar.id} )}}" {% else %} href="#" {% endif %} class="link-hover">{{caviar.name}}</a></h5>
+                                
+                              <div class="shop-counter">
+                                <div class="custom-input-number">
+                                  <button type="button" class="cin-btn cin-decrement">
+                                    <a class="card-caviar-min" href="{{ path('app_shop_cart_caviar_min',{ id:caviar.id } ) }}"><img style="height:12px;width:12px;" src="img/left_arr.png" alt="left arrow"></a>
+                                  </button>
+
+                                  <input type="number" class="cin-input input-field card-caviar-quantity" step="1" value="{{ caviar.quantity }}" min="1" max="1000">
+                                  
+                                  <button type="button" class="cin-btn cin-increment">
+                                    <a class="card-caviar-max" href="{{ path('app_shop_cart_caviar_max',{ id:caviar.id } ) }}"><img style="height:12px;width:12px;" src="img/right_arr.png" alt="right arrow"></a>
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="main-col"><span class="menu-price">{{ caviar.price|number_format(2, ',', '.') }}</span> €</div>
                               <div class="close-item main-fill-hover">
                                 <a class="link-delete" href="{{ path('app_shop_cart_caviar_delete',{ id:caviar.id } ) }}">
                                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background=  "new 0 0 64 64"><g><path fill="#1D1D1B" d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/></g>
@@ -101,7 +101,7 @@
                                       </button>
                                   </div>
                               </div>
-                              <div class="menu-price main-col">{{basket.price}}</div>
+                              <div class="main-col"><span class="menu-price">{{basket.price|number_format(2, ',', '.')}}</span> €</div>
                               <div class="close-item main-fill-hover">
                                 <a class="link-delete" href="{{ path('app_shop_cart_basket_delete',{ id:basket.id } ) }}">
                                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background=  "new 0 0 64 64"><g><path fill="#1D1D1B" d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/></g>
@@ -132,7 +132,7 @@
                                       </button>
                                   </div>
                               </div>
-                              <div class="menu-price main-col">{{accessorie.price}}</div>
+                              <div class="main-col"><span class="menu-price">{{accessorie.price|number_format(2, ',', '.')}}</span> €</div>
                               <div class="close-item main-fill-hover">
                                 <a class="link-delete" href="{{ path('app_shop_cart_accessories_delete',{ id:accessorie.id } ) }}">
                                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background=  "new 0 0 64 64"><g><path fill="#1D1D1B" d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/></g>
@@ -180,10 +180,10 @@
                         </ul>
                     </li>
                     <li><a href="{{ path('app_recipes')}}">Recettes<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
-                      <ul>
-                        <li><a href="{{ path('app_shop_caviar')}}">Nos Chefs</a></li>
-                        <li><a href="{{ path('app_shop_caviar')}}">Ou nous trouver</a></li>
-                      </ul>
+                        <ul>
+                          <li><a href="{{ path('app_shop_caviar')}}">Nos Chefs</a></li>
+                          <li><a href="{{ path('app_shop_caviar')}}">Ou nous trouver</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="{{ path('app_products')}}">Produits<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
@@ -250,7 +250,7 @@
                     <div class="simple-text">
                         <p>{{ basket.description }}</p>
                     </div>
-                    <div class="menu-price style-2 title main-col">{{ basket.price }} €</div>
+                    <div class="menu-price style-2 title main-col">{{ basket.price|number_format(2, ',', '.') }} €</div>
                   </div>
                 </div>
             </div>

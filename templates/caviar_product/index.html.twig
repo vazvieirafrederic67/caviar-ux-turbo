@@ -30,7 +30,7 @@
                     <td>{{ caviar_product.description }}</td>
                     <td>{{ caviar_product.diameter }}</td>
                     <td>{{ caviar_product.color }}</td>
-                    <td>{{ caviar_product.price }}</td>
+                    <td>{{ caviar_product.price|number_format(2, ',', '.')  }}</td>
                     <td>
                         <a href="{{ path('caviar_product_show', {'id': caviar_product.id}) }}">show</a>
                         <a href="{{ path('caviar_product_edit', {'id': caviar_product.id}) }}">edit</a>

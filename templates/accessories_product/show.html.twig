@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <th>Price</th>
-                    <td>{{ accessories_product.price }}</td>
+                    <td>{{ accessories_product.price|number_format(2, ',', '.') }}</td>
                 </tr>
             </tbody>
         </table>
