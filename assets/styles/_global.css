@@ -1551,7 +1551,7 @@ select.input-field.type-2 {font-weight: 700;background: url(../img/select-arrow-
 .promo-code{position: relative;}
 .promo-code .input-field-wrap{margin-right: 30px;}
 .promo-code .input-field-wrap .input-field {padding-right: 180px;}
-.promo-code .page-button{position: absolute;top: 0;right: 0;}
+.promo-code .page-button{position: relative;top: 0;right: 0;}
 .button-style-1.type-4:hover:before {-webkit-transform: scale(1);transform: scale(1);}
 .button-style-1.type-4.check:after{opacity: 0;left: 0px;top: 0px;right: 0px;bottom: 0px;background: #464646;-webkit-transform: scale(1);transform: scale(1);}
 .button-style-1.type-4.check:hover:after{opacity: 1;}
@@ -2072,7 +2072,7 @@ transition: all 0.35s ease-out; }
 #basket_product_description {width:70vw;height:20vh;margin-top:2vh;background-color: lightgray;}
 #accessories_product_description {width:70vw;height:20vh;margin-top:2vh;background-color: lightgray;}
 
-
+#code_promo > div {display:flex; justify-content: space-between; width:400px;margin-bottom: 10px;margin-top: 10px;};
 
 
 

@@ -266,3 +266,34 @@ app_contact_delete:
     controller: App\Controller\ContactController::delete
     methods: POST
 
+code_promo_index:
+    path: /admin/code_promo
+    controller: App\Controller\CodePromoController::index
+    methods: GET
+
+code_promo_new:
+    path: /admin/code_promo/new
+    controller: App\Controller\CodePromoController::new
+    methods: GET|POST
+
+code_promo_show:
+    path: /admin/code_promo/{id}
+    controller: App\Controller\CodePromoController::show
+    methods: GET
+
+code_promo_edit:
+    path: /admin/code_promo/{id}/edit
+    controller: App\Controller\CodePromoController::edit
+    methods: GET|POST
+
+code_promo_delete:
+    path: /admin/code_promo/{id}/delete
+    controller: App\Controller\CodePromoController::delete
+    methods: POST
+
+app_check_code:
+    path: /check_code
+    controller: App\Controller\CodePromoController::checkCode
+    methods: GET|POST
+
+

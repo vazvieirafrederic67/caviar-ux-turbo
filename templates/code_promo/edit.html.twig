@@ -1,0 +1,18 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Edit CodePromo{% endblock %}
+
+{% block body %}
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+
+    <h6 class="border-bottom pb-2 mb-0">Edit CodePromo</h6>
+
+    {{ include('code_promo/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('code_promo_index') }}">back to list</a>
+
+    {{ include('code_promo/_delete_form.html.twig') }}
+
+</div>
+{% endblock %}

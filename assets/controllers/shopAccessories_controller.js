@@ -14,7 +14,6 @@ export default class extends Controller {
 
         // Gestion des boutons "Supprimer Images"
         let linksProduct = document.querySelectorAll('a.page-button.open-popup-product');
-
         let modalActive = document.getElementsByClassName('index-popup-gallery');
         let modalTitle = document.getElementById('modal-title');
         let modalDescription = document.getElementById('modal-description');

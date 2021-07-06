@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AccessoriesProductRepository;
+use App\Repository\CodePromoRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\Length;
@@ -35,12 +36,14 @@ class PagesController extends AbstractController
     private $baskets;
     private $accessories;
     private $message;
+    private $codesPromo;
 
-    public function __construct(CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository)
+    public function __construct(CodePromoRepository $codePromoRepository, CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository)
     {
         $this->caviars = $caviarProductRepository->findAll();
         $this->baskets = $basketProductRepository->findAll();
         $this->accessories = $accessoriesProductRepository->findAll();
+        $this->codesPromo = $codePromoRepository->findAll();
         $this->message = null;
     }
 
@@ -685,6 +688,7 @@ class PagesController extends AbstractController
         $total = 0;
         $price = 0;
         $quantity = 0;
+        $reduction = 0;
 
         $caviarPanier = $session->get('caviarProduct', []);
         $basketPanier = $session->get('basketProduct', []);
@@ -696,6 +700,10 @@ class PagesController extends AbstractController
                 $price = $caviar->getPrice();
                 $quantity = $panier['quantity'];
                 $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $reduction = $panier['reduction'];
+                }
             }
         }   
 
@@ -705,6 +713,10 @@ class PagesController extends AbstractController
                 $price = $basket->getPrice();
                 $quantity = $panier['quantity'];
                 $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $reduction = $panier['reduction'];
+                }
             }
         }        
 
@@ -714,10 +726,20 @@ class PagesController extends AbstractController
                 $price = $accessories->getPrice();
                 $quantity = $panier['quantity'];
                 $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $reduction = $panier['reduction'];
+                }
             }
         } 
 
-        $prix = (float)$total;
+        if(!empty($reduction)){
+            $retrait = ($total * $reduction) / 100;
+            $total = $total - $retrait;
+        }
+
+        $prix = round((float)$total, 2);
+
 
         // On instancie Stripe
         \Stripe\Stripe::setApiKey('sk_test_51Ir3u4JS3NsLYofkF9np7mZcyc8lLJF70cDxiHd5lmj3f38kI5aL29SjW5WAAIOMqRdpVbwaHfJ1ddk85H4pk1c000UyhTlmaM');
@@ -740,7 +762,7 @@ class PagesController extends AbstractController
         $total = 0;
         $price = 0;
         $quantity = 0;
-
+        $reduction = 0;
        
         $caviarPanier = $session->get('caviarProduct', []);
         $basketPanier = $session->get('basketProduct', []);
@@ -752,6 +774,10 @@ class PagesController extends AbstractController
                 $price = $caviar->getPrice();
                 $quantity = $panier['quantity'];
                 $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $reduction = $panier['reduction'];
+                }
             }
         }   
 
@@ -761,6 +787,10 @@ class PagesController extends AbstractController
                 $price = $basket->getPrice();
                 $quantity = $panier['quantity'];
                 $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $reduction = $panier['reduction'];
+                }
             }
         }        
 
@@ -770,10 +800,14 @@ class PagesController extends AbstractController
                 $price = $accessories->getPrice();
                 $quantity = $panier['quantity'];
                 $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $reduction = $panier['reduction'];
+                }
             }
         } 
 
-        $prix = (float)$total;
+        $prix = round((float)$total, 2);
 
         // On instancie Stripe
         \Stripe\Stripe::setApiKey('sk_test_51Ir3u4JS3NsLYofkF9np7mZcyc8lLJF70cDxiHd5lmj3f38kI5aL29SjW5WAAIOMqRdpVbwaHfJ1ddk85H4pk1c000UyhTlmaM');
@@ -954,6 +988,15 @@ class PagesController extends AbstractController
 
         return $this->render('pages/home.html.twig',[
             'message' => $this->message
+        ]);
+    }
+
+    #[Route('/code_promo', name: 'app_code_promo')]
+    public function codePromo(): Response
+    {
+
+        return $this->render('pages/codePromo.html.twig',[
+            'codesPromo' => $this->codesPromo
         ]);
     }
 

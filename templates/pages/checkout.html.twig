@@ -121,7 +121,7 @@
                                 </div>
                             </td>
                             <td>
-                                <h5 class="h5 sm order-price main-col">{{caviar.price}}</h5>
+                                <h5 class="h5 sm order-price main-col">{{caviar.price|number_format(2, ',', '.')}} <span> €</span></h5>
                             </td>
                         </tr>
 
@@ -147,7 +147,7 @@
                                 </div>
                             </td>
                             <td>
-                                <h5 class="h5 sm order-price main-col">{{basket.price}}</h5>
+                                <h5 class="h5 sm order-price main-col">{{basket.price|number_format(2, ',', '.')}}<span> €</span></h5>
                             </td>
                         </tr>
                     {% endfor %}
@@ -172,7 +172,7 @@
                                 </div>
                             </td>
                             <td>
-                                <h5 class="h5 sm order-price main-col">{{ accessorie.price }}</h5>
+                                <h5 class="h5 sm order-price main-col">{{ accessorie.price|number_format(2, ',', '.') }}<span> €</span></h5>
                             </td>
                         </tr>
                     {% endfor %}
@@ -180,19 +180,39 @@
 
             </table>
              <div class="empty-sm-30 empty-xs-15"></div>
-             <div class="promo-code">
-                <div class="input-field-wrap type-2">
-                  <input type="text" class="input-field color-2" placeholder="Code Promo"> 
-                </div> 
-                <a href="#" class="page-button md button-style-1 type-4 check"><span class="txt">check code</span></a>
+             <div data-controller="accordion" class="promo-code">
+
+                <div>
+                    <div class="empty-sm-30 empty-xs-15"></div>
+                    <button style="cursor:pointer;" class="accordion">Je n'ai pas de code promo</button>
+                    <div class="panel">
+                        <div class="empty-sm-30 empty-xs-15"></div>
+                        <a href="{{ path('app_code_promo')}}" class="page-button button-style-1 type-2"><span class="txt">Obtenir un code promo</span></a>
+                    </div>
+                    <div class="empty-sm-30 empty-xs-15"></div>
+                </div>
+
+                <div>
+                    <div class="empty-sm-30 empty-xs-15"></div>
+                    <button style="cursor:pointer;" class="accordion sm color-2">J'ai un code promo</button>
+                    <div class="panel">
+                        <div class="input-field-wrap type-2">
+                            <div class="empty-sm-30 empty-xs-15"></div>
+                            <input id="check_code" type="text" class="input-field color-2" placeholder="Code Promo"> 
+                        </div>
+                        <a id="click_check_code" href="{{ path('app_check_code' )}}" class="page-button md button-style-1 type-4 check"><span class="txt">check code</span></a>
+                    </div>
+                    <div class="empty-sm-30 empty-xs-15"></div>
+                </div>
+
              </div>
              <div class="empty-sm-30 empty-xs-15"></div>
              <div class="cart-total"> 
               <ul>
-                <li><h5 class="tt h5 sm color-2 height-50">Total Panier :<span><b class="main-col">{{ total }} </b> €</span></h5></li>
+                <li><h5 class="tt h5 sm color-2 height-50">Total Panier :<span><b class="main-col">{{ total|number_format(2, ',', '.') }} </b> €</span></h5></li>
                 <li><h5 class="tt h5 sm color-2 height-50">Livraison :<span><b class="main-col">free</b></span></h5></li>
                 <div class="empty-sm-15 empty-xs-15"></div>
-                <li><h4 class="tt h4 color-2 height-50">Total :<span><b class="main-col">{{ total }}</b> €</span></h4></li>
+                <li><h4 class="tt h4 color-2 height-50">Total :<span><b id="info-price-total" class="main-col">{{ total|number_format(2, ',', '.') }}</b> €</span></h4></li>
               </ul>
              </div>
         </div>

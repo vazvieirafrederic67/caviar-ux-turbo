@@ -1,0 +1,43 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}CodePromo{% endblock %}
+
+{% block body %}
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+
+    <h6 class="border-bottom pb-2 mb-0">CodePromo</h6>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ code_promo.id }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ code_promo.code }}</td>
+            </tr>
+            <tr>
+                <th>StartedAt</th>
+                <td>{{ code_promo.startedAt ? code_promo.startedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EndedAt</th>
+                <td>{{ code_promo.endedAt ? code_promo.endedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ code_promo.active ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('code_promo_index') }}">back to list</a>
+
+    <a href="{{ path('code_promo_edit', {'id': code_promo.id}) }}">edit</a>
+
+    {{ include('code_promo/_delete_form.html.twig') }}
+
+</div>
+{% endblock %}

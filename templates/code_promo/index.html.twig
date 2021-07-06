@@ -1,0 +1,49 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}CodePromo index{% endblock %}
+
+{% block body %}
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+
+    <h6 class="border-bottom pb-2 mb-0">Code promo index</h6>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>StartedAt</th>
+                <th>EndedAt</th>
+                <th>Active</th>
+                <th>Always active</th>
+                <th>Reduction %</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for code_promo in code_promos %}
+            <tr>
+                <td>{{ code_promo.code }}</td>
+                <td>{{ code_promo.startedAt ? code_promo.startedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ code_promo.endedAt ? code_promo.endedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ code_promo.active ? 'Yes' : 'No' }}</td>
+
+                <td>{{ code_promo.alwaysActive ? 'Yes' : 'No' }}</td>
+                <td>{{ code_promo.pourcentageReduction }}</td>
+                <td>
+                    <a href="{{ path('code_promo_show', {'id': code_promo.id}) }}">show</a>
+                    <a href="{{ path('code_promo_edit', {'id': code_promo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+<a href="{{ path('code_promo_new') }}">Create new</a>
+{% endblock %}
