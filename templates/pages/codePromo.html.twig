@@ -229,7 +229,7 @@
             <div class="container item-animation scroll-type-1">
                 <div class="simple-item text-center color-type-1 simple-item-style-1">
 
-                {% if codesPromo.0.code|length > 0 %}
+                {% if codesPromo is defined and codesPromo.0.code|length > 0 %}
                     <div class="first-div sub-title">Code : {{ codesPromo.0.code }}</div>
                 
                     <div class="empty-sm-20 empty-xs-20"></div>

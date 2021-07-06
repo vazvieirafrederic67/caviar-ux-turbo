@@ -51,7 +51,7 @@ export default class extends Controller {
                     if (isNaN(data.total)) {
                         return 0;
                     }else{
-                        infoPriceTotal.innerHTML = 'reduction de ' + data.reduction + '% - ' + formatter.format(data.total);
+                        infoPriceTotal.innerHTML = 'reduction de ' + data.reduction + '% | ' + formatter.format(data.total);
                     }
                 });
             }) 
