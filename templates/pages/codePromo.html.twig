@@ -229,12 +229,11 @@
             <div class="container item-animation scroll-type-1">
                 <div class="simple-item text-center color-type-1 simple-item-style-1">
 
-                {% if codesPromo is defined and codesPromo.0.code|length > 0 %}
+                {% if codesPromo.0.code is defined and codesPromo.0.code|length > 0 %}
                     <div class="first-div sub-title">Code : {{ codesPromo.0.code }}</div>
-                
                     <div class="empty-sm-20 empty-xs-20"></div>
                         <div class="wrap-padding">
-                            <h2 class="title main-col h1">Profitez de votre code promo!</h2>
+                            <h2 class="title main-col h1">Profitez de votre code promo de {{ codesPromo.0.pourcentageReduction }} % !</h2>
                             <div class="empty-sm-10 empty-xs-10"></div>
                         </div>
                         <div class="empty-sm-40  empty-xs-40"></div>
@@ -246,7 +245,23 @@
                             {% endif %}
                         </div>
                     </div>
-
+                {% else %}
+                  <div class="first-div sub-title">Aucun code promo disponible maintenant!</div>
+                    <div class="empty-sm-20 empty-xs-20"></div>
+                        <div class="wrap-padding">
+                            <h2 class="title main-col h1">Retentez votre chose prochainement !</h2>
+                            <div class="empty-sm-10 empty-xs-10"></div>
+                        </div>
+                        <div class="empty-sm-40  empty-xs-40"></div>
+                        <div class="button-wrap">
+                            {% if is_granted('ROLE_USER') %}
+                                <a href="{{ path('app_checkout')}}" class="page-button button-style-1"><span class="txt">Retour</span></a>
+                            {% else %}
+                                <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1"><span class="txt">Retour</span></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                
                 {% endif %}
             </div>
         <div class="empty-lg-200 empty-md-100 empty-sm-90 empty-xs-60"></div>   
