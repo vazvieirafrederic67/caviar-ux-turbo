@@ -210,11 +210,13 @@
         <div class="col-md-7 col-xs-12">
 					<div class="empty-sm-60 empty-xs-30"></div>
 					<div class="text-left check-subtitle">
-						<h4 class="h4 sm color-2">Achat sans s'enregistrer.</h4>
+						
                         {% if is_granted('ROLE_USER') %}
-                            <a href="{{ path('app_logout')}}" class="open-popup-test" data-open="popup-login" data-rel="3">Déconnexion</a>
+                            <h4 class="h4 sm color-2">Vos informations</h4>
                         {% else %}
-                            <a href="{{ path('app_login')}}" class="open-popup-test" data-open="popup-login" data-rel="3">S'identifier</a> / <a href="{{ path('app_register')}}" class="open-popup-test" data-open="popup-register" data-rel="4">S'enregistrer</a>
+                            <a href="{{ path('app_login')}}" class="open-popup-test" data-open="popup-login" data-rel="3">Vous avez déjà un compte ? Identifiez vous.</a> / <a href="{{ path('app_register')}}" class="open-popup-test" data-open="popup-register" data-rel="4">Créer votre compte</a>
+                            <div class="empty-sm-20 empty-xs-20"></div> 
+                            <h4 class="h4 sm color-2">Continuez vos achats sans s'enregistrer</h4>
                         {% endif %}
 					</div>
 					<div class="empty-sm-40 empty-xs-20"></div>
