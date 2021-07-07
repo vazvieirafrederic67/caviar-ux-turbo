@@ -126,12 +126,12 @@ class CodePromoController extends AbstractController
     public function checkCode(Request $request, CodePromoRepository $codePromoRepository, SessionInterface $session): Response
     {
         $total = 0;
-        $code = $request->get('name');
+        $code = strtoupper($request->get('name'));
 
         $codePromo = $codePromoRepository->findOneBy(['code' => $code]);
         $panierCaviar = $session->get('caviarProduct', []);
-        $panierBasket = $session->get('caviarBasket', []);
-        $panierAccessories = $session->get('caviarAccessories', []);
+        $panierBasket = $session->get('basketProduct', []);
+        $panierAccessories = $session->get('accessoriesProduct', []);
 
         if(null === $codePromo) {
             $codePromo = "Pas de code!";
@@ -182,6 +182,8 @@ class CodePromoController extends AbstractController
                 'reduction' => $codePromo->getPourcentageReduction(),
                 'active'=> $codePromo->getActive(),
                 'panierCaviar' => $panierCaviar,
+                'panierBasket' => $panierBasket,
+                'panierAccessories' => $panierAccessories,
                 'total' => $total
             ]);
         }

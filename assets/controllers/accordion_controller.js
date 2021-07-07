@@ -47,7 +47,7 @@ export default class extends Controller {
            
             fetch( finalUrl ).then(function(response) {
                 response.json().then(function(data) {
-
+                    console.log(data);
                     if (isNaN(data.total)) {
                         return 0;
                     }else{
