@@ -291,6 +291,11 @@ code_promo_delete:
     controller: App\Controller\CodePromoController::delete
     methods: POST
 
+app_code_promo:
+    path: /code_promo
+    controller: App\Controller\PagesController::codePromo
+    methods: GET|POST
+
 app_check_code:
     path: /check_code
     controller: App\Controller\CodePromoController::checkCode
