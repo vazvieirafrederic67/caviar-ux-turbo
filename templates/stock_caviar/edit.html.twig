@@ -1,0 +1,18 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Edit StockCaviar{% endblock %}
+
+{% block body %}
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+
+    <h6 class="border-bottom pb-2 mb-0">Edit StockCaviar</h6>
+
+    {{ include('stock_caviar/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('stock_caviar_index') }}">back to list</a>
+
+    {{ include('stock_caviar/_delete_form.html.twig') }}
+
+</div>
+{% endblock %}

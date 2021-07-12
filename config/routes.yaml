@@ -301,4 +301,33 @@ app_check_code:
     controller: App\Controller\CodePromoController::checkCode
     methods: GET|POST
 
+stock_caviar_index:
+    path: /admin/stock/caviar
+    controller: App\Controller\StockCaviarController::index
+    methods: GET
+
+stock_caviar_new:
+    path: /admin/stock/caviar/new
+    controller: App\Controller\StockCaviarController::new
+    methods: GET|POST
+
+stock_caviar_show:
+    path: /admin/stock/caviar/{id}
+    controller: App\Controller\StockCaviarController::show
+    methods: GET
+
+stock_caviar_edit:
+    path: /admin/stock/caviar/{id}/edit
+    controller: App\Controller\StockCaviarController::edit
+    methods: GET|POST
+
+stock_caviar_delete:
+    path: /admin/stock/caviar/{id}/delete
+    controller: App\Controller\StockCaviarController::delete
+    methods: POST
+
+app_dhl_raterequest:
+    path: /dhl_raterequest
+    controller: App\Controller\PagesController::dhlRateRequest
+    methods: GET|POST
 

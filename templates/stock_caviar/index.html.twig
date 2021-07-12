@@ -1,0 +1,44 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}StockCaviar index{% endblock %}
+
+{% block body %}
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+
+    <h6 class="border-bottom pb-2 mb-0">StockCaviar index</h6>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Caviar Name</th>
+                <th>Quantity</th>
+                <th>QuantityMin</th>
+                <th>QuantityMax</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stock_caviar in stock_caviars %}
+            <tr>
+                <td>{{ stock_caviar.nameCaviar }}</td>
+                <td>{{ stock_caviar.quantity }}</td>
+                <td>{{ stock_caviar.quantityMin }}</td>
+                <td>{{ stock_caviar.quantityMax }}</td>
+                <td>
+                    <a href="{{ path('stock_caviar_show', {'id': stock_caviar.id}) }}">show</a>
+                    <a href="{{ path('stock_caviar_edit', {'id': stock_caviar.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+<a href="{{ path('stock_caviar_new') }}">Create new</a>
+{% endblock %}

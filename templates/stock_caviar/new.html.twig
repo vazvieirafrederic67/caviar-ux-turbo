@@ -1,0 +1,16 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New StockCaviar{% endblock %}
+
+{% block body %}
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+
+    <h6 class="border-bottom pb-2 mb-0">Create new StockCaviar</h6>
+
+    {{ include('stock_caviar/_form.html.twig') }}
+
+</div>
+
+    <a href="{{ path('stock_caviar_index') }}">back to list</a>
+{% endblock %}

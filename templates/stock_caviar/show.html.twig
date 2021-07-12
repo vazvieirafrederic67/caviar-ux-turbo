@@ -1,0 +1,39 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}StockCaviar{% endblock %}
+
+{% block body %}
+
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+
+    <h6 class="border-bottom pb-2 mb-0">StockCaviar</h6>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ stock_caviar.id }}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ stock_caviar.quantity }}</td>
+            </tr>
+            <tr>
+                <th>QuantityMin</th>
+                <td>{{ stock_caviar.quantityMin }}</td>
+            </tr>
+            <tr>
+                <th>QuantityMax</th>
+                <td>{{ stock_caviar.quantityMax }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+    <a href="{{ path('stock_caviar_index') }}">back to list</a>
+
+    <a href="{{ path('stock_caviar_edit', {'id': stock_caviar.id}) }}">edit</a>
+
+    {{ include('stock_caviar/_delete_form.html.twig') }}
+{% endblock %}

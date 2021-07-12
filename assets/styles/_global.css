@@ -2073,6 +2073,6 @@ transition: all 0.35s ease-out; }
 #accessories_product_description {width:70vw;height:20vh;margin-top:2vh;background-color: lightgray;}
 
 #code_promo > div {display:flex; justify-content: space-between; width:400px;margin-bottom: 10px;margin-top: 10px;};
-
+#stock_caviar_caviar {width:20vw!important;}
 
 

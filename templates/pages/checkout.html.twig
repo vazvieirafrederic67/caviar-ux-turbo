@@ -200,10 +200,11 @@
              <div class="empty-sm-30 empty-xs-15"></div>
              <div class="cart-total"> 
               <ul>
-                <li><h5 class="tt h5 sm color-2 height-50">Total Panier :<span><b class="main-col">{{ total|number_format(2, ',', '.') }} </b> €</span></h5></li>
-                <li><h5 class="tt h5 sm color-2 height-50">Livraison :<span><b class="main-col">free</b></span></h5></li>
+                <li><h5 class="tt h5 sm color-2 height-50">Total Panier :<span><b id="price" class="main-col">{{ total|number_format(2, ',', '.') }} </b> €</span></h5></li>
+                <li><h5 class="tt h5 sm color-2 height-50">Frais de livraison :<span><b id="prix-livraison" class="main-col"></b> €</span></h5></li>
+                <li><h5 class="tt h5 sm color-2 height-50">Date de livraison prévue :<span><b id="date-livraison" class="main-col"></b></span></h5></li>
                 <div class="empty-sm-15 empty-xs-15"></div>
-                <li><h4 class="tt h4 color-2 height-50">Total :<span><b id="info-price-total" class="main-col">{{ total|number_format(2, ',', '.') }}</b> €</span></h4></li>
+                <li><h4 class="tt h4 color-2 height-50">Total :<span><b id="price-total" class="main-col">{{ total|number_format(2, ',', '.') }}</b> €</span></h4></li>
               </ul>
              </div>
         </div>
@@ -218,6 +219,7 @@
                             <div class="empty-sm-20 empty-xs-20"></div> 
                             <h4 class="h4 sm color-2">Continuez vos achats sans s'enregistrer</h4>
                         {% endif %}
+
 					</div>
 					<div class="empty-sm-40 empty-xs-20"></div>
                     {% if is_granted('ROLE_USER') %}
@@ -425,7 +427,7 @@
                                   <div class="empty-sm-20 empty-xs-20"></div>      
                               </div>
                           </div>
-                          <div class="row">
+                          <div data-controller="dhlApi" class="row">
                               <div class="col-sm-6 col-xs-12">
                               <div class="input-field-wrap">
                                   <div class="col-12">{{ form_row(form.country, {'attr':{'class':'input-field color-2', 'placeholder' : 'Pays'}}) }}</div> 
@@ -500,7 +502,14 @@
             <div class="page-button button-style-1 type-4">
                 <a href="{{ path('app_paiement')}}"><span class="txt">Paiement</span></a>
             </div>
-        {% endif %}		  
+        {% endif %}
+
+        {% if message is not null %}
+            <div class="text-center">
+                <h5 class="h5">{{ message }}</h5>
+            </div>
+        {% endif %}
+
 		<div class="empty-lg-140 empty-md-100 empty-sm-60 empty-xs-60"></div>
     </section>
 

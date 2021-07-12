@@ -2,27 +2,29 @@
 
 namespace App\Controller;
 
-use App\Entity\Contact;
+use DateTime;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Entity\ShoppingCart;
 use App\Entity\BasketProduct;
 use App\Entity\CaviarProduct;
 use App\Entity\UserAnonymous;
 use App\Form\UserAnonymousType;
+use App\Service\DhlRateRequest;
 use App\Form\ChangeUserInfoType;
 use App\Entity\AccessoriesProduct;
-use App\Entity\ShoppingCart;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use App\Security\AppUserAuthenticator;
+use App\Repository\CodePromoRepository;
 use App\Repository\BasketProductRepository;
 use App\Repository\CaviarProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AccessoriesProductRepository;
-use App\Repository\CodePromoRepository;
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -50,7 +52,6 @@ class PagesController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function home(): Response
     {
-
         return $this->render('pages/home.html.twig',[
             'caviars' => $this->caviars
         ]);
@@ -617,10 +618,12 @@ class PagesController extends AbstractController
         $total = 0;
         $price = 0;
         $quantity = 0;
+        $this->message = null;
 
         $caviarPanier = $session->get('caviarProduct', []);
         $basketPanier = $session->get('basketProduct', []);
         $accessoriesPanier = $session->get('accessoriesProduct', []);
+        $livraison = $session->get('livraison', []);
 
         if(!empty($caviarPanier)){
             foreach($caviarPanier as $panier) {
@@ -654,7 +657,7 @@ class PagesController extends AbstractController
         $form = $this->createForm(UserAnonymousType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && isset($livraison['amount']) && null !== $livraison['amount']) {
 
             $userPanier = $session->get('userAnonyme', []);
 
@@ -674,9 +677,14 @@ class PagesController extends AbstractController
             return $this->redirectToRoute('app_paiement_anonymous');
         }
 
+        if ($form->isSubmitted() && $form->isValid() && !isset($livraison['amount'])){
+            $this->message = "Votre adresse de livraison comporte une ou plusieurs erreurs. Veuillez vérifier les champs.";
+        }
+
         return $this->render('pages/checkout.html.twig',[
             'form' => $form->createView(),
-            'total' => $total
+            'total' => $total,
+            'message' => $this->message
         ]);
     }
 
@@ -767,6 +775,7 @@ class PagesController extends AbstractController
         $caviarPanier = $session->get('caviarProduct', []);
         $basketPanier = $session->get('basketProduct', []);
         $accessoriesPanier = $session->get('accessoriesProduct', []);
+        $livraison = $session->get('livraison',[]);
 
         if(!empty($caviarPanier)){
             foreach($caviarPanier as $panier) {
@@ -805,7 +814,11 @@ class PagesController extends AbstractController
                     $reduction = $panier['reduction'];
                 }
             }
-        } 
+        }
+
+        if(isset($livraison["amount"]) && null !== $livraison["amount"]){
+            $total = $total + $livraison["amount"];
+        }
 
         $prix = round((float)$total, 2);
 
@@ -994,9 +1007,31 @@ class PagesController extends AbstractController
     #[Route('/code_promo', name: 'app_code_promo')]
     public function codePromo(): Response
     {
-
         return $this->render('pages/codePromo.html.twig',[
             'codesPromo' => $this->codesPromo
+        ]);
+    }
+
+    #[Route('/dhl_raterequest', name: 'app_dhl_raterequest')]
+    public function dhlRateRequest(Request $request, DhlRateRequest $dhlRateRequest, SessionInterface $session): Response
+    {
+        $livraison = $session->get('livraison', []);
+        $message = 'ok';
+        $cityDest = $request->get('citySelected');
+        $cityPostalCode = $request->get('postalCodeSelected');
+        $cityCountryCode = $request->get('codeCountry');
+
+        $response = $dhlRateRequest->callDhlRateRequestApi($cityDest, $cityPostalCode, $cityCountryCode);
+        
+        if(isset($response['message'])){
+            $message = $response['message'];
+        };
+
+        $session->set('livraison', $response);
+
+        return new JsonResponse([
+            'response' => $response,
+            'message' => $message,
         ]);
     }
 

@@ -27,6 +27,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
 
@@ -53,6 +56,10 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="integer", length=255)
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $adresseNumber;
 
@@ -63,6 +70,10 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="integer", length=255)
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $postalCode;
 
@@ -83,6 +94,10 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="integer", length=255)
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $phoneNumber;
 

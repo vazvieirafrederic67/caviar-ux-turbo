@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -27,6 +28,9 @@ class UserAnonymous
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
 
@@ -45,8 +49,13 @@ class UserAnonymous
      */
     private $firstname;
 
+
     /**
      * @ORM\Column(type="integer", length=255)
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $adresseNumber;
 
@@ -57,6 +66,10 @@ class UserAnonymous
 
     /**
      * @ORM\Column(type="integer", length=255)
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $postalCode;
 
@@ -77,6 +90,10 @@ class UserAnonymous
 
     /**
      * @ORM\Column(type="integer", length=255)
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      */
     private $phoneNumber;
 

@@ -34,7 +34,8 @@ export default class extends Controller {
          */
         let code = document.querySelector('#check_code');
         let clickCkeck = document.querySelector('#click_check_code');
-        let infoPriceTotal = document.querySelector('#info-price-total');
+        let infoPriceTotal = document.querySelector('#price-total');
+        let priceDelivery = document.querySelector('#prix-livraison');
         
         // Create our number formatter.
         var formatter = new Intl.NumberFormat('fr-FR', {});
@@ -42,12 +43,16 @@ export default class extends Controller {
         clickCkeck.addEventListener('click', function(e){
             e.preventDefault();
 
+            let livraison = priceDelivery.innerHTML.replace(',','.');
+
             let url = this.getAttribute("href");
-            let finalUrl = url + '?name=' + code.value;
+            let finalUrl = url + '?name=' + code.value + '&livraison=' + livraison;
            
             fetch( finalUrl ).then(function(response) {
                 response.json().then(function(data) {
+
                     console.log(data);
+                  
                     if (isNaN(data.total)) {
                         return 0;
                     }else{

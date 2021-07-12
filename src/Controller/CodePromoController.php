@@ -127,11 +127,14 @@ class CodePromoController extends AbstractController
     {
         $total = 0;
         $code = strtoupper($request->get('name'));
+        $livraisonAlreadyExist = $request->get('livraison');
 
         $codePromo = $codePromoRepository->findOneBy(['code' => $code]);
         $panierCaviar = $session->get('caviarProduct', []);
         $panierBasket = $session->get('basketProduct', []);
         $panierAccessories = $session->get('accessoriesProduct', []);
+        $livraison = $session->get('livraison', []);
+        
 
         if(null === $codePromo) {
             $codePromo = "Pas de code!";
@@ -174,6 +177,10 @@ class CodePromoController extends AbstractController
             $reduction = $total * ($codePromo->getPourcentageReduction() / 100);
             $total = $total - $reduction;
 
+            if( isset($livraison['amount']) && null !== $livraison['amount'] && null !== $livraisonAlreadyExist ) {
+                $total = $total + $livraison['amount'];
+            }
+
             $total = round((float)$total, 2);
 
             return new JsonResponse([
@@ -184,7 +191,8 @@ class CodePromoController extends AbstractController
                 'panierCaviar' => $panierCaviar,
                 'panierBasket' => $panierBasket,
                 'panierAccessories' => $panierAccessories,
-                'total' => $total
+                'total' => $total,
+                'livraison' => $livraisonAlreadyExist
             ]);
         }
     }

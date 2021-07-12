@@ -9,7 +9,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class UserAnonymousType extends AbstractType
 {
@@ -17,18 +19,18 @@ class UserAnonymousType extends AbstractType
 
     public function __construct()
     {
-        \Locale::setDefault('en');
+        \Locale::setDefault('fr');
         $dataCountries = Countries::getNames();
         
-        foreach($dataCountries as $country){ 
-            $this->countries[$country] = $country;
-        }  
+        foreach($dataCountries as $key => $country){
+            $this->countries[$country] = $key;
+        }
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', TextType::class, [
+            ->add('email', EmailType::class, [
                 'label' => false,
             ])
             ->add('lastname', TextType::class, [
@@ -37,13 +39,13 @@ class UserAnonymousType extends AbstractType
             ->add('firstname', TextType::class, [
                 'label' => false,
             ])
-            ->add('adresseNumber', TextType::class, [
+            ->add('adresseNumber', IntegerType::class, [
                 'label' => false,
             ])
             ->add('streetName', TextType::class, [
                 'label' => false,
             ])
-            ->add('postalCode', TextType::class, [
+            ->add('postalCode', IntegerType::class, [
                 'label' => false,
             ])
             ->add('city', TextType::class, [
@@ -52,9 +54,9 @@ class UserAnonymousType extends AbstractType
             ->add('country', ChoiceType::class, [
                 'label' => false,
                 'placeholder' => 'Choisir votre pays',
-                'choices'  => $this->countries,
+                'choices' => $this->countries,
             ])
-            ->add('phoneNumber', TextType::class, [
+            ->add('phoneNumber', IntegerType::class, [
                 'label' => false,
             ])
             ->add('dateOfBirth', DateType::class, [

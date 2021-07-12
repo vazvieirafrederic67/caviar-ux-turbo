@@ -3,18 +3,35 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Component\Intl\Countries;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class UserType extends AbstractType
 {
+
+    private $countries = [];
+
+    public function __construct()
+    {
+        \Locale::setDefault('fr');
+        $dataCountries = Countries::getNames();
+        
+        foreach($dataCountries as $key => $country){
+            $this->countries[$country] = $key;
+        }
+    }
+
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
+            ->add('email', EmailType::class)
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Utilisateur' => 'ROLE_USER',
@@ -25,14 +42,18 @@ class UserType extends AbstractType
                 'multiple' => true,
                 'label' => 'Rôles',
             ])
-            ->add('lastname')
-            ->add('firstname')
-            ->add('adresseNumber')
-            ->add('streetName')
-            ->add('postalCode')
-            ->add('city')
-            ->add('country')
-            ->add('phoneNumber')
+            ->add('lastname', TextType::class)
+            ->add('firstname', TextType::class)
+            ->add('adresseNumber',IntegerType::class)
+            ->add('streetName', TextType::class)
+            ->add('postalCode',IntegerType::class)
+            ->add('city', TextType::class)
+            ->add('country', ChoiceType::class, [
+                'label' => false,
+                'placeholder' => 'Choisir votre pays',
+                'choices' => $this->countries,
+            ])
+            ->add('phoneNumber',IntegerType::class)
             ->add('dateOfBirth', DateType::class, [
                 'widget' => 'choice',
                  'years' => range(date('Y'), date('Y')-100),

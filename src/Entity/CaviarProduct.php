@@ -64,9 +64,11 @@ class CaviarProduct
      */
     private $grammage;
 
+
     public function __construct()
     {
         $this->shoppingCarts = new ArrayCollection();
+        $this->stockCaviars = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,4 +198,19 @@ class CaviarProduct
 
         return $this;
     }
+
+    /**
+     * @return Collection|StockCaviar[]
+     */
+    public function getStockCaviars(): Collection
+    {
+        return $this->stockCaviars;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+
 }
