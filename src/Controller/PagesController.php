@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Entity\StockCaviar;
 use App\Entity\ShoppingCart;
 use App\Entity\BasketProduct;
 use App\Entity\CaviarProduct;
@@ -25,6 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AccessoriesProductRepository;
+use App\Repository\StockCaviarRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -844,7 +846,7 @@ class PagesController extends AbstractController
     }
 
     #[Route('/validation-shopping', name: 'app_validation_shopping')]
-    public function validationShopping(SessionInterface $session,UserRepository $userRepository, CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository){
+    public function validationShopping(StockCaviarRepository $stockCaviarRepository,SessionInterface $session,UserRepository $userRepository, CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository){
 
         $total = 0;
         $price = 0;
@@ -859,12 +861,20 @@ class PagesController extends AbstractController
 
 
         if(!empty($caviarPanier)){
+
+            $entityManager = $this->getDoctrine()->getManager();
+
             foreach($caviarPanier as $panier) {
                 $caviar = $caviarProductRepository->find($panier['id']);
                 $price = $caviar->getPrice();
                 $quantity = $panier['quantity'];
                 $total = $total + ($price * $quantity);
+                $stockCaviarQuantity = $stockCaviarRepository->findOneBy(['caviar' => $caviar])->getQuantity();
+                $stockCaviar = $stockCaviarRepository->findOneBy(['caviar' => $caviar])->setQuantity($stockCaviarQuantity - $quantity);
+                $entityManager->persist($stockCaviar);
             }
+
+            $entityManager->flush();
         }   
 
         if(!empty($basketPanier)){
