@@ -15,4 +15,9 @@
     {{ include('stock_caviar/_delete_form.html.twig') }}
 
 </div>
+
+    {% if message is not null %}
+        {{ message }}
+    {% endif %}
+    
 {% endblock %}

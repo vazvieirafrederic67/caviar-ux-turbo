@@ -258,7 +258,7 @@
                     <div class="row">
                         <div class="col-sm-6 col-xs-12">
                         <div class="input-field-wrap">
-                            <input type="text" class="input-field color-2" placeholder="{{app.user.country}}" readonly> 
+                            <input id="countryValue" type="text" class="input-field color-2" placeholder="{{app.user.country}}" readonly> 
                             <div class="focus"></div>
                         </div> 
                         <div class="empty-sm-20 empty-xs-20"></div>   
@@ -344,7 +344,7 @@
                               </div>
                           </div>
                           <div class="row">
-                              <div class="col-sm-6 col-xs-12">
+                              <div data-controller="dhlApiUser" class="col-sm-6 col-xs-12">
                               <div class="input-field-wrap">
                                   <div class="col-12">{{ form_row(form.country, {'attr':{'class':'input-field color-2'}}) }}</div> 
                                   <div class="focus"></div>
@@ -427,7 +427,7 @@
                                   <div class="empty-sm-20 empty-xs-20"></div>      
                               </div>
                           </div>
-                          <div data-controller="dhlApi" class="row">
+                          <div data-controller="dhlApiAnonymous" class="row">
                               <div class="col-sm-6 col-xs-12">
                               <div class="input-field-wrap">
                                   <div class="col-12">{{ form_row(form.country, {'attr':{'class':'input-field color-2', 'placeholder' : 'Pays'}}) }}</div> 

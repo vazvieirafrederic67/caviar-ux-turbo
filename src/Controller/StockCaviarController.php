@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\StockCaviar;
 use App\Form\StockCaviarType;
+use App\Repository\CaviarProductRepository;
 use App\Repository\StockCaviarRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,26 +23,36 @@ class StockCaviarController extends AbstractController
     }
 
     #[Route('/new', name: 'stock_caviar_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, StockCaviarRepository $stockCaviarRepository): Response
     {
+
+        $message = null;
         $stockCaviar = new StockCaviar();
         $form = $this->createForm(StockCaviarType::class, $stockCaviar);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $stockCaviar->setNameCaviar($form->getData()->getCaviar()->getName());
+            if(null !== $form->getData()->getCaviar()){
+                $nameCaviar = $stockCaviar->setNameCaviar($form->getData()->getCaviar()->getName());
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($stockCaviar);
-            $entityManager->flush();
+                if(null === $stockCaviarRepository->findOneBy(['nameCaviar' => $nameCaviar->getNameCaviar()])){
 
-            return $this->redirectToRoute('stock_caviar_index');
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($stockCaviar);
+                    $entityManager->flush();
+
+                    return $this->redirectToRoute('stock_caviar_index');
+                }
+            }
+
+            $message = 'Ce nom de stock est déjà existant, ou invalide ! ';
         }
 
         return $this->render('stock_caviar/new.html.twig', [
             'stock_caviar' => $stockCaviar,
             'form' => $form->createView(),
+            'message' => $message
         ]);
     }
 
@@ -54,20 +65,37 @@ class StockCaviarController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'stock_caviar_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, StockCaviar $stockCaviar): Response
+    public function edit(Request $request, StockCaviar $stockCaviar, StockCaviarRepository $stockCaviarRepository, CaviarProductRepository $caviarProductRepository): Response
     {
+        $message = null;
+        $caviarId = $stockCaviar->getCaviar()->getId();
         $form = $this->createForm(StockCaviarType::class, $stockCaviar);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('stock_caviar_index');
+            if(null !== $form->getData()->getCaviar()){
+
+                $nameCaviar = $stockCaviar->setNameCaviar($form->getData()->getCaviar()->getName());
+
+                $nameInitialCaviar = $caviarProductRepository->find($caviarId)->getName();
+    
+                if(null === $stockCaviarRepository->findOneBy(['nameCaviar' => $nameCaviar->getNameCaviar()]) || $nameCaviar->getNameCaviar() === $nameInitialCaviar){
+    
+                    $this->getDoctrine()->getManager()->flush();
+    
+                    return $this->redirectToRoute('stock_caviar_index');
+                }
+            }
+
+            $message = 'Ce nom de stock est déjà existant, ou invalide ! ';
+            
         }
 
         return $this->render('stock_caviar/edit.html.twig', [
             'stock_caviar' => $stockCaviar,
             'form' => $form->createView(),
+            'message' => $message
         ]);
     }
 

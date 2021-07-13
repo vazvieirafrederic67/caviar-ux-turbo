@@ -12,5 +12,8 @@
 
 </div>
 
+    {% if message is not null %}
+        {{ message }}
+    {% endif %}
     <a href="{{ path('stock_caviar_index') }}">back to list</a>
 {% endblock %}

@@ -544,6 +544,7 @@ class PagesController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $user = $this->getUser();
+        $this->message = null;
 
         $total = 0;
         $price = 0;
@@ -608,7 +609,8 @@ class PagesController extends AbstractController
 
         return $this->render('pages/checkout.html.twig',[
             'form' => $form->createView(),
-            'total' => $total
+            'total' => $total,
+            'message' => $this->message
         ]);
     }
 
@@ -741,7 +743,7 @@ class PagesController extends AbstractController
             }
         } 
 
-        if(!empty($reduction)){
+        if(!empty($reduction) && 0 !== $reduction){
             $retrait = ($total * $reduction) / 100;
             $total = $total - $retrait;
         }
@@ -814,6 +816,11 @@ class PagesController extends AbstractController
                     $reduction = $panier['reduction'];
                 }
             }
+        }
+
+        if(!empty($reduction) && 0 !== $reduction){
+            $retrait = ($total * $reduction) / 100;
+            $total = $total - $retrait;
         }
 
         if(isset($livraison["amount"]) && null !== $livraison["amount"]){
@@ -1016,6 +1023,7 @@ class PagesController extends AbstractController
     public function dhlRateRequest(Request $request, DhlRateRequest $dhlRateRequest, SessionInterface $session): Response
     {
         $livraison = $session->get('livraison', []);
+        $reduction = $session->get('reduction', []);
         $message = 'ok';
         $cityDest = $request->get('citySelected');
         $cityPostalCode = $request->get('postalCodeSelected');
@@ -1027,11 +1035,12 @@ class PagesController extends AbstractController
             $message = $response['message'];
         };
 
-        $session->set('livraison', $response);
+        $livraison = $session->set('livraison', $response);
 
         return new JsonResponse([
             'response' => $response,
             'message' => $message,
+            'reduction' => $reduction
         ]);
     }
 

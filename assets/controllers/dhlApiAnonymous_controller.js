@@ -2,6 +2,7 @@ import { Controller } from 'stimulus';
 
 
 export default class extends Controller {
+
     connect() {
         let country = document.querySelector('#user_anonymous_country');
         let postalCode = document.querySelector('#user_anonymous_postalCode');
@@ -10,19 +11,15 @@ export default class extends Controller {
         let dateLivraison = document.querySelector('#date-livraison');
         let price = document.querySelector('#price');
         let priceTotal = document.querySelector('#price-total');
-
         let codeCountry = null;
         let postalCodeSelected = null;
         let citySelected = null;
 
-        
         if(postalCode.value.length > 0 && city.value.length > 0 && country.value.length){
             postalCodeSelected = postalCode.value;
             citySelected = city.value;
             codeCountry = country.value;
         }
-
-       
 
         country.addEventListener('change', (event) => {
             codeCountry = event.target.value;
@@ -54,7 +51,8 @@ export default class extends Controller {
 
             let url = "/dhl_raterequest/";
             let finalUrl = url + '?codeCountry=' + codeCountry + '&postalCodeSelected=' + postalCodeSelected + '&citySelected=' + citySelected;
-           
+            let reduction = 0;
+
             fetch( finalUrl ).then(function(response) {
                 response.json().then(function(data) {
 
@@ -62,9 +60,11 @@ export default class extends Controller {
                         livraison.innerHTML = "données invalides!";
                     }else{
                         let tempTotal = parseFloat(price.innerHTML.replace('.', '').replace(',','.'));
+                        reduction = data.reduction;
+
                         dateLivraison.innerHTML = data.response.delivery.replace("T", " à ");;
                         livraison.innerHTML = String(data.response.amount).replace('.',',');
-                        priceTotal.innerHTML = String(tempTotal + data.response.amount).replace('.',',') ;
+                        priceTotal.innerHTML = String(Number((tempTotal - data.reduction) + data.response.amount).toFixed(2).replace('.',',')) ;
                     }
                 });
             }); 

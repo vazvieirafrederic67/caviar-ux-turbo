@@ -22,10 +22,9 @@ class ChangeUserInfoType extends AbstractType
         \Locale::setDefault('en');
         $dataCountries = Countries::getNames();
         
-        foreach($dataCountries as $country){ 
+        foreach($dataCountries as $country){
             $this->countries[$country] = $country;
         }
-       
     }
 
 

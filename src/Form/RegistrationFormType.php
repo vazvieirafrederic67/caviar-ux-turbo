@@ -35,8 +35,8 @@ class RegistrationFormType extends AbstractType
         \Locale::setDefault('en');
         $dataCountries = Countries::getNames();
         
-        foreach($dataCountries as $country){ 
-            $this->countries[$country] = $country;
+        foreach($dataCountries as $key => $country){
+            $this->countries[$country] = $key;
         }
        
     }

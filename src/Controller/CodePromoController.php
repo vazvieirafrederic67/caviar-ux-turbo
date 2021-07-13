@@ -134,6 +134,7 @@ class CodePromoController extends AbstractController
         $panierBasket = $session->get('basketProduct', []);
         $panierAccessories = $session->get('accessoriesProduct', []);
         $livraison = $session->get('livraison', []);
+        $reduction = $session->get('reduction', []);
         
 
         if(null === $codePromo) {
@@ -174,10 +175,11 @@ class CodePromoController extends AbstractController
                 $session->set('caviarAccessories', $panierAccessories);
             }
 
-            $reduction = $total * ($codePromo->getPourcentageReduction() / 100);
-            $total = $total - $reduction;
+            $tempReduction = $total * ($codePromo->getPourcentageReduction() / 100);
+            $total = $total - $tempReduction;
+            $session->set('reduction', $tempReduction);
 
-            if( isset($livraison['amount']) && null !== $livraison['amount'] && null !== $livraisonAlreadyExist ) {
+            if( isset($livraison['amount']) && null !== $livraison['amount'] && "" !== $livraisonAlreadyExist ) {
                 $total = $total + $livraison['amount'];
             }
 
