@@ -513,7 +513,7 @@ class PagesController extends AbstractController
         ]);
     }
 
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('/caviar_contact', name: 'app_contact')]
     public function contact(Request $request): Response
     {
         $this->message = null;

@@ -185,7 +185,7 @@ app_products_baskets:
     controller: App\Controller\PagesController::productsBaskets
 
 app_contact:
-    path: /contact
+    path: /caviar_contact
     controller: App\Controller\PagesController::contact
 
 app_register:
