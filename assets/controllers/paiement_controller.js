@@ -1,14 +1,6 @@
 import { Controller } from 'stimulus';
 
-/*
- * This is an example Stimulus controller!
- *
- * Any element with a data-controller="hello" attribute will cause
- * this controller to be executed. The name "hello" comes from the filename:
- * hello_controller.js -> "hello"
- *
- * Delete this file or adapt it for your use!
- */
+
 export default class extends Controller {
     connect() {
         window.onload = () => {
@@ -17,14 +9,16 @@ export default class extends Controller {
             let elements = stripe.elements()
             let redirect = "/validation-shopping";
 
+            
+
             // Objets de la page
             let cardHolderName = document.getElementById("cardholder-name")
             let cardButton = document.getElementById("card-button")
             let clientSecret = cardButton.dataset.secret;
 
             // Crée les éléments du formulaire de carte bancaire
-            let card = elements.create("card")
-            card.mount("#card-elements")
+            let card = elements.create("card");
+            card.mount("#card-elements");
 
             // On gère la saisie
             card.addEventListener("change", (event) => {
