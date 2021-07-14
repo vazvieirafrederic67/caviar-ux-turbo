@@ -87,7 +87,6 @@ app_about:
     path: /about
     controller: App\Controller\PagesController::about
 
-
 app_shop:
     path: /shop
     controller: App\Controller\PagesController::shop
