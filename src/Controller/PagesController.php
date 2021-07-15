@@ -54,6 +54,7 @@ class PagesController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function home(): Response
     {
+
         return $this->render('pages/home.html.twig',[
             'caviars' => $this->caviars
         ]);
@@ -718,6 +719,8 @@ class PagesController extends AbstractController
                 if(isset($panier['reduction'])){
                     $reduction = $panier['reduction'];
                 }
+
+                dd($panier);
             }
         }   
 
