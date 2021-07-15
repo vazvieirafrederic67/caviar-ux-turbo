@@ -720,6 +720,10 @@ class PagesController extends AbstractController
         $basketPanier = $session->get('basketProduct', []);
         $accessoriesPanier = $session->get('accessoriesProduct', []);
         $livraison = $session->get('livraison',[]);
+        $reduction = $session->get('reduction', []);
+
+
+        
 
         if(!empty($caviarPanier)){
             foreach($caviarPanier as $panier) {
@@ -761,8 +765,7 @@ class PagesController extends AbstractController
         } 
 
         if(!empty($reduction) && 0 !== $reduction){
-            $retrait = ($total * $reduction) / 100;
-            $total = $total - $retrait;
+            $total = $total - $reduction;
         }
 
         if(isset($livraison["amount"]) && null !== $livraison["amount"]){

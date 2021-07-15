@@ -152,6 +152,7 @@ class CodePromoController extends AbstractController
                 foreach($panierCaviar as $caviar){
                     $total = $total + ($caviar['quantity'] * $caviar['price']);
                     $panierCaviar[$caviar['name']]['reduction'] = $codePromo->getPourcentageReduction();
+                    $session->set('reduction', $codePromo->getPourcentageReduction() );
                 }
 
                 $session->set('caviarProduct', $panierCaviar);
@@ -161,6 +162,7 @@ class CodePromoController extends AbstractController
                 foreach($panierBasket as $basket){
                     $total = $total + ($basket['quantity'] * $basket['price']);
                     $panierBasket[$basket['name']]['reduction'] = $codePromo->getPourcentageReduction();
+                    $session->set('reduction', $codePromo->getPourcentageReduction() );
                 }
 
                 $session->set('caviarBasket', $panierBasket);
@@ -170,6 +172,7 @@ class CodePromoController extends AbstractController
                 foreach($panierAccessories as $accessorie){
                     $total = $total + ($accessorie['quantity'] * $accessorie['price']);
                     $panierAccessories[$accessorie['name']]['reduction'] = $codePromo->getPourcentageReduction();
+                    $session->set('reduction', $codePromo->getPourcentageReduction() );
                 }
 
                 $session->set('caviarAccessories', $panierAccessories);
