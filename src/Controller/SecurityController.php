@@ -13,42 +13,8 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils, SessionInterface $session): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-
-
-        $caviarPanier = $session->get('caviarProduct', []);
-        $basketPanier = $session->get('basketProduct', []);
-        $accessoriesPanier = $session->get('accessoriesProduct', []);
-
-        if(!empty($caviarPanier)){
-            foreach($caviarPanier as $panier) {
-
-                if(isset($panier['reduction'])){
-                    $panier['reduction'] = [];
-                }
-            }
-        }   
-
-        if(!empty($basketPanier)){
-            foreach($basketPanier as $panier) {
-
-                if(isset($panier['reduction'])){
-                    $panier['reduction'] = [];
-                }
-            }
-        }        
-
-        if(!empty($accessoriesPanier)){
-            foreach($accessoriesPanier as $panier) {
-
-                if(isset($panier['reduction'])){
-                    $panier['reduction'] = [];
-                }
-            }
-        } 
-
-
         if ($this->getUser()) {
              return $this->redirectToRoute('app_home');
         }
@@ -64,42 +30,8 @@ class SecurityController extends AbstractController
     /**
      * @Route("/logout", name="app_logout")
      */
-    public function logout(SessionInterface $session)
+    public function logout()
     {
-        $caviarPanier = $session->get('caviarProduct', []);
-        $basketPanier = $session->get('basketProduct', []);
-        $accessoriesPanier = $session->get('accessoriesProduct', []);
-
-        if(!empty($caviarPanier)){
-            foreach($caviarPanier as $panier) {
-
-                if(isset($panier['reduction'])){
-                    $panier['reduction'] = [];
-                }
-            }
-        }   
-
-        if(!empty($basketPanier)){
-            foreach($basketPanier as $panier) {
-
-                if(isset($panier['reduction'])){
-                    $panier['reduction'] = [];
-                }
-            }
-        }        
-
-        if(!empty($accessoriesPanier)){
-            foreach($accessoriesPanier as $panier) {
-
-                if(isset($panier['reduction'])){
-                    $panier['reduction'] = [];
-                }
-            }
-        } 
-
-
-
-
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

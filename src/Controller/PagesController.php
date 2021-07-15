@@ -564,6 +564,10 @@ class PagesController extends AbstractController
                 $price = $caviar->getPrice();
                 $quantity = $panier['quantity'];
                 $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $panier['reduction'] = [];
+                }
             }
         }   
 
@@ -573,6 +577,10 @@ class PagesController extends AbstractController
                 $price = $basket->getPrice();
                 $quantity = $panier['quantity'];
                 $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $panier['reduction'] = [];
+                }
             }
         }        
 
@@ -583,6 +591,10 @@ class PagesController extends AbstractController
                 $price = $accessories->getPrice();
                 $quantity = $panier['quantity'];
                 $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $panier['reduction'] = [];
+                }
             }
         } 
 
@@ -717,10 +729,8 @@ class PagesController extends AbstractController
                 $total = $total + ($price * $quantity);
 
                 if(isset($panier['reduction'])){
-                    $reduction = $panier['reduction'];
+                    $panier['reduction'] = [];
                 }
-
-                dd($panier);
             }
         }   
 
@@ -732,7 +742,7 @@ class PagesController extends AbstractController
                 $total = $total + ($price * $quantity);
 
                 if(isset($panier['reduction'])){
-                    $reduction = $panier['reduction'];
+                    $panier['reduction'] = [];
                 }
             }
         }        
@@ -745,7 +755,7 @@ class PagesController extends AbstractController
                 $total = $total + ($price * $quantity);
 
                 if(isset($panier['reduction'])){
-                    $reduction = $panier['reduction'];
+                    $panier['reduction'] = [];
                 }
             }
         } 
