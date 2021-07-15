@@ -555,6 +555,7 @@ class PagesController extends AbstractController
         $caviarPanier = $session->get('caviarProduct', []);
         $basketPanier = $session->get('basketProduct', []);
         $accessoriesPanier = $session->get('accessoriesProduct', []);
+        $reduction = $session->set('reduction', []);
 
         if(!empty($caviarPanier)){
             foreach($caviarPanier as $panier) {
@@ -705,6 +706,7 @@ class PagesController extends AbstractController
         $caviarPanier = $session->get('caviarProduct', []);
         $basketPanier = $session->get('basketProduct', []);
         $accessoriesPanier = $session->get('accessoriesProduct', []);
+        $livraison = $session->get('livraison',[]);
 
         if(!empty($caviarPanier)){
             foreach($caviarPanier as $panier) {
@@ -748,6 +750,10 @@ class PagesController extends AbstractController
         if(!empty($reduction) && 0 !== $reduction){
             $retrait = ($total * $reduction) / 100;
             $total = $total - $retrait;
+        }
+
+        if(isset($livraison["amount"]) && null !== $livraison["amount"]){
+            $total = $total + $livraison["amount"];
         }
 
         $prix = round((float)$total, 2);

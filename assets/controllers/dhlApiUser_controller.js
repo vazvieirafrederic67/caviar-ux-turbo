@@ -335,6 +335,9 @@ export default class extends Controller {
                         let tempTotal = parseFloat(price.innerHTML.replace('.', '').replace(',','.'));
                         reduction = data.reduction;
 
+
+                        console.log(data.reduction);
+
                         dateLivraison.innerHTML = data.response.delivery.replace("T", " à ");;
                         livraison.innerHTML = String(data.response.amount).replace('.',',');
                         priceTotal.innerHTML = String(Number((tempTotal - data.reduction) + data.response.amount).toFixed(2).replace('.',',')) ;
