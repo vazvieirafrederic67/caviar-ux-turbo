@@ -221,31 +221,15 @@
         </div>
     </header>
 
-    <div class="main-content">
+    <div data-controller="confetti" class="main-content">
 
         <section class="full-height-slider type-1">
-          <div class="bg ready data-jarallax" data-jarallax="5" style="background-image: url(img/background_promo.png)" data-swiper-parallax="50%"></div>
-          <div class="table-view mobile-rel-block">
-            <div class="table-cell">
-            <div class="container no-padd"> 
-              <div class="row vertical-wrap">
-                <div class="col-md-6 col-md-offset-3 col-sm-12 col-sm-offset-0">
-                      <div class="simple-item color-type-1 text-center">
-                          <div class="main-title">
-                            <h2 class="title main-col h1">Code promo !</h2>
-                            <div class="empty-sm-30"></div>
-                          </div>   
-                        </div>
-                    </div>
-                </div>
-              </div> 
-              </div>
-            </div>
+         <canvas id="my-canvas"></canvas>
         </section>
 
         <section class="section">
-            <div class="empty-lg-400 empty-md-200 empty-sm-180 empty-xs-120"></div>  
-            <div class="bg layer ready data-jarallax" data-jarallax="5" style="background-image: url(img/background_promo2.jpg)"></div>
+            <div class="empty-lg-400 empty-md-200 empty-sm-180 empty-xs-120"></div>
+            <div class="bg layer ready data-jarallax" data-jarallax="5" style="background-image: url(img/background_promo2.jpg)"  ></div>
             <div class="container item-animation scroll-type-1">
                 <div class="simple-item text-center color-type-1 simple-item-style-1">
 
@@ -264,6 +248,7 @@
                                 <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1"><span class="txt">Retour</span></a>
                             {% endif %}
                         </div>
+                        
                     </div>
                 {% else %}
                   <div class="first-div sub-title">Aucun code promo disponible maintenant!</div>
