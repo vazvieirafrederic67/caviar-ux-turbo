@@ -45,19 +45,16 @@
             (tarteaucitron.job = tarteaucitron.job || []).push('facebook');
             </script>
 
-
             {{ encore_entry_script_tags('app') }}
             
         {% endblock %}
-
-
 
         <meta charset="UTF-8">
         <meta property="og:url"           content="{{ url('app_home') }}" />
         <meta property="og:type"          content="website" />
         <meta property="og:title"         content="Emotion Caviar" />
         <meta property="og:description"   content="Emotion Caviar est le caviar exclusif italien qui représente l’excellence en matière de caviar d’élevage 100 % Made in Italy" />
-        <meta property="og:image"         content="{{ asset('Beluga.png')}}"/>
+        <meta property="og:image"         content="{{ asset('img/Beluga-mini.png')}}"/>
 
         <title>{% block title %}Welcome!{% endblock %}</title>
     
