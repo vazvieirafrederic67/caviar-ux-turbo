@@ -1,10 +1,66 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+
+        {% block javascripts %}
+        
+            <script src="{{'tarteaucitron/tarteaucitron.js'}}" type="text/javascript"></script>
+            <script>
+            tarteaucitron.init({
+                "privacyUrl": "", /* Privacy policy url */
+
+                "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
+                "cookieName": "tarteaucitron", /* Cookie name */
+
+                "orientation": "middle", /* Banner position (top - bottom - middle - popup) */
+
+                "groupServices": false, /* Group services by category */
+
+                "showAlertSmall": false, /* Show the small banner on bottom right */
+                "cookieslist": false, /* Show the cookie list */
+                
+                "showIcon": true, /* Show cookie icon to manage cookies */
+                // "iconSrc": "", /* Optionnal: URL or base64 encoded image */
+                "iconPosition": "BottomRight", /* Position of the icon between BottomRight, BottomLeft, TopRight and TopLeft */
+
+                "adblocker": false, /* Show a Warning if an adblocker is detected */
+
+                "DenyAllCta" : true, /* Show the deny all button */
+                "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
+                "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
+
+                "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+
+                "removeCredit": false, /* Remove credit link */
+                "moreInfoLink": true, /* Show more info link */
+                "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+
+                //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for subdomain website */
+
+                "readmoreLink": "", /* Change the default readmore link pointing to tarteaucitron.io */
+                
+                "mandatory": true /* Show a message about mandatory cookies */
+            });
+
+            (tarteaucitron.job = tarteaucitron.job || []).push('facebook');
+            </script>
+
+
+            {{ encore_entry_script_tags('app') }}
+            
+        {% endblock %}
+
+
+
         <meta charset="UTF-8">
+        <meta property="og:url"           content="{{ url('app_home') }}" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="Emotion Caviar" />
+        <meta property="og:description"   content="Emotion Caviar est le caviar exclusif italien qui représente l’excellence en matière de caviar d’élevage 100 % Made in Italy" />
+        <meta property="og:image"         content="{{ asset('Beluga.png')}}"/>
+
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
+    
         {% block stylesheets %}
             <style id="dynamic-css">
             .preloader {position: fixed;left: 0;top: 0;width: 100%;height: 100%;background: #fff;text-align: center;z-index: 6001; }
@@ -54,10 +110,6 @@
                 transform: scale3D(0, 0, 1); } }
             </style>
             {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
         {% endblock %}
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://js.stripe.com/v3/" defer></script>

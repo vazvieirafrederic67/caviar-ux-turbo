@@ -6889,6 +6889,11 @@
   "resolved" "https://registry.npmjs.org/tapable/-/tapable-2.2.0.tgz"
   "version" "2.2.0"
 
+"tarteaucitronjs@^1.9.3":
+  "integrity" "sha512-K/0Sz/BMTKYxS6tHn3vDWOWNZTEFvrHE8wkMvxOagrbWvI/JqyIFIcGKfNXpxwyUUhOUeKTL+2AtRRcl/RZV5A=="
+  "resolved" "https://registry.npmjs.org/tarteaucitronjs/-/tarteaucitronjs-1.9.3.tgz"
+  "version" "1.9.3"
+
 "terminal-link@^2.0.0":
   "integrity" "sha512-un0FmiRUQNr5PJqy9kP7c40F5BOfpGlYTrxonDChEZB7pzZxRNp/bt+ymiy9/npwXya9KH99nJ/GXFIiUkYGFQ=="
   "resolved" "https://registry.npmjs.org/terminal-link/-/terminal-link-2.1.1.tgz"
