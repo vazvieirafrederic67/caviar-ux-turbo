@@ -21,10 +21,13 @@ export default class extends Controller {
             codeCountry = country.value;
         }
 
+        
+
         country.addEventListener('change', (event) => {
             codeCountry = event.target.value;
 
             if(null !== codeCountry && null !== postalCodeSelected && 4 <= postalCodeSelected.length  && null !== citySelected && 3<= citySelected.length){
+                console.log('1 : ' + codeCountry, postalCodeSelected, citySelected);
                 callDhlRateRequestApi(codeCountry, postalCodeSelected, citySelected);
             }
         });
@@ -34,6 +37,7 @@ export default class extends Controller {
             postalCodeSelected = event.target.value;
 
             if(null !== codeCountry && null !== postalCodeSelected && 4 <= postalCodeSelected.length  && null !== citySelected && 3<= citySelected.length){
+                console.log('2 : ' + codeCountry, postalCodeSelected, citySelected);
                 callDhlRateRequestApi(codeCountry, postalCodeSelected, citySelected);
             }
         });
@@ -42,6 +46,7 @@ export default class extends Controller {
             citySelected = event.target.value;
 
             if(null !== codeCountry && null !== postalCodeSelected && 4 <= postalCodeSelected.length && null !== citySelected && 3<= citySelected.length){
+                console.log('3 : ' + codeCountry, postalCodeSelected, citySelected);
                 callDhlRateRequestApi(codeCountry, postalCodeSelected, citySelected);
             }
         })
@@ -53,9 +58,15 @@ export default class extends Controller {
             let finalUrl = url + '?codeCountry=' + codeCountry + '&postalCodeSelected=' + postalCodeSelected + '&citySelected=' + citySelected;
             let reduction = 0;
 
+            console.log('4 :' + finalUrl);
+
             fetch( finalUrl ).then(function(response) {
+                console.log('5 : ' + response)
+
                 response.json().then(function(data) {
 
+                    console.log('6 : ' + data)
+                    
                     if(null !== data.message.Notification[0].Message){
                         livraison.innerHTML = "données invalides!";
                     }else{

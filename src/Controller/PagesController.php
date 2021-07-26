@@ -780,7 +780,7 @@ class PagesController extends AbstractController
 
         $intent = \Stripe\PaymentIntent::create([
             'amount' => $prix * 100,
-            'currency' => 'eur'
+            'currency' => 'eur',
         ]);
 
         return $this->render('pages/paiement.html.twig',[
@@ -858,7 +858,7 @@ class PagesController extends AbstractController
 
         $intent = \Stripe\PaymentIntent::create([
             'amount' => $prix * 100,
-            'currency' => 'eur'
+            'currency' => 'eur',
         ]);
 
         return $this->render('pages/paiement_anonymous.html.twig',[
@@ -1054,6 +1054,7 @@ class PagesController extends AbstractController
     #[Route('/dhl_raterequest', name: 'app_dhl_raterequest')]
     public function dhlRateRequest(Request $request, DhlRateRequest $dhlRateRequest, SessionInterface $session): Response
     {
+     
         $livraison = $session->get('livraison', []);
         $reduction = $session->get('reduction', []);
         $message = 'ok';
