@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Cet email est déjà existant. Veuillez vous connecter ou changer d'email.")
  */
 class UserAnonymous
 {
@@ -29,7 +29,7 @@ class UserAnonymous
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
+     *     message = "L'email '{{ value }}' n'est pas valide."
      * )
      */
     private $email;
