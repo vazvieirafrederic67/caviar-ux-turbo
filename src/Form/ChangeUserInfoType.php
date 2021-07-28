@@ -19,16 +19,13 @@ class ChangeUserInfoType extends AbstractType
 
     public function __construct()
     {
-        \Locale::setDefault('en');
+        \Locale::setDefault('fr');
         $dataCountries = Countries::getNames();
         
         foreach($dataCountries as $country){
             $this->countries[$country] = $country;
         }
     }
-
-
-
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
