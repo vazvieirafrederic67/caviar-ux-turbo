@@ -193,7 +193,7 @@
                   <li><a href="{{path('app_home')}}">Accueil<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                     </li>
                     <li><a href="{{path('app_about')}}">A propos</a></li>
-                    <li class="active"><a href="{{path('app_shop')}}">Shop<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
+                    <li><a href="{{path('app_shop')}}">Shop<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                         <ul>
                             <li><a href="{{ path('app_shop_caviar')}}">Caviar</a></li>
                             <li><a href="{{ path('app_shop_baskets')}}">Paniers</a></li>
@@ -214,7 +214,7 @@
                             <li><a href="{{ path('app_products_accessories')}}">Accessoires</a></li>
                         </ul>
                     </li>
-                     <li class="contact"><a href="{{ path('app_contact')}}">Contact<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
+                     <li class="active" class="contact"><a href="{{ path('app_contact')}}">Contact<img src="img/down-arrow.png" alt="image" class="menu-arr"></a>
                   </li>
               </ul>
             </nav>
@@ -273,10 +273,10 @@
                     </svg>
                     </div>
                     <div class="empty-sm-15 empty-xs-10"></div>
-                    <h4 class="h4 tt color-type-1">Call us</h4>
+                    <h4 class="h4 tt color-type-1">Appelez-nous</h4>
                         <div class="empty-sm-20 empty-xs-10"></div>
                         <div class="simple-text contact">
-                            <a href="tel:3805623157851" class="link-hover">+38 056 23 15 7851</a>
+                            <a href="tel:+352 691 38 91 89" class="link-hover">+352 691 38 91 89</a>
                         </div>
                     </div>
                 </div>
@@ -294,10 +294,10 @@
                     </svg>
                     </div>
                     <div class="empty-sm-15 empty-xs-10"></div>
-                    <h4 class="h4 tt color-type-1">MAIL us</h4>
+                    <h4 class="h4 tt color-type-1">Envoyer-nous un email</h4>
                         <div class="empty-sm-20 empty-xs-10"></div>
                         <div class="simple-text contact">
-                            <a href="mailto:delice.info@mail.com" class="link-hover">delice.info@mail.com</a>
+                            <a href="mailto:delice.info@mail.com" class="link-hover">ezgi.akcadag@opales.lu</a>
                         </div>
                     </div>
                 </div>
@@ -338,6 +338,13 @@
 
                         {{ form_start(form) }}
                             <div class="row">
+                                  <div class="col-sm-12 col-xs-12">
+                                    <div class="input-field-wrap">  
+                                    {{ form_widget(form.pseudo,{'attr':{'class':'input-field','placeholder':'Pseudo'}}) }}
+                                    <div class="focus"></div>
+                                    </div>  
+                                    <div class="empty-sm-20 empty-xs-20"></div>   
+                                </div>
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="input-field-wrap">  
                                     {{ form_widget(form.firstname,{'attr':{'class':'input-field','placeholder':'Prénom'}}) }}

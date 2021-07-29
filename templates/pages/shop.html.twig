@@ -226,7 +226,7 @@
   <div class="main-content">
     
     <section class="full-height-slider type-1">
-       <div class="bg ready data-jarallax" data-jarallax="5" style="background-image: url(img/livraison.jpeg)" data-swiper-parallax="50%"></div>
+       <div class="bg ready data-jarallax" data-jarallax="5" style="background-image: url(img/shop/main-naner-bg-2.jpg)" data-swiper-parallax="50%"></div>
 		   <div class="table-view mobile-rel-block">
 			  <div class="table-cell">
 			   <div class="container no-padd"> 
@@ -280,7 +280,9 @@
                         <p style="width:100%;display:flex;padding:5px;">Diamètre&nbsp;:&nbsp;<b> &nbsp;{{ caviar.diameter }}</b> </p>
                         <p style="width:100%;display:flex;padding:5px;">Couleur&nbsp;:&nbsp;<b>&nbsp;{{ caviar.color }}</b></p>
                     </div>
+                    <!--
                     <div class="menu-price style-2 title main-col">{{ caviar.price|number_format(2, ',', '.') }} € / {{ caviar.grammage }} gr</div>
+                    -->
                   </div>
                 </div>
             </div>
@@ -299,7 +301,7 @@
                     <div class="vertical-align full menu-button">
                         <a href="{{ path('app_shop_cart_basket',{ id:basket.id } ) }}" class="page-button button-style-1 type-4"><span class="txt">Ajouter au panier</span></a>
                         <div class="empty-sm-10 empty-xs-10"></div>
-                        <a href="{{ path('app_shop_view',{ id:basket.id } ) }}" class="page-button button-style-1 type-2 open-popup-product" data-open="popup-gallery" data-rel="1"><span class="txt">Détail</span></a>
+                        <a href="{{ path('app_shop_baskets_view',{ id:basket.id } ) }}" class="page-button button-style-1 type-2 open-popup-product" data-open="popup-gallery" data-rel="1"><span class="txt">Détail</span></a>
                     </div>
                   </div>
                   <div class="text">
@@ -309,7 +311,9 @@
                     <div class="simple-text">
                         <p>{{ basket.description }}</p>
                     </div>
+                    <!--
                     <div class="menu-price style-2 title main-col">{{ basket.price|number_format(2, ',', '.') }} €</div>
+                    -->
                   </div>
                 </div>
             </div>
@@ -328,7 +332,7 @@
                     <div class="vertical-align full menu-button">
                         <a href="{{ path('app_shop_cart_accessories',{ id:accessorie.id } ) }}" class="page-button button-style-1 type-4"><span class="txt">Ajouter au panier</span></a>
                         <div class="empty-sm-10 empty-xs-10"></div>
-                        <a href="{{ path('app_shop_view',{ id:accessorie.id } ) }}" class="page-button button-style-1 type-2 open-popup-product" data-open="popup-gallery" data-rel="1"><span class="txt">Détail</span></a>
+                        <a href="{{ path('app_shop_accessories_view',{ id:accessorie.id } ) }}" class="page-button button-style-1 type-2 open-popup-product" data-open="popup-gallery" data-rel="1"><span class="txt">Détail</span></a>
                     </div>
                   </div>
                   <div class="text">
@@ -338,7 +342,9 @@
                     <div class="simple-text">
                         <p>{{ accessorie.description }}</p>
                     </div>
+                    <!--
                     <div class="menu-price style-2 title main-col">{{ accessorie.price|number_format(2, ',', '.') }} €</div>
+                    -->
                   </div>
                 </div>
             </div>
@@ -428,6 +434,7 @@
                     <div class="empty-sm-20 empty-xs-20"></div>
                     <h4 id="modal-title" class="h3 sm tt color-2"></h4>
                     <h5 style="display:flex;align-items:center;" class="h5 sm color-2">Price&nbsp;:&nbsp;<span class="h4 main-col" id="modal-price"></span>&nbsp;€</h5>
+                    <h5 style="width:100px;display:flex;" class="h5 sm color-2 inline-box">Grammage&nbsp;:&nbsp;<span style="width:100%;display:flex;" id="modal-grammage"></span>&nbsp;g</h5>
                   </aside>
                   <div class="empty-sm-20 empty-xs-20"></div>
                   <aside class="product-size">

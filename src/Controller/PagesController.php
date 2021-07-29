@@ -86,7 +86,9 @@ class PagesController extends AbstractController
             'price' => $caviarProduct->getPrice(),
             'diameter' => $caviarProduct->getDiameter(),
             'color' => $caviarProduct->getColor(),
-            'image' => $caviarProduct->getImage()
+            'image' => $caviarProduct->getImage(),
+            'grammage' => $caviarProduct->getGrammage(),
+            'product' => 'caviars'
         ]);
     }
 
@@ -98,7 +100,8 @@ class PagesController extends AbstractController
             'name' => $basketProduct->getName(),
             'description' => $basketProduct->getDescription(),
             'price' => $basketProduct->getPrice(),
-            'image' => $basketProduct->getImage()
+            'image' => $basketProduct->getImage(),
+            'product' => 'baskets'
         ]);
     }
 
@@ -110,7 +113,8 @@ class PagesController extends AbstractController
             'name' => $accessoriesProduct->getName(),
             'description' => $accessoriesProduct->getDescription(),
             'price' => $accessoriesProduct->getPrice(),
-            'image' => $accessoriesProduct->getImage()
+            'image' => $accessoriesProduct->getImage(),
+            'product' => 'accessories'
         ]);
     }
 
@@ -521,8 +525,9 @@ class PagesController extends AbstractController
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
+        
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && null === $form->getData()->getPseudo() ) {
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($contact);

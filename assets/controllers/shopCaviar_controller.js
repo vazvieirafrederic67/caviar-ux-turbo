@@ -23,6 +23,7 @@ export default class extends Controller {
         let modalPrice = document.getElementById('modal-price');
         let modalImage = document.getElementById('modal-image');
         let modalLink = document.getElementById('modal-link');
+        let modalGrammage = document.getElementById('modal-grammage');
         let url = modalLink.href;
        
         // On boucle sur links
@@ -35,14 +36,15 @@ export default class extends Controller {
     
                 fetch(this.getAttribute("href")).then(function(response) {
                     response.json().then(function(data) {
+
                         modalLink.href = url.replace(/\/[^\/]*$/, '/' + data.id);
                         modalTitle.innerHTML = data.name;
                         modalDescription.innerHTML = data.description;
                         modalDiameter.innerHTML = data.diameter;
                         modalColor.innerHTML = data.color;
                         modalPrice.innerHTML = data.price;
-                        modalImage.src = 'uploads/images/caviars/' + data.image;
-
+                        modalGrammage.innerHTML = data.grammage;
+                        modalImage.src = 'uploads/images/' + data.product + '/' + data.image;
                         modalActive[0].className += " active";
                         // faire quelque chose avec les données
                     });

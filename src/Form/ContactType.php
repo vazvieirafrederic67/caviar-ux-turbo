@@ -15,6 +15,11 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('pseudo', TextType::class,[
+                'label' => false,
+                'attr' => ['style' => 'visibility:hidden'],
+                'required' => false,
+            ])
             ->add('firstname', TextType::class,[
                 'label' => false,
             ])
