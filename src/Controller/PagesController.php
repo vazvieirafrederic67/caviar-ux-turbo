@@ -859,7 +859,7 @@ class PagesController extends AbstractController
         $prix = round((float)$total, 2);
 
         // On instancie Stripe
-        \Stripe\Stripe::setApiKey('sk_test_51Ir3u4JS3NsLYofkF9np7mZcyc8lLJF70cDxiHd5lmj3f38kI5aL29SjW5WAAIOMqRdpVbwaHfJ1ddk85H4pk1c000UyhTlmaM');
+        \Stripe\Stripe::setApiKey('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');
 
         $intent = \Stripe\PaymentIntent::create([
             'amount' => $prix * 100,
