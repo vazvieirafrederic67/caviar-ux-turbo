@@ -5,11 +5,9 @@ export default class extends Controller {
     connect() {
         window.onload = () => {
             // Variables
-            let stripe = Stripe('pk_test_51Ir3u4JS3NsLYofkwsv3Fd8Y5KLvNcra0lB5Xbe9uzBonxkpeG1Vt0Js6VdM0SG1vQWNoRH31HlmYsGJ3wNQiVsK00CTsTFI3R')
+            let stripe = Stripe('pk_live_51IxwOgJZeCpU6SOlMrgAwkHFx8uSWj1ciiMcR4d1GOMApjrLw0RKUWQ8F44W2WivFuDOZpRkQ71HeZOn5ENzfAGB00v50nxnKn')
             let elements = stripe.elements()
             let redirect = "/validation-shopping";
-
-            
 
             // Objets de la page
             let cardHolderName = document.getElementById("cardholder-name")
