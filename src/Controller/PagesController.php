@@ -727,9 +727,6 @@ class PagesController extends AbstractController
         $livraison = $session->get('livraison',[]);
         $reduction = $session->get('reduction', []);
 
-
-        
-
         if(!empty($caviarPanier)){
             foreach($caviarPanier as $panier) {
                 $caviar = $caviarProductRepository->find($panier['id']);

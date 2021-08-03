@@ -14,8 +14,8 @@ class DhlRateRequest
 
           $date = new DateTime('now');
           $shipTimestamp = $date->format('Y-m-d') . 'T' . $date->format('H:i:s') . ' GMT'.$date->format('P');
-          $cityExpe = "Contern";
-          $postalCodeExpe = 5326;
+          $cityExpe = "Clervaux";
+          $postalCodeExpe = 9712;
           $countryCodeExpe = "LU";
           $lenght = 20;
           $width = 25;
