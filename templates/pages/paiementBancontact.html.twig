@@ -5,6 +5,8 @@
 {% block body %}
 <body data-turbo="false" class="page-color-style-6 page-style-6">
 
+
+   
     <div class="preloader">
      <div class="sk-cube-grid selected">
       <div class="sk-cube sk-cube1"></div>
@@ -75,20 +77,20 @@
   <div class="main-content">
     
     <section class="section">
-	    <div class="empty-lg-140 empty-md-100 empty-sm-60 empty-xs-60"></div>
-        <div class="empty-lg-50 empty-md-20 empty-sm-10 empty-xs-10"></div>
-        <div class="container"> 
-          <div class="row">
-            <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0">
-              <div class="simple-item color-type-2 text-center">
-                <div class="main-title">
-                  <h1 class="h1 color-2">Paiement</h1>
-                  <div class="empty-sm-25"></div>
-                </div>   
-              </div>
-          </div>
+	  <div class="empty-lg-140 empty-md-100 empty-sm-60 empty-xs-60"></div>
+		<div class="empty-lg-50 empty-md-20 empty-sm-10 empty-xs-10"></div>
+		<div class="container"> 
+			<div class="row">
+				<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0">
+					<div class="simple-item color-type-2 text-center">
+						<div class="main-title">
+							<h1 class="h1 color-2">Panier</h1>
+							<div class="empty-sm-25"></div>
+						</div>   
+            </div>
         </div>
-		  </div>
+      </div>
+		</div>
     </section>
     
     <section class="section">
@@ -100,21 +102,23 @@
   						<h4 class="h4 sm color-2">Méthode de paiement</h4>
   					</div>
   					<div class="empty-sm-40 empty-xs-20"></div>
+             
             <div class="checkbox-entry-wrap">  
               <label class="type-2">
-                  <p>Paiement par carte de crédit</p>  
+                  <p>Paiement par bancontact</p>  
               </label>
             </div>
-            <div class="empty-sm-10 empty-xs-10"></div>
+         
 
+            <div class="empty-sm-10 empty-xs-10"></div>
           </div>
           <div class="col-md-7 col-xs-12">
 					<div class="empty-sm-60 empty-xs-30"></div>
 					<div class="text-left check-subtitle">
-						<h4 class="h4 sm color-2">Infos de paiement</h4>
+						<h4 class="h4 sm color-2">Information de paiement</h4>
 					</div>
 					    <div class="empty-sm-40 empty-xs-20"></div>
-              <form data-controller="paiement" method="post">
+              <form data-controller="paiementBancontact" method="post">
                 <div class="row">
                   <div class="col-sm-12 col-xs-12">
                     <div class="input-field-wrap">
@@ -130,7 +134,7 @@
 
                 <div class="empty-sm-50 empty-xs-30"></div>
                 <div class="fr button-full-width">
-                  <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1 type-2"><span class="txt">Retour</span></a>
+                  <a href="{{path('app_checkout')}}" class="page-button button-style-1 type-2"><span class="txt">Retour</span></a>
                   <button id="card-button" class="page-button button-style-1 type-4" type="button" data-secret="{{secret}}"><span class="txt">Procédez au paiement de {{total}} €</span></button>
                 </div>    
               </form>

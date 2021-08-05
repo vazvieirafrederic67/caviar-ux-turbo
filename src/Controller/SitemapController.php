@@ -56,6 +56,8 @@ class SitemapController extends AbstractController
         $urls[] = ['loc' => $this->generateUrl('app_checkout_anonymous')];
         $urls[] = ['loc' => $this->generateUrl('app_paiement')];
         $urls[] = ['loc' => $this->generateUrl('app_paiement_anonymous')];
+        $urls[] = ['loc' => $this->generateUrl('app_paiement_bancontact')];
+        $urls[] = ['loc' => $this->generateUrl('app_paiement_bancontact_anonymous')];
         $urls[] = ['loc' => $this->generateUrl('app_validation_shopping')];
         $urls[] = ['loc' => $this->generateUrl('app_contact_index')];
         $urls[] = ['loc' => $this->generateUrl('code_promo_index')];

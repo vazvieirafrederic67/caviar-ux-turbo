@@ -244,6 +244,14 @@ app_paiement_anonymous:
     path: /paiement-anonymous
     controller: App\Controller\PagesController::paiementAnonymous
 
+app_paiement_bancontact:
+    path: /paiement-bancontact
+    controller: App\Controller\PagesController::paiementBancontact
+
+app_paiement_bancontact_anonymous:
+    path: /paiement-bancontact-anonymous
+    controller: App\Controller\PagesController::paiementBancontactAnonymous 
+
 app_validation_shopping:
     path: /validation-shopping
     controller: App\Controller\PagesController::validationShopping

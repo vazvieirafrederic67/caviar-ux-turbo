@@ -682,6 +682,9 @@ class PagesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() && isset($livraison['amount']) && null !== $livraison['amount']) {
 
+
+            
+
             $userPanier = $session->get('userAnonyme', []);
 
             $userPanier['lastname'] = $user->getLastname();
@@ -696,6 +699,10 @@ class PagesController extends AbstractController
             $userPanier['phoneNumber'] = $user->getPhoneNumber();
  
             $session->set('userAnonyme', $userPanier);
+
+            if("Envoyer" === $request->request->get('bancontact')){
+                return $this->redirectToRoute('app_paiement_bancontact_anonymous');
+            }
 
             return $this->redirectToRoute('app_paiement_anonymous');
         }
@@ -791,6 +798,87 @@ class PagesController extends AbstractController
         ]);
     }
 
+    #[Route('/paiement-bancontact', name: 'app_paiement_bancontact')]
+    public function paiementBancontact(Request $request, SessionInterface $session, CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        $total = 0;
+        $price = 0;
+        $quantity = 0;
+        $reduction = 0;
+
+        $caviarPanier = $session->get('caviarProduct', []);
+        $basketPanier = $session->get('basketProduct', []);
+        $accessoriesPanier = $session->get('accessoriesProduct', []);
+        $livraison = $session->get('livraison',[]);
+        $reduction = $session->get('reduction', []);
+
+        if(!empty($caviarPanier)){
+            foreach($caviarPanier as $panier) {
+                $caviar = $caviarProductRepository->find($panier['id']);
+                $price = $caviar->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $panier['reduction'] = [];
+                }
+            }
+        }   
+
+        if(!empty($basketPanier)){
+            foreach($basketPanier as $panier) {
+                $basket = $basketProductRepository->find($panier['id']);
+                $price = $basket->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $panier['reduction'] = [];
+                }
+            }
+        }        
+
+        if(!empty($accessoriesPanier)){
+            foreach($accessoriesPanier as $panier) {
+                $accessories =  $accessoriesProductRepository->find($panier['id']);
+                $price = $accessories->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $panier['reduction'] = [];
+                }
+            }
+        } 
+
+        if(!empty($reduction) && 0 !== $reduction){
+            $total = $total - $reduction;
+        }
+
+        if(isset($livraison["amount"]) && null !== $livraison["amount"]){
+            $total = $total + $livraison["amount"];
+        }
+
+        $prix = round((float)$total, 2);
+
+
+        // On instancie Stripe
+        \Stripe\Stripe::setApiKey('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');
+
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => $prix * 100,
+            'currency' => 'eur',
+            'payment_method_types' => ['bancontact'],
+        ]);
+
+        return $this->render('pages/paiementBancontact.html.twig',[
+            'total' => $prix,
+            'secret' => $intent->client_secret
+        ]);
+    }
+
     #[Route('/paiement-anonymous', name: 'app_paiement_anonymous')]
     public function paiementAnonymous(Request $request, SessionInterface $session, CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository): Response
     {
@@ -864,6 +952,85 @@ class PagesController extends AbstractController
         ]);
 
         return $this->render('pages/paiement_anonymous.html.twig',[
+            'total' => $prix,
+            'secret' => $intent->client_secret
+        ]);
+    }
+
+    #[Route('/paiement-bancontact-anonymous', name: 'app_paiement_bancontact_anonymous')]
+    public function paiementBancontactAnonymous(Request $request, SessionInterface $session, CaviarProductRepository $caviarProductRepository, BasketProductRepository $basketProductRepository, AccessoriesProductRepository $accessoriesProductRepository): Response
+    {
+
+        $total = 0;
+        $price = 0;
+        $quantity = 0;
+        $reduction = 0;
+       
+        $caviarPanier = $session->get('caviarProduct', []);
+        $basketPanier = $session->get('basketProduct', []);
+        $accessoriesPanier = $session->get('accessoriesProduct', []);
+        $livraison = $session->get('livraison',[]);
+
+        if(!empty($caviarPanier)){
+            foreach($caviarPanier as $panier) {
+                $caviar = $caviarProductRepository->find($panier['id']);
+                $price = $caviar->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $reduction = $panier['reduction'];
+                }
+            }
+        }   
+
+        if(!empty($basketPanier)){
+            foreach($basketPanier as $panier) {
+                $basket = $basketProductRepository->find($panier['id']);
+                $price = $basket->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $reduction = $panier['reduction'];
+                }
+            }
+        }        
+
+        if(!empty($accessoriesPanier)){
+            foreach($accessoriesPanier as $panier) {
+                $accessories =  $accessoriesProductRepository->find($panier['id']);
+                $price = $accessories->getPrice();
+                $quantity = $panier['quantity'];
+                $total = $total + ($price * $quantity);
+
+                if(isset($panier['reduction'])){
+                    $reduction = $panier['reduction'];
+                }
+            }
+        }
+
+        if(!empty($reduction) && 0 !== $reduction){
+            $retrait = ($total * $reduction) / 100;
+            $total = $total - $retrait;
+        }
+
+        if(isset($livraison["amount"]) && null !== $livraison["amount"]){
+            $total = $total + $livraison["amount"];
+        }
+
+        $prix = round((float)$total, 2);
+
+        // On instancie Stripe
+        \Stripe\Stripe::setApiKey('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');
+
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => $prix * 100,
+            'currency' => 'eur',
+            'payment_method_types' => ['bancontact'],
+        ]);
+
+        return $this->render('pages/paiementBancontact_anonymous.html.twig',[
             'total' => $prix,
             'secret' => $intent->client_secret
         ]);

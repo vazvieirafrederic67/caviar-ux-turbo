@@ -5,7 +5,6 @@
 {% block body %}
 <body data-turbo="false" class="page-color-style-6 page-style-6">
 
-
     <div class="preloader">
      <div class="sk-cube-grid selected">
       <div class="sk-cube sk-cube1"></div>
@@ -485,12 +484,20 @@
                               </div>
                           </div>
                           <a href="{{ path('app_shop')}}" class="page-button button-style-1 type-2"><span class="txt">Retour</span></a>
-                          <div class="text-center"> 
-                              <div class="page-button button-style-1 type-4">
-                              <input type="submit">
-                                <span class="txt">Paiement</span><i></i>
-                              </div>
-                          </div>
+
+                        <div style="margin-top:20px;" class="text-center"> 
+                            <div style="width:270px;"  class="page-button button-style-1 type-4">
+                                <input id="paiement" name="carte" type="submit">
+                                <span class="txt">Paiement par carte</span><i></i>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:20px;" class="text-center"> 
+                            <div style="width:270px;" class="page-button button-style-1 type-4">
+                                <input id="paiementBancontact" name="bancontact" type="submit">
+                                <span class="txt">Paiement par Bancontact</span><i></i>
+                            </div>
+                        </div>
     
                       {{ form_end(form)}}
 						        			   
@@ -501,7 +508,10 @@
         <div class="empty-lg-70 empty-md-50 empty-sm-30 empty-xs-30"></div>
         {% if is_granted('ROLE_USER') %}
             <div class="page-button button-style-1 type-4">
-                <a href="{{ path('app_paiement')}}"><span class="txt">Paiement</span></a>
+                <a href="{{ path('app_paiement')}}"><span class="txt">Paiement par carte</span></a>
+            </div>
+            <div class="page-button button-style-1 type-4">
+                <a href="{{ path('app_paiement_bancontact')}}"><span class="txt">Paiement par bancontact</span></a>
             </div>
         {% endif %}
 

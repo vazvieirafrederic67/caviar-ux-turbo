@@ -58,14 +58,9 @@ export default class extends Controller {
             let finalUrl = url + '?codeCountry=' + codeCountry + '&postalCodeSelected=' + postalCodeSelected + '&citySelected=' + citySelected;
             let reduction = 0;
 
-            console.log('4 :' + finalUrl);
-
             fetch( finalUrl ).then(function(response) {
-                console.log('5 : ' + response)
-
+               
                 response.json().then(function(data) {
-
-                    console.log('6 : ' + data)
                     
                     if(null !== data.message.Notification[0].Message){
                         livraison.innerHTML = "données invalides!";
