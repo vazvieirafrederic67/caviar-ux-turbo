@@ -863,7 +863,6 @@ class PagesController extends AbstractController
 
         $prix = round((float)$total, 2);
 
-
         // On instancie Stripe
         \Stripe\Stripe::setApiKey('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');
 
@@ -871,6 +870,11 @@ class PagesController extends AbstractController
             'amount' => $prix * 100,
             'currency' => 'eur',
             'payment_method_types' => ['bancontact'],
+            'payment_method_options' => [
+                'bancontact' => [
+                  'preferred_language' => 'fr',
+                ],
+            ]
         ]);
 
         return $this->render('pages/paiementBancontact.html.twig',[
@@ -1028,6 +1032,11 @@ class PagesController extends AbstractController
             'amount' => $prix * 100,
             'currency' => 'eur',
             'payment_method_types' => ['bancontact'],
+            'payment_method_options' => [
+                'bancontact' => [
+                  'preferred_language' => 'fr',
+                ],
+            ]
         ]);
 
         return $this->render('pages/paiementBancontact_anonymous.html.twig',[
