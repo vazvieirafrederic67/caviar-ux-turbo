@@ -12,7 +12,7 @@ export default class extends Controller {
 
             // Variables
             let stripe = Stripe('pk_live_51IxwOgJZeCpU6SOlMrgAwkHFx8uSWj1ciiMcR4d1GOMApjrLw0RKUWQ8F44W2WivFuDOZpRkQ71HeZOn5ENzfAGB00v50nxnKn');
-            let redirect = "/validation-shopping";
+            let redirect = "https://www.vazvieirafrederic.fr/validation-shopping";
             let secret = document.querySelector('#submit-button').getAttribute('data-secret');
 
             var namePaiement = document.querySelector('#name').nodeValue;
