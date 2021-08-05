@@ -1,15 +1,19 @@
 import { Controller } from 'stimulus';
 
 
+
+
 export default class extends Controller {
+
+  
     
     connect() {
         window.onload = () => {
+
             // Variables
             let stripe = Stripe('pk_live_51IxwOgJZeCpU6SOlMrgAwkHFx8uSWj1ciiMcR4d1GOMApjrLw0RKUWQ8F44W2WivFuDOZpRkQ71HeZOn5ENzfAGB00v50nxnKn');
             let redirect = "/validation-shopping";
-
-            var secret = document.querySelector('#payment-button').getAttribute('data-secret');
+            let secret = document.querySelector('#submit-button').getAttribute('data-secret');
 
             var namePaiement = document.querySelector('#name').nodeValue;
             

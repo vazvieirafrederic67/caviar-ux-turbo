@@ -108,36 +108,31 @@
             <div class="empty-sm-10 empty-xs-10"></div>
 
           </div>
-          <div class="col-md-7 col-xs-12">
-					<div class="empty-sm-60 empty-xs-30"></div>
-					<div class="text-left check-subtitle">
-						<h4 class="h4 sm color-2">Infos de paiement</h4>
-					</div>
+            <div class="col-md-7 col-xs-12">
+            <div class="empty-sm-60 empty-xs-30"></div>
+            <div class="text-left check-subtitle">
+              <h4 class="h4 sm color-2">Infos de paiement</h4>
+            </div>
 					    <div class="empty-sm-40 empty-xs-20"></div>
               <div data-controller="paiementBancontact" method="post">
 
-                    <form id="payment-form">
-                      <div class="form-row">
-                          <label for="name">Name</label>
-                          <input class="input-field color-2" id="name" name="name" required>
-                      </div>
+                <form id="payment-form">
+                
+                  <div class="form-row">
+                      <label for="name">Name</label>
+                      <input class="input-field color-2" id="name" name="name" required>
+                  </div>
 
-                      <!-- Used to display form errors. -->
-                      <div id="errors"></div>
+                  <!-- Used to display form errors. -->
+                  <div id="errors"></div>
 
-                      <div style="margin-top:20px;" class="fr button-full-width">
-                        <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1 type-2"><span class="txt">Retour</span></a>
-                        <button class="page-button button-style-1 type-4" id="submit-button"><span class="txt">Payez avec Bancontact pour le montant de {{total}} €</span></button>
-                      </div>
-                    </form>
+                  <div style="margin-top:20px;" class="fr button-full-width">
+                    <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1 type-2"><span class="txt">Retour</span></a>
+                    <button class="page-button button-style-1 type-4" id="submit-button" data-secret="{{secret}}"><span class="txt">Payez avec Bancontact pour le montant de {{total}} €</span></button>
+                  </div>
+                </form>
 
                 <div class="empty-sm-50 empty-xs-30"></div>
-
-                <div class="fr button-full-width">
-                  <a href="{{ path('app_checkout_anonymous')}}" class="page-button button-style-1 type-2"><span class="txt">Retour</span></a>
-                  <button id="card-button" class="page-button button-style-1 type-4" type="button" data-secret="{{secret}}"><span class="txt">Procédez au paiement de {{total}} €</span></button>
-                </div>
-
 
               </div>
             </div>
