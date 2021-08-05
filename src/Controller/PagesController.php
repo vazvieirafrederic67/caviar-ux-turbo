@@ -970,6 +970,7 @@ class PagesController extends AbstractController
         $quantity = 0;
         $reduction = 0;
        
+        $userAnonymePanier = $session->get('userAnonyme', []);
         $caviarPanier = $session->get('caviarProduct', []);
         $basketPanier = $session->get('basketProduct', []);
         $accessoriesPanier = $session->get('accessoriesProduct', []);
@@ -1041,7 +1042,8 @@ class PagesController extends AbstractController
 
         return $this->render('pages/paiementBancontact_anonymous.html.twig',[
             'total' => $prix,
-            'secret' => $intent->client_secret
+            'secret' => $intent->client_secret,
+            'user' => $userAnonymePanier
         ]);
     }
 

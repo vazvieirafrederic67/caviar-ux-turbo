@@ -117,10 +117,9 @@
               <div data-controller="paiementBancontact" method="post">
 
                 <form id="payment-form">
-                
                   <div class="form-row">
                       <label for="name">Name</label>
-                      <input class="input-field color-2" id="name" name="name" required>
+                      <input value="{{user.lastname}} {{user.firstname}}" class="input-field color-2" id="name" name="name" required>
                   </div>
 
                   <!-- Used to display form errors. -->
