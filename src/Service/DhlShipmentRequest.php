@@ -14,21 +14,12 @@ class DhlShipmentRequest
 
           $date = new DateTime('now');
           $shipTimestamp = $date->format('Y-m-d') . 'T' . $date->format('H:i:s') . ' GMT'.$date->format('P');
-     
           $data = $this->constructData($shipTimestamp, $account, $image_base_64);
-
-          dd($data);exit;
-
-          /*
-          * Controleur 
-          */
-          //$data = file_get_contents('data.json');
           $url = 'https://wsbexpress.dhl.com/rest/sndpt/ShipmentRequest';
           $username = 'opalesLU';
           $password = 'K^0aA@2tF!8k';
 
           /*********************************************************************************** */
-
 
           /**
            * Service
